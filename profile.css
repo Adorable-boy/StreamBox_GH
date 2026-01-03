@@ -1,0 +1,199 @@
+body {
+    background: black;
+    color: rgb(255, 255, 255);
+    height: 100vh;
+    background-attachment: fixed;
+    font-family: Arial, Helvetica, sans-serif,'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+}
+
+main {
+    margin-top: 100px;
+    padding-bottom: 60px; /* Extra spacing before footer */
+}
+
+
+ footer{
+    background: #44444473;
+    backdrop-filter: blur(30px);
+    overflow-x: hidden;
+    position: fixed;
+    width:100%;
+    bottom: 0;
+    left: 0;
+    margin-top: 20px;
+    z-index: 10;
+ }
+
+
+
+
+.nav-links a{
+    text-decoration: none;
+}
+
+.nav-links a:hover svg{
+    background-color: white;
+    fill: black;
+    transform: scale(1.1);
+}
+
+
+.footer-items,
+span{
+display: flex;
+flex-direction: column;
+text-align: center;
+align-items: center;
+}
+
+
+.footer-labels{
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-links svg{
+    font-weight: 600;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    border-radius: 20px;
+    fill: black;
+    width: 30px;
+    height: 30px;
+    transition: all 0.4s ease;
+    border: #ffffff24 1px solid;
+}
+
+
+.nav-links{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 15px;
+    padding-left: 15px;
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    border: none;
+}
+
+
+header {
+    opacity: 0.98;
+    padding: 10px 20px ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #44444473;
+    backdrop-filter: blur(20px);
+    margin-bottom: 25px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+ }
+
+
+ .nav-links a[href="profile.html"]:not(:hover) svg {
+    fill: white;
+}
+
+
+header h1 {
+    font-size: 1.2rem;
+    opacity: 0.98;
+    padding: 10px 20px ;
+    background: #3f3e3e;
+    border: #ffffff24 1px solid;
+    border-radius: 20px;
+ }
+
+
+
+  
+ 
+
+#toggleChange svg{
+height: 30px;
+width: 30px;
+fill: #fff;
+transition: all ease 0.4s;
+border: none;
+align-items: center;
+cursor: pointer;
+background-color: #222;
+border-radius: 20px;
+padding: 0px 6px;
+}
+
+#toggleChange svg:hover {
+transform: scale(1.1);
+}
+
+
+
+
+.svg-items{
+display: flex;
+flex-direction: column;
+text-align: center;
+align-items: center;
+}
+
+
+
+
+.profile-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    position: relative;
+    padding: 20px;
+}
+
+.profile-list h2 {
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.profile-list .poster-wrapper {
+position: relative;
+    transition: transform 0.3s ease;
+}
+
+.profile-list img {
+background-color: #4a4444;
+transition: transform 0.4s ease, box-shadow 0.4s ease;
+width: 136px;
+height: 200px;
+border-radius: 10px;
+object-fit: cover;
+color: white;
+flex-shrink: 0;
+    display: block;
+}
+
+.profile-list .poster-wrapper:hover img {
+transform: translateY(-8px) scale(1.08);
+cursor: pointer;
+box-shadow: 0 15px 25px rgb(69, 81, 81);
+}
+
+.profile-list .remove-from-list:hover {
+    background-color: rgba(255, 0, 60, 1) !important;
+    transform: scale(1.1);
+}
+
+
+.column-posters::-webkit-scrollbar {
+height: 3px;
+}
+

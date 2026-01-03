@@ -1,0 +1,430 @@
+body {
+    background: black;
+    color: rgb(255, 255, 255);
+    height: 100vh;
+    background-attachment: fixed;
+    font-family: Arial, Helvetica, sans-serif,'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+    padding-bottom: 1000px;
+
+}
+
+
+main {
+    margin-top: 100px;
+    padding-bottom: 80px; /* Extra spacing before footer */
+}
+
+
+ footer{
+    background: #44444473;
+    backdrop-filter: blur(30px);
+    overflow-x: hidden;
+    position: fixed;
+    left: 0;
+    width:100%;
+    bottom: 0;
+    margin-top: 20px;
+    z-index: 10;
+ }
+
+
+
+
+.nav-links a{
+    text-decoration: none;
+}
+
+.nav-links a:hover svg{
+    background-color: white;
+    fill: black;
+    transform: scale(1.1);
+}
+
+.nav-links a[href="new&rich.html"]:not(:hover) svg {
+    fill: white;
+}
+
+
+
+
+.footer-items,
+span{
+display: flex;
+flex-direction: column;
+text-align: center;
+align-items: center;
+}
+
+
+.footer-labels{
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-links svg{
+    font-weight: 600;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    border-radius: 20px;
+    fill: black;
+    width: 30px;
+    height: 30px;
+    transition: all 0.4s ease;
+    border: #ffffff24 1px solid;
+}
+
+
+.nav-links{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 15px;
+    padding-left: 15px;
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    border: none;
+}
+
+
+nav {
+    opacity: 0.98;
+    padding: 10px 20px ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #44444473;
+    backdrop-filter: blur(30px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    gap: 90px;
+ }
+
+
+
+nav h1 {
+    font-size: 1.2rem;
+    opacity: 0.98;
+    padding: 10px 20px ;
+    background: #3f3e3e;
+    border-radius: 20px;
+    border: #ffffff24 1px solid;
+ }
+
+
+nav a{
+    text-decoration: none;
+    color: white;
+}
+  
+
+#toggleChange svg{
+height: 30px;
+width: 30px;
+fill: #fff;
+transition: all ease 0.4s;
+border: none;
+align-items: center;
+cursor: pointer;
+background-color: #222;
+border-radius: 20px;
+padding: 0px 6px;
+}
+
+#toggleChange svg:hover {
+transform: scale(1.1);
+}
+
+
+
+
+.svg-items{
+display: flex;
+flex-direction: column;
+text-align: center;
+align-items: center;
+}
+
+
+
+
+
+
+/* Section Wrapper */
+.section-wrapper {
+    margin-bottom: 40px;
+}
+
+.section-wrapper h1 {
+    margin: 20px 0 20px 20px;
+    font-size: 1.5rem;
+}
+
+/* Poster Card Container */
+.poster-card {
+    display: grid;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    grid-template-columns: repeat(auto-fit,minmax(240px,1fr))  ;
+}
+
+/* Poster Container with Image and Overlay */
+.poster-container {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: #322f2fb6;
+    transition: transform 0.4s ease-in-out;
+}
+.poster-container:hover {
+    transform: translateY(-7px);
+}
+
+
+
+.poster-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.poster-image:hover {
+    transform: scale(1.1);
+    filter: brightness(0.7);
+}
+
+/* Info Overlay - appears on hover */
+.poster-info-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.7), transparent);
+    color: white;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+}
+
+.poster-container:hover .poster-info-overlay {
+    opacity: 1;
+}
+
+
+.poster-title {
+    margin: 0 0 8px 0;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.poster-meta {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.poster-meta span {
+    padding: 2px 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+.poster-description {
+    margin-top: 8px ;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin-bottom: 2px;
+    overflow: hidden;
+}
+
+.poster-genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.genre-tag {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 12px;
+    color: white;
+    border: #fff 1px solid;
+}
+
+/* Button Group */
+.newrich-button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+    width: 100%;
+    padding: 0 5px;
+    box-sizing: border-box;
+}
+
+
+.newrich-play-btn,
+.newrich-add-btn {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    flex: 1;
+    max-width: 150px;
+    position: relative;
+}
+
+.newrich-play-btn {
+    border: 3px solid rgb(255, 0, 60);
+    background-color: rgba(255, 255, 255, 0.747);
+}
+
+.newrich-play-btn:hover {
+    transform: scale(1.05);
+}
+
+.newrich-add-btn {
+    background-color: rgb(170, 147, 147);
+    border: 3px solid rgb(255, 0, 60);
+}
+
+.newrich-add-btn:hover {
+    transform: scale(1.05);
+}
+
+
+.column-posters{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+.column-posters::-webkit-scrollbar {
+height: 3px;
+}
+
+
+main{
+    margin-top: 100px;
+}
+
+
+h1{
+    text-align: center;
+    text-decoration: none;
+    transition: transform ease-in-out 0.4s;
+}
+
+h1:hover{
+transform: scale(1.1);
+}
+
+.new-discription{
+    position: absolute;
+    z-index: 1;
+}
+
+/* Responsive Grid Layout */
+@media (max-width: 768px) {
+    .column-posters {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .poster-container {
+        height: 180px;
+    }
+    
+    nav {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    nav h1 {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .column-posters {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 10px;
+    }
+    
+    .poster-card {
+        max-width: 100%;
+    }
+    
+    .poster-container {
+        height: 200px;
+    }
+    
+    nav {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    nav h1 {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+        margin: 2px 0;
+    }
+    
+    .newrich-button-group {
+        width: 100%;
+        padding: 0 10px;
+        gap: 8px;
+    }
+    
+    .newrich-play-btn,
+    .newrich-add-btn {
+        padding: 8px 15px;
+        font-size: 0.85rem;
+        max-width: none;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .column-posters {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        
+    }
+}
+
+@media (min-width: 1025px) {
+    .column-posters {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+}
+
