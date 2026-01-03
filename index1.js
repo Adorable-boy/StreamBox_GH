@@ -39,7 +39,9 @@ let topPicksContainers = document.querySelectorAll("#TopPicks, #TopPicks2, #TopP
 async function loadTopPicks() {
     try {
         const fetchPromises = [];
-        for (let i = 1; i <= 500; i++) {
+        // Reduced from 500 to 33 to match the number of TopPicks containers (TopPicks to TopPicks33)
+        // This significantly improves load time and reduces API spam.
+        for (let i = 1; i <= 33; i++) {
             fetchPromises.push(
     fetch(`https://streambox-api.bpvw7gw5zw.workers.dev/?endpoint=movie/popular&language=en-US&page=${i}`)
                 .then(r => r.json())
@@ -55,22 +57,22 @@ async function loadTopPicks() {
 
 
 
-    loadTopPicks().then(dataArray => {
-        // Helper function to map TMDB movie to our format
-        function mapTMDBMovie(tmdbMovie) {
-            return {
-                id: tmdbMovie.id,
-                name: tmdbMovie.title || tmdbMovie.original_title || tmdbMovie.name,
-                title: tmdbMovie.name || tmdbMovie.original_title || tmdbMovie.title,
-                poster: tmdbMovie.poster_path ? `https://image.tmdb.org/t/p/w500${tmdbMovie.poster_path}` : '',
-                description: tmdbMovie.overview,
-                year: tmdbMovie.release_date ? tmdbMovie.release_date.substring(0, 4) : "",
-                rating: tmdbMovie.vote_average,
-                alt: tmdbMovie.title,
-                source: 'toppicks'
-            };
-        }
+    // Helper function to map TMDB movie to our format
+    function mapTMDBMovie(tmdbMovie) {
+        return {
+            id: tmdbMovie.id,
+            name: tmdbMovie.title || tmdbMovie.original_title || tmdbMovie.name,
+            title: tmdbMovie.name || tmdbMovie.original_title || tmdbMovie.title,
+            poster: tmdbMovie.poster_path ? `https://image.tmdb.org/t/p/w500${tmdbMovie.poster_path}` : '',
+            description: tmdbMovie.overview,
+            year: tmdbMovie.release_date ? tmdbMovie.release_date.substring(0, 4) : "",
+            rating: tmdbMovie.vote_average,
+            alt: tmdbMovie.title,
+            source: 'toppicks'
+        };
+    }
 
+    loadTopPicks().then(dataArray => {
         const topPickIds = ["TopPicks", "TopPicks2", "TopPicks3", "TopPicks4", "TopPicks5", "TopPicks6", "TopPicks7", "TopPicks8", "TopPicks9", "TopPicks10", "TopPicks11", "TopPicks12", "TopPicks13", "TopPicks14", "TopPicks15", "TopPicks16", "TopPicks17", "TopPicks18", "TopPicks19", "TopPicks20", "TopPicks21", "TopPicks22", "TopPicks23", "TopPicks24", "TopPicks25", "TopPicks26", "TopPicks27", "TopPicks28", "TopPicks29", "TopPicks30", "TopPicks31", "TopPicks32", "TopPicks33"];
 
         let allTopPicksMovies = [];
@@ -112,7 +114,50 @@ async function loadTopPicks() {
                 allMovies = [...allMovies, ...allTopPicksMovies];
             }
         }
+
+        // Start background fetch for remaining movies (pages 34-500)
+        loadRemainingMovies();
     });
+
+    async function loadRemainingMovies() {
+        const totalPages = 500;
+        const startPage = 1;
+        const batchSize = 10; // Fetch 10 pages at a time to keep UI responsive
+
+        for (let i = startPage; i <= totalPages; i += batchSize) {
+            const fetchPromises = [];
+            const endPage = Math.min(i + batchSize - 1, totalPages);
+            
+            for (let page = i; page <= endPage; page++) {
+                fetchPromises.push(
+                    fetch(`https://streambox-api.bpvw7gw5zw.workers.dev/?endpoint=movie/popular&language=en-US&page=${page}`)
+                    .then(r => r.json())
+                    .catch(e => null)
+                );
+            }
+
+            try {
+                const results = await Promise.all(fetchPromises);
+                const newMovies = [];
+                results.forEach(data => {
+                    if (data && data.results) {
+                        data.results.forEach(m => {
+                            newMovies.push({ ...mapTMDBMovie(m), source: 'toppicks' });
+                        });
+                    }
+                });
+
+                if (newMovies.length > 0) {
+                    allMovies = [...allMovies, ...newMovies];
+                }
+                
+                // Small delay to yield to main thread
+                await new Promise(resolve => setTimeout(resolve, 500));
+            } catch (error) {
+                console.error("Error loading background movies:", error);
+            }
+        }
+    }
 
 
 
