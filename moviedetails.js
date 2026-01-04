@@ -353,12 +353,12 @@ ${movie.cast && movie.cast.length ? `<div class="cast"> <h3>Cast</h3> <p>${movie
 
             <div class="actions">
                 <a href="${movie.show}" id="playLink">
-                    <button class="play">▶ Play </button>
+                    <button class="play">▶ Play</button>
                 </a>
 
 
                  <a href="https://vidlink.pro/movie/${movie.id}" id="playLink">
-                    <button class="play">▶ Play 2</button>
+                    <button class="play">▶ Play2</button>
                 </a>
 
                 <button class="play"
