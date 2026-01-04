@@ -332,7 +332,7 @@ function displayMovieDetails(movie) {
 
         <h1 id="detail">${movie.name || movie.original_title || movie.title || 'Untitled'}</h1>
 
-        <video src="${movie.show}" autoplay muted playsinline poster="${movie.poster}"></video>
+        <video src="" autoplay muted playsinline poster="${movie.poster}"></video>
 
         <div class="movie-info">
 
@@ -353,7 +353,7 @@ ${movie.cast && movie.cast.length ? `<div class="cast"> <h3>Cast</h3> <p>${movie
 
             <div class="actions">
                 <a href="${movie.show}" id="playLink">
-                    <button class="play">▶ Play 1</button>
+                    <button class="play">▶ Play </button>
                 </a>
 
 
@@ -430,7 +430,7 @@ function displayTvShowDetails(movie) {
 
         <h1 id="detail">${movie.name || movie.original_title || movie.title || 'Untitled'}</h1>
 
-        <video src="${movie.show || movie.trailers || ''}" autoplay muted playsinline poster="${movie.poster || ''}">
+        <video src="" autoplay muted playsinline poster="${movie.poster || ''}">
         </video>
 
         <div class="movie-info">
