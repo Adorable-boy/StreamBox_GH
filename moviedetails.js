@@ -126,7 +126,7 @@ function mapTMDBTvShow(m) {
                 gener: m.genre_ids || [],
                 genres: [],
                 alt: "",
-                show:`https://vidsrc.icu/embed/tv/${m.id}/1/1`,
+                show:`https://vidsrc.icu/embed/tv/${m.id}`,
                 source: 'tvshows',
                 totalEpisodes: m.number_of_episodes || 0,
                 totalSeasons: m.number_of_seasons || 1
