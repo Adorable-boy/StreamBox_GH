@@ -353,7 +353,12 @@ ${movie.cast && movie.cast.length ? `<div class="cast"> <h3>Cast</h3> <p>${movie
 
             <div class="actions">
                 <a href="${movie.show}" id="playLink">
-                    <button class="play">▶ Play</button>
+                    <button class="play">▶ Play 1</button>
+                </a>
+
+
+                 <a href="https://vidlink.pro/movie/${movie.id}" id="playLink">
+                    <button class="play">▶ Play 2</button>
                 </a>
 
                 <button class="play"
@@ -446,8 +451,13 @@ function displayTvShowDetails(movie) {
 ${movie.cast && movie.cast.length ? `<div class="cast"> <h3>Cast</h3> <p>${movie.cast.join(' . ')}</p> </div> ` : ''}
 
             <div class="actions">
-                <a href="${movie.show || '#'}" id="playLink">
+                <a href="${movie.show}" id="playLink">
                     <button class="play">▶ Play</button>
+                </a>
+
+
+                 <a href="https://vidlink.pro/tv/${movie.id}/1/1" id="playLink">
+                    <button class="play">▶ Play 2</button>
                 </a>
 
                 <button class="play"

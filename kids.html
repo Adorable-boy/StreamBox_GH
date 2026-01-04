@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="StreamBox.css">
+    <title>TV SHOWS</title>
+</head>
+<body>
+    
+   
+<nav>
+
+<h1 id="name">StreamBox🍿</h1>
+    <div class="actions">
+                <input type="search" placeholder="Search…" id="search">
+                <a href="javascript:history.back()"><button class="button">Back</button></a>
+            
+          <div onclick="changeTheme()" class="svg-items" id="toggleChange">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M416 192C486.7 192 544 249.3 544 320C544 390.7 486.7 448 416 448L224 448C153.3 448 96 390.7 96 320C96 249.3 153.3 192 224 192L416 192zM608 320C608 214 522 128 416 128L224 128C118 128 32 214 32 320C32 426 118 512 224 512L416 512C522 512 608 426 608 320zM224 400C268.2 400 304 364.2 304 320C304 275.8 268.2 240 224 240C179.8 240 144 275.8 144 320C144 364.2 179.8 400 224 400z"/></svg>
+            <span class="footer-labels">ChangeTheme</span>
+          </div>
+        </div>  
+    </div>
+</nav>
+
+
+
+<main>
+    
+    <!-- Search Results Section (hidden by default) -->
+     <section id="searchResults" style="display: none;">
+        <h2>Search Results</h2>
+        <div class="row-posters" id="searchResultsContainer"></div>
+    </section>
+
+
+
+
+    <section>
+        <h2>Top Kids</h2>
+        <div class="row-posters" id="tvshowsContainer"></div>
+    </section>
+
+
+    
+    <section>
+        <h2>Holiday Season</h2>
+        <div class="row-posters" id="TopPicksTv2">
+
+        </div>
+    </section>
+
+
+
+    <section>
+        <h2>Recent Streams</h2>
+        <div class="row-posters" id="continue-watching">
+
+        </div>
+    </section>
+
+
+    <section>
+        <h2>Get Some Action</h2>
+        <div class="row-posters"  id="TopPicksTv3">
+
+        </div>
+    </section>
+
+
+    <section>
+        <h2>Animation</h2>
+        <div class="row-posters"  id="TopPicksTv4">
+
+        </div>
+    </section>
+
+    <section>
+      <h2>Top-Notch</h2>
+      <div class="row-posters" id="TopPicksTv5">
+
+      </div>
+    </section>
+
+
+
+    <section>
+        <h2>Call Out</h2>
+        <div class="row-posters" id="TopPicksTv6">
+        
+        </div>
+    </section>
+
+
+
+
+    <section>
+        <h2>Mischief</h2>
+        <div class="row-posters" id="TopPicksTv7">
+        
+        </div>
+    </section> 
+    
+    
+    <section>
+        <h2>For See</h2>
+        <div class="row-posters" id="TopPicksTv8">
+        
+        </div>
+    </section>
+
+
+    <section>
+        <h2>Sad-Endings</h2>
+        <div class="row-posters" id="TopPicksTv9">
+        
+        </div>
+    </section>
+
+
+    <section>
+        <h2>Nerdy</h2>
+        <div class="row-posters" id="TopPicksTv10">
+        
+        </div>
+    </section>
+
+
+
+
+    <section>
+        <h2>Up-Raising</h2>
+        <div class="row-posters" id="TopPicksTv11">
+        
+        </div>
+    </section>
+
+
+
+    <section>
+        <h2>Lets Dance!</h2>
+        <div class="row-posters" id="TopPicksTv12">
+        
+        </div>
+    </section>
+
+
+
+    <section>
+        <h2>Fresh</h2>
+        <div class="row-posters" id="TopPicksTv13">
+        
+        </div>
+    </section>
+
+
+
+
+    <section>
+        <h2>Top Searches</h2>
+        <div class="row-posters" id="TopPicksTv14">
+        
+        </div>
+    </section>
+
+
+
+
+    <section>
+        <h2>Family</h2>
+            <div class="row-posters" id="TopPicksTv15">
+        
+        </div>
+    </section>
+
+
+
+
+    <section>
+        <h2>People-pleasers</h2>
+        <div class="row-posters" id="TopPicksTv16">
+        
+        </div>
+    </section>
+
+
+
+
+
+
+    <section>
+        <h2>US Epics</h2>
+        <div class="row-posters" id="TopPicksTv17">
+        
+        </div>
+    </section>
+
+
+
+
+    <section>
+        <h2>Epic Worlds</h2>
+            <div class="row-posters" id="TopPicksTv18">
+        
+        </div>
+    </section>
+
+
+
+
+    <section>
+        <h2>Girls Night In</h2>
+        <div class="row-posters" id="TopPicksTv19">
+        
+        </div>
+    </section>
+
+
+
+
+    <section>
+        <h2>Drama</h2>
+        <div class="row-posters" id="TopPicksTv20">
+        
+        </div>
+    </section>
+
+
+
+
+    <section>
+        <h2>Horror</h2>
+        <div class="row-posters" id="TopPicksTv21">
+        
+        </div>
+    </section>
+
+
+
+
+    <section>
+        <h2>Seasonal Shows</h2>
+        <div class="row-posters" id="TopPicksTv22">
+        
+        </div>
+    </section>
+
+
+
+
+    <section>
+        <h2>Iconic Franchises</h2>
+        <div class="row-posters" id="TopPicksTv23">
+        
+        </div>
+    </section>
+
+
+
+    <section>
+        <h2>Historical Shows</h2>
+            <div class="row-posters" id="TopPicksTv24">
+        
+        </div>
+    </section>
+
+
+
+
+    <section>
+        <h2>Drama movies</h2>
+        <div class="row-posters" id="TopPicksTv25">
+        
+        </div>
+    </section>
+
+
+
+    <section>
+        <h2>Emotional Shows</h2>
+        <div class="row-posters" id="TopPicksTv26">
+        
+        </div>
+    </section>
+
+
+
+
+    <section>
+        <h2>Comedy</h2>
+            <div class="row-posters" id="TopPicksTv27">
+        
+        </div>
+    </section>
+
+
+
+
+    <section>
+        <h2>Europian Series</h2>
+        <div class="row-posters" id="TopPicksTv28">
+        
+        </div>
+    </section>
+
+
+
+
+    <section>
+        <h2>Popular</h2>
+        <div class="row-posters" id="TopPicksTv29">
+        
+        </div>
+    </section>
+
+
+
+
+    <section>
+        <h2>Young Adults</h2>
+        <div class="row-posters" id="TopPicksTv30">
+        
+        </div>
+    </section>
+
+
+    
+    
+    
+    <section>
+        <h2>Watch Next</h2>
+        <div class="row-posters" id="TopPicksTv31">
+        
+        </div>
+    </section>
+
+
+
+    <section>
+        <h2>Shows</h2>
+        <div class="row-posters" id="TopPicksTv32">
+        
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</main>
+
+
+
+
+
+<footer>
+
+    <div>
+    <ul class="nav-links">
+       <div class="footer-items"><li><a href="index.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M304 70.1C313.1 61.9 326.9 61.9 336 70.1L568 278.1C577.9 286.9 578.7 302.1 569.8 312C560.9 321.9 545.8 322.7 535.9 313.8L527.9 306.6L527.9 511.9C527.9 547.2 499.2 575.9 463.9 575.9L175.9 575.9C140.6 575.9 111.9 547.2 111.9 511.9L111.9 306.6L103.9 313.8C94 322.6 78.9 321.8 70 312C61.1 302.2 62 287 71.8 278.1L304 70.1zM320 120.2L160 263.7L160 512C160 520.8 167.2 528 176 528L224 528L224 424C224 384.2 256.2 352 296 352L344 352C383.8 352 416 384.2 416 424L416 528L464 528C472.8 528 480 520.8 480 512L480 263.7L320 120.3zM272 528L368 528L368 424C368 410.7 357.3 400 344 400L296 400C282.7 400 272 410.7 272 424L272 528z"/></svg><span class="footer-labels">HOME</span></a></li></div>
+       <div class="footer-items"><li><a href="new&rich.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M160 144C151.2 144 144 151.2 144 160L144 480C144 488.8 151.2 496 160 496L480 496C488.8 496 496 488.8 496 480L496 160C496 151.2 488.8 144 480 144L160 144zM96 160C96 124.7 124.7 96 160 96L480 96C515.3 96 544 124.7 544 160L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 160zM296 408L296 344L232 344C218.7 344 208 333.3 208 320C208 306.7 218.7 296 232 296L296 296L296 232C296 218.7 306.7 208 320 208C333.3 208 344 218.7 344 232L344 296L408 296C421.3 296 432 306.7 432 320C432 333.3 421.3 344 408 344L344 344L344 408C344 421.3 333.3 432 320 432C306.7 432 296 421.3 296 408z"/></svg><span class="footer-labels">NEW & RICH</span></a></li></div>
+       <div class="footer-items"><li><a href="profile.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M128 128C128 92.7 156.7 64 192 64L448 64C483.3 64 512 92.7 512 128L512 512C512 547.3 483.3 576 448 576L192 576C156.7 576 128 547.3 128 512L128 128zM208 432C208 440.8 215.2 448 224 448L416 448C424.8 448 432 440.8 432 432C432 387.8 396.2 352 352 352L288 352C243.8 352 208 387.8 208 432zM320 312C350.9 312 376 286.9 376 256C376 225.1 350.9 200 320 200C289.1 200 264 225.1 264 256C264 286.9 289.1 312 320 312z"/></svg><span class="footer-labels">PROFILE</span></a></li></div>
+    </ul>
+   </div>
+   
+</footer>
+
+<script src="Tvshows.js"></script>
+<script src="index1.js"></script>
+<script src="theme.js"></script>
+</body>
+</html>
