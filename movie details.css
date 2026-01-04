@@ -136,9 +136,15 @@ margin: 0;
 
    @media screen and (max-width: 414px){
     .dets{
-        height: 60vh;
+        height: 70vh;
     }
    }
+
+
+
+
+
+  
 
    .dets video{
     position: absolute;
@@ -290,6 +296,17 @@ margin: 0;
     
     
 }
+
+
+
+  @media screen and (max-width: 500px){
+    .dets{
+        height: 80vh;
+    }
+   }
+
+
+
 
 
 #toggleChange svg{
