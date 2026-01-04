@@ -105,7 +105,7 @@
             flex-wrap: wrap;
          }
 
-         @media screen and (max-width: 414px) {
+         @media screen and (max-width: 315px) {
             nav {
                 flex-direction: column;
             }
@@ -115,13 +115,13 @@
             }
 
             #search {
-                max-width: 100px;
+                max-width: 110px;
             }
          }
 
 
 
-         @media screen and (width: 375px) {
+         @media screen and (max-width: 375px) {
             nav {
                 flex-direction: column;
             }
@@ -129,6 +129,12 @@
         main{
             margin-top: 10%;
         }
+
+
+
+         #search {
+                max-width: 110px;
+            }
 
          }
 
