@@ -705,7 +705,17 @@ function performSearch(searchQuery) {
 
         const movieTitle = movie.name || movie.original_title  || movie.title;
 
+        // Exact/Partial match
         const titleMatch = typeof movieTitle === "string" && movieTitle.toLowerCase().includes(query);
+
+        // Fuzzy match for title (allows up to 2 typos/differences)
+        let fuzzyTitleMatch = false;
+        if (!titleMatch && typeof movieTitle === "string" && query.length > 3) {
+            const distance = levenshteinDistance(query, movieTitle.toLowerCase());
+            // Allow 2 errors for queries > 3 chars, 3 errors for longer queries
+            const maxErrors = query.length > 6 ? 3 : 2;
+            fuzzyTitleMatch = distance <= maxErrors;
+        }
 
         const descMatch = typeof movie.description === "string" && movie.description.toLowerCase().includes(query);
 
@@ -726,7 +736,7 @@ function performSearch(searchQuery) {
         const yearMatch = movie.year && String(movie.year).includes(query);
         
         // Return true if ANY field matches
-        return titleMatch || descMatch || genreMatch || castMatch || yearMatch;
+        return titleMatch || fuzzyTitleMatch || descMatch || genreMatch || castMatch || yearMatch;
 
     });
     
@@ -749,7 +759,36 @@ function performSearch(searchQuery) {
     // Show search results section
     searchResultsSection.style.display = "";
     
-    // Display matching movies
+    // Sort matching movies to prioritize title matches
+    matchingMovies.sort((a, b) => {
+        const titleA = (a.name || a.original_title || a.title || "").toLowerCase();
+        const titleB = (b.name || b.original_title || b.title || "").toLowerCase();
+        
+        // Check for exact title match
+        const exactMatchA = titleA === query;
+        const exactMatchB = titleB === query;
+        
+        if (exactMatchA && !exactMatchB) return -1;
+        if (!exactMatchA && exactMatchB) return 1;
+        
+        // Check for starts-with match
+        const startsWithA = titleA.startsWith(query);
+        const startsWithB = titleB.startsWith(query);
+        
+        if (startsWithA && !startsWithB) return -1;
+        if (!startsWithA && startsWithB) return 1;
+        
+        // Check for substring title match
+        const hasTitleA = titleA.includes(query);
+        const hasTitleB = titleB.includes(query);
+        
+        if (hasTitleA && !hasTitleB) return -1;
+        if (!hasTitleA && hasTitleB) return 1;
+        
+        return 0;
+    });
+
+    // Display all matching movies
     if (matchingMovies.length === 0) {
         // No results found
         const noResults = document.createElement("p");
@@ -783,15 +822,65 @@ document.addEventListener("DOMContentLoaded", function() {
     // Add event listener to search input
     if (searchInput) {
         // Listen for input events (typing)
-        searchInput.addEventListener("input", async function(event) {
+        searchInput.addEventListener("input", debounce(function(event) {
             const searchQuery = event.target.value;
             performSearch(searchQuery);
-        });
+        }, 300)); // 300ms debounce
         
     } else {
         console.warn("Search input element not found");
     }
 });
+
+// Helper function for fuzzy matching (Levenshtein Distance)
+function levenshteinDistance(a, b) {
+    if (a.length === 0) return b.length;
+    if (b.length === 0) return a.length;
+
+    const matrix = [];
+
+    // increment along the first column of each row
+    for (let i = 0; i <= b.length; i++) {
+        matrix[i] = [i];
+    }
+
+    // increment each column in the first row
+    for (let j = 0; j <= a.length; j++) {
+        matrix[0][j] = j;
+    }
+
+    // Fill in the rest of the matrix
+    for (let i = 1; i <= b.length; i++) {
+        for (let j = 1; j <= a.length; j++) {
+            if (b.charAt(i - 1) === a.charAt(j - 1)) {
+                matrix[i][j] = matrix[i - 1][j - 1];
+            } else {
+                matrix[i][j] = Math.min(
+                    matrix[i - 1][j - 1] + 1, // substitution
+                    Math.min(
+                        matrix[i][j - 1] + 1, // insertion
+                        matrix[i - 1][j] + 1 // deletion
+                    )
+                );
+            }
+        }
+    }
+
+    return matrix[b.length][a.length];
+}
+
+// Debounce function to limit search frequency
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
 
 
 
