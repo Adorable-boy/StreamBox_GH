@@ -126,7 +126,7 @@ function mapTMDBTvShow(m) {
                 gener: m.genre_ids || [],
                 genres: [],
                 alt: "",
-                show:`https://vidsrc.icu/embed/tv/${m.id}`,
+                show:`https://vidsrc.icu/embed/tv/${m.id}/1/1`,
                 source: 'tvshows',
                 totalEpisodes: m.number_of_episodes || 0,
                 totalSeasons: m.number_of_seasons || 1
@@ -157,7 +157,7 @@ function mapTMDBMovie(m) {
                 gener: m.genre_ids || [],
                 genres: [],
                 alt: "",
-                show:`https://vidsrc.icu/embed/movie/${m.id}`,
+                show:`https://vidsrc.icu/embed/movie/${m.id}/1/1`,
                 source: 'toppicks'
     };
 }
@@ -181,7 +181,7 @@ function mapTMDBDetails(m) {
         runtime: m.runtime || null,
         gener: [],
         alt: "",
-        show: `https://vidsrc.icu/embed/movie/${m.id}`
+        show: `https://vidsrc.icu/embed/movie/${m.id}/1/1`,
     };
 }
 
