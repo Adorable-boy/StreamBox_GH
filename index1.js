@@ -712,8 +712,7 @@ function performSearch(searchQuery) {
         let fuzzyTitleMatch = false;
         if (!titleMatch && typeof movieTitle === "string" && query.length > 3) {
             const distance = levenshteinDistance(query, movieTitle.toLowerCase());
-            // Allow 2 errors for queries > 3 chars, 3 errors for longer queries
-            const maxErrors = query.length > 6 ? 3 : 2;
+            const maxErrors = query.length > 6 ? 4 : 3;
             fuzzyTitleMatch = distance <= maxErrors;
         }
 
@@ -1134,5 +1133,4 @@ function addSearchMovieAlt(movie, container) {
     posterWrapper.appendChild(title);
     container.appendChild(posterWrapper);
 }
-
 
