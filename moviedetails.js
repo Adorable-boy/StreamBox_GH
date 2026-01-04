@@ -157,8 +157,8 @@ function mapTMDBMovie(m) {
                 gener: m.genre_ids || [],
                 genres: [],
                 alt: "",
-                show:`https://vidsrc.icu/embed/movie/${m.id}`
-            
+                show:`https://vidsrc.icu/embed/movie/${m.id}`,
+                source: 'toppicks'
     };
 }
 

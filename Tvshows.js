@@ -8,7 +8,7 @@ async function fetchTvShows() {
     // Reduced from 500 to 32 to match the number of TV containers
     for(let i = 1; i <= 32; i++) {
     tvshows.push(
-        fetch(`https://api.themoviedb.org/3/discover/tv?api_key=e729d3999faacd83f8c79de0b5c7bc0e&language=en-US&page=${i}`)
+        fetch(`https://streambox-api.bpvw7gw5zw.workers.dev/?endpoint=discover/tv&language=en-US&page=${i}`)
        .then(r => r.json())
       );
     }

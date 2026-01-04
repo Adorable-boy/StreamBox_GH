@@ -57,17 +57,17 @@ async function loadTopPicks() {
 
 
 
-    // Helper function to map TMDB movie to our format
+    // Helper function to map TMDB movie/TV show to our format
     function mapTMDBMovie(tmdbMovie) {
         return {
             id: tmdbMovie.id,
-            name: tmdbMovie.title || tmdbMovie.original_title || tmdbMovie.name,
-            title: tmdbMovie.name || tmdbMovie.original_title || tmdbMovie.title,
+            name: tmdbMovie.title || tmdbMovie.original_title || tmdbMovie.name || tmdbMovie.original_name,
+            title: tmdbMovie.name || tmdbMovie.original_title || tmdbMovie.title || tmdbMovie.original_name,
             poster: tmdbMovie.poster_path ? `https://image.tmdb.org/t/p/w500${tmdbMovie.poster_path}` : '',
             description: tmdbMovie.overview,
-            year: tmdbMovie.release_date ? tmdbMovie.release_date.substring(0, 4) : "",
+            year: tmdbMovie.release_date ? tmdbMovie.release_date.substring(0, 4) : (tmdbMovie.first_air_date ? tmdbMovie.first_air_date.substring(0, 4) : ""),
             rating: tmdbMovie.vote_average,
-            alt: tmdbMovie.title,
+            alt: tmdbMovie.title || tmdbMovie.name,
             source: 'toppicks'
         };
     }
@@ -117,7 +117,15 @@ async function loadTopPicks() {
 
         // Start background fetch for remaining movies (pages 34-500)
         loadRemainingMovies();
+        loadRemainingTvShows();
+
     });
+
+
+
+
+
+
 
     async function loadRemainingMovies() {
         const totalPages = 500;
@@ -145,6 +153,7 @@ async function loadTopPicks() {
                             newMovies.push({ ...mapTMDBMovie(m), source: 'toppicks' });
                         });
                     }
+                    
                 });
 
                 if (newMovies.length > 0) {
@@ -164,6 +173,60 @@ async function loadTopPicks() {
 
 
    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    async function loadRemainingTvShows() {
+        const totalPages = 500;
+        const startPage = 1;
+        const batchSize = 10; // Fetch 10 pages at a time to keep UI responsive
+
+        for (let i = startPage; i <= totalPages; i += batchSize) {
+            const fetchPromises = [];
+            const endPage = Math.min(i + batchSize - 1, totalPages);
+            
+            for (let page = i; page <= endPage; page++) {
+                fetchPromises.push(
+                    fetch(`https://streambox-api.bpvw7gw5zw.workers.dev/?endpoint=discover/tv&language=en-US&page=${page}`)
+                    .then(r => r.json())
+                    .catch(e => null)
+                );
+            }
+
+            try {
+                const results = await Promise.all(fetchPromises);
+                const newTvShows = [];
+                results.forEach(data => {
+                    if (data && data.results) {
+                        data.results.forEach(m => {
+                            newTvShows.push({ ...mapTMDBMovie(m), source: 'tvshows' });
+                        });
+                    }
+                    
+                });
+
+                if (newTvShows.length > 0) {
+                    allMovies = [...allMovies, ...newTvShows];
+                }
+                
+                // Small delay to yield to main thread
+                await new Promise(resolve => setTimeout(resolve, 500));
+            } catch (error) {
+                console.error("Error loading background movies:", error);
+            }
+        }
+    }
+
 
 
 
