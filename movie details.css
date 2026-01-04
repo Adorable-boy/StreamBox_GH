@@ -11,10 +11,9 @@ margin: 0;
 
 
 #detail{
-    margin-left: 50px;
     z-index: 3;
     color: azure;
-    margin-bottom: 20%;
+    margin: 10px 10px 0 10px;
    }
  
 
