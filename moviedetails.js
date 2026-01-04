@@ -181,7 +181,7 @@ function mapTMDBDetails(m) {
         runtime: m.runtime || null,
         gener: [],
         alt: "",
-        show: `https://vidsrc.icu/embed/movie/${m.id}/1/1`,
+        show: `https://vidsrc.icu/embed/movie/${m.id}`,
     };
 }
 
