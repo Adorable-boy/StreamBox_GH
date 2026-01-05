@@ -138,8 +138,21 @@ margin: 3px;
     .dets{
         height: 70vh;
     }
+
+    .description{
+        height: 40vh;
+    }
    }
 
+
+
+ 
+
+@media screen and (orientation: landscape) and (min-width: 820px) and (max-width: 900px){
+   .dets{
+       height: 130vh;
+   }
+}
 
 
 
