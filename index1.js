@@ -331,7 +331,7 @@ function addMovieAlt(movie, container) {
 
 //MajorPoster
 if (document.getElementById("majorposter")) {
-    fetch(`https://streambox-api.bpvw7gw5zw.workers.dev/?endpoint=movie/popular&language=en-US&page=33`)
+    fetch(`https://streambox-api.bpvw7gw5zw.workers.dev/?endpoint=movie/popular&language=en-US&page=1`)
     .then(response => response.json())
     .then(data => {
 
