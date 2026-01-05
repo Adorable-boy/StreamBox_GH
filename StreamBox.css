@@ -108,7 +108,7 @@
 
 
 
-         @media screen and (max-width: 414px) {
+         @media screen and (min-width: 321px) and (max-width: 410px) {
             nav {
                 flex-direction: column;
             }
@@ -126,9 +126,7 @@
 
 
 
-
-
-         @media screen and (width: 425px) {
+          @media screen and (min-width:1px) and (max-width: 320px) {
             nav {
                 flex-direction: column;
             }
@@ -137,23 +135,15 @@
             margin-top: 10%;
         }
 
-    }
-
-
-
-
-
-         @media screen and (width: 500px) {
-            nav {
-                flex-direction: column;
+          #search {
+                max-width: 85px;
             }
-          
-        main{
-            margin-top: 10%;
-        }
-
 
          }
+     
+
+
+
  
 
 
@@ -168,7 +158,7 @@
 
           .actions {
             display: flex;
-            gap: 1rem;
+            gap: 0.1rem;
             align-items: center;
          }
 
