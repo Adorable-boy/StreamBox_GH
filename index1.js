@@ -15,6 +15,24 @@ const SVG_STRING = `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="
 </svg>`;
 const PLACEHOLDER_POSTER = 'data:image/svg+xml;utf8,' + encodeURIComponent(SVG_STRING);
 
+// Simple localStorage cache for JSON responses
+function fetchWithCache(url, key) {
+  try {
+    const cached = localStorage.getItem(key);
+    if (cached) {
+      return Promise.resolve(JSON.parse(cached));
+    }
+  } catch (_) {}
+  return fetch(url)
+    .then(r => r.json())
+    .then(data => {
+      try {
+        localStorage.setItem(key, JSON.stringify(data));
+      } catch (_) {}
+      return data;
+    });
+}
+
 
 window.addEventListener("load", () => {
   const loginBox = document.querySelector(".login");
@@ -43,10 +61,8 @@ async function loadTopPicks() {
         // Reduced from 500 to 33 to match the number of TopPicks containers (TopPicks to TopPicks33)
         // This significantly improves load time and reduces API spam.
         for (let i = 1; i <= 33; i++) {
-            fetchPromises.push(
-    fetch(`https://streambox-api.bpvw7gw5zw.workers.dev/?endpoint=movie/popular&language=en-US&page=${i}`)
-                .then(r => r.json())
-            );
+            const url = `https://streambox-api.bpvw7gw5zw.workers.dev/?endpoint=movie/popular&language=en-US&page=${i}`;
+            fetchPromises.push(fetchWithCache(url, `popular_page_${i}`));
         }
         const responses = await Promise.all(fetchPromises);
         return responses;
@@ -131,7 +147,7 @@ async function loadTopPicks() {
     async function loadRemainingMovies() {
         const totalPages = 500;
         const startPage = 1;
-        const batchSize = 10; // Fetch 10 pages at a time to keep UI responsive
+        const batchSize = 15; // Fetch 15 pages at a time to keep UI responsive
 
         for (let i = startPage; i <= totalPages; i += batchSize) {
             const fetchPromises = [];
@@ -162,7 +178,7 @@ async function loadTopPicks() {
                 }
                 
                 // Small delay to yield to main thread
-                await new Promise(resolve => setTimeout(resolve, 500));
+                await new Promise(resolve => setTimeout(resolve, 250));
             } catch (error) {
                 console.error("Error loading background movies:", error);
             }
@@ -190,7 +206,7 @@ async function loadTopPicks() {
     async function loadRemainingTvShows() {
         const totalPages = 500;
         const startPage = 1;
-        const batchSize = 10; // Fetch 10 pages at a time to keep UI responsive
+        const batchSize = 15; // Fetch 15 pages at a time to keep UI responsive
 
         for (let i = startPage; i <= totalPages; i += batchSize) {
             const fetchPromises = [];
@@ -221,7 +237,7 @@ async function loadTopPicks() {
                 }
                 
                 // Small delay to yield to main thread
-                await new Promise(resolve => setTimeout(resolve, 500));
+                await new Promise(resolve => setTimeout(resolve, 250));
             } catch (error) {
                 console.error("Error loading background movies:", error);
             }
@@ -254,6 +270,8 @@ function addMovie(movie, container) {
     const img = document.createElement("img");
     img.src = movie.poster || PLACEHOLDER_POSTER;
     img.alt = PLACEHOLDER_POSTER;
+    img.loading = "lazy";
+    img.decoding = "async";
 
     let title = document.createElement("p");
     title.innerText = movie.name || movie.title;
@@ -292,6 +310,8 @@ function addMovieAlt(movie, container) {
     const img = document.createElement("img");
     img.src = PLACEHOLDER_POSTER;
     img.alt = movie.name || movie.title || "Untitled";
+    img.loading = "lazy";
+    img.decoding = "async";
     
 
     let title = document.createElement("p");
@@ -548,7 +568,7 @@ if (document.getElementById("majorposter")) {
 
 
     
-    function addMajorAlt(major, container) {
+function addMajorAlt(major, container) {
         // Create a wrapper div for each poster and its buttons
         const posterWrapper = document.createElement("div");
         posterWrapper.style.display = "flex";
@@ -558,9 +578,11 @@ if (document.getElementById("majorposter")) {
         const sourceParam = major.source || 'profile';
         link.href = `moviedetails.html?id=${major.id}&source=${sourceParam}`;
         
-        const img = document.createElement("img");
-        img.src = PLACEHOLDER_POSTER;
-        img.alt = PLACEHOLDER_POSTER;
+    const img = document.createElement("img");
+    img.src = PLACEHOLDER_POSTER;
+    img.alt = PLACEHOLDER_POSTER;
+    img.loading = "lazy";
+    img.decoding = "async";
 
         img.style.display ="flex"
         
@@ -1073,6 +1095,8 @@ function addSearchMovie(movie, container) {
     const img = document.createElement("img");
     img.src = movie.poster ;
     img.alt = PLACEHOLDER_POSTER;
+    img.loading = "lazy";
+    img.decoding = "async";
 
     let title = document.createElement("p");
     title.innerText = movie.name || movie.title;
@@ -1119,6 +1143,8 @@ function addSearchMovieAlt(movie, container) {
     const img = document.createElement("img");
     img.src = PLACEHOLDER_POSTER;
     img.alt = movie.name || movie.title || "Untitled" || PLACEHOLDER_POSTER;
+    img.loading = "lazy";
+    img.decoding = "async";
 
     let title = document.createElement("p");
     title.innerText = movie.name || movie.title || "Untitled";

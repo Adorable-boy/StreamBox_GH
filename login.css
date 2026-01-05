@@ -35,14 +35,6 @@ body{
                     width: clamp(280px, 90vw, 420px);
             }
 
-            body{
-                 background: linear-gradient(rgba(2, 1, 1, 0.737) , rgba(127, 128, 129, 0.942)), url(/images/signisn:login\ pic.JPG);  
-                 background-size: cover;
-                 background-position: center;
-                 background-repeat: no-repeat;
-                 height: 100vh;
-            }
-
          }
 
 
@@ -53,16 +45,8 @@ body{
                      width: clamp(260px, 92vw, 320px);
                      padding: 24px;
             }
-            
-            
-            
             body{
                     height: 100vh;
-                     background: linear-gradient(rgba(2, 1, 1, 0.737) , rgba(127, 128, 129, 0.942)), url(/images/signisn:login\ pic.JPG);  
-                     background-size: cover;
-                    background-position: center;
-                     background-repeat: no-repeat;
-
                   }
          }
      
@@ -148,13 +132,6 @@ button{
   .login, .signin{
     width: clamp(320px, 60vw, 520px);
   }
-
-  body{ 
-    background: linear-gradient(rgba(2, 1, 1, 0.737) , rgba(127, 128, 129, 0.942)), url(/images/signisn:login\ pic.JPG);  
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;}
 }
 
 @media (orientation: landscape) and (max-height: 430px) {
@@ -162,14 +139,6 @@ button{
     width: clamp(320px, 70vw, 520px);
     padding: 24px;
   }
-
-   body{ 
-    background: linear-gradient(rgba(2, 1, 1, 0.737) , rgba(127, 128, 129, 0.942)), url(/images/signisn:login\ pic.JPG);  
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;}
-
 }
 
 @keyframes signin {
