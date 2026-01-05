@@ -332,7 +332,7 @@ function displayMovieDetails(movie) {
 
         <h1 id="detail">${movie.name || movie.original_title || movie.title || 'Untitled'}</h1>
 
-        <video src="${''}" autoplay muted playsinline poster="${movie.poster}"></video>
+        <img src="${movie.poster}" class="dets-video" >
 
         <div class="movie-info">
 
@@ -430,8 +430,7 @@ function displayTvShowDetails(movie) {
 
         <h1 id="detail">${movie.name || movie.original_title || movie.title || 'Untitled'}</h1>
 
-        <video src="${''}" autoplay muted playsinline poster="${movie.poster || ''}">
-        </video>
+       <img src="${movie.poster}" class="dets-video" >
 
         <div class="movie-info">
 
