@@ -88,13 +88,18 @@ function mapTMDBTvShow(m) {
         id: m.id,
         name: m.name || m.title,
         title: m.original_title || m.title || m.name,
-        poster: m.poster_path ? `https://image.tmdb.org/t/p/w500${m.poster_path}` : PLACEHOLDER_POSTER,
-        description: m.overview,
-        year: m.release_date ? m.release_date.substring(0, 4) : "",
-        rating: m.vote_average,
-        runtime: null,
+        poster: m.poster || (m.poster_path ? `https://image.tmdb.org/t/p/w500${m.poster_path}` : PLACEHOLDER_POSTER),
+        description: m.overview || m.description || "",
+        year: m.first_air_date ? m.first_air_date.substring(0, 4) : (m.release_date ? m.release_date.substring(0, 4) : (m.year || "")),
+        rating: m.vote_average || m.rating,
+        runtime: m.episode_run_time ? (Array.isArray(m.episode_run_time) ? m.episode_run_time[0] : m.episode_run_time) : null,
         gener: m.genre_ids || [],
-        genres: [],
+        genres: Array.isArray(m.genres)
+            ? (typeof m.genres[0] === "string" ? m.genres : m.genres.map(g => g.name).filter(Boolean))
+            : [],
+        cast: m.credits && Array.isArray(m.credits.cast)
+            ? m.credits.cast.slice(0, 12).map(c => c.name).filter(Boolean)
+            : (Array.isArray(m.cast) ? m.cast : []),
         alt: "",
         show: `${WORKER_URL}/?url=https://vidsrc.to/embed/tv/${m.id}/`,
         source: 'tvshows',
@@ -108,13 +113,18 @@ function mapTMDBMovie(m) {
         id: m.id,
         name: m.name || m.title,
         title: m.original_title || m.title || m.name,
-        poster: m.poster_path ? `https://image.tmdb.org/t/p/w500${m.poster_path}` : PLACEHOLDER_POSTER,
-        description: m.overview,
-        year: m.release_date ? m.release_date.substring(0, 4) : "",
-        rating: m.vote_average,
-        runtime: null,
+        poster: m.poster || (m.poster_path ? `https://image.tmdb.org/t/p/w500${m.poster_path}` : PLACEHOLDER_POSTER),
+        description: m.overview || m.description || "",
+        year: m.release_date ? m.release_date.substring(0, 4) : (m.first_air_date ? m.first_air_date.substring(0, 4) : (m.year || "")),
+        rating: m.vote_average || m.rating,
+        runtime: typeof m.runtime === "number" ? m.runtime : (m.runtime && m.runtime.value ? m.runtime.value : null),
         gener: m.genre_ids || [],
-        genres: [],
+        genres: Array.isArray(m.genres)
+            ? (typeof m.genres[0] === "string" ? m.genres : m.genres.map(g => g.name).filter(Boolean))
+            : [],
+        cast: m.credits && Array.isArray(m.credits.cast)
+            ? m.credits.cast.slice(0, 12).map(c => c.name).filter(Boolean)
+            : (Array.isArray(m.cast) ? m.cast : []),
         alt: "",
         show: `${WORKER_URL}/?url=https://vidsrc.to/embed/movie/${m.id}/`,
         source: 'toppicks'
@@ -287,11 +297,8 @@ function displayMovieDetails(movie) {
             ${movie.description ? `<p class="description">${movie.description}</p>` : '...'}
             ${movie.cast && movie.cast.length ? `<div class="cast"><h3>Cast</h3><p>${movie.cast.join(' . ')}</p></div>` : ''}
             <div class="actions">
-                <a href="${movie.show}" class="playLink" target="_blank">
+                <a href="player.html?id=${movie.id}&type=movie&provider=auto" class="playLink">
                     <button class="play">▶Play</button>
-                </a>
-                <a href="https://vidsrc.icu/movie/${movie.id}" class="playLink" controls target="_blank">
-                    <button class="play">▶Play2</button>
                 </a>
                 <button class="play" data-movie-id="${movie.id}" data-movie='${movieData}' onclick="addToList(event, JSON.parse(this.dataset.movie))">
                     ${buttonText}
@@ -350,11 +357,8 @@ function displayTvShowDetails(movie) {
             
             
             <div class="actions">
-                <a href="${movie.show}" class="playLink" target="_blank">
+                <a href="player.html?id=${movie.id}&type=tv&provider=auto" class="playLink">
                     <button class="play">▶Play</button>
-                </a>
-                <a href="https://vidsrc.icu/tv/${movie.id}/" class="playLink" target="_blank">
-                    <button class="play">▶Play2</button>
                 </a>
                 <button class="play" data-movie-id="${movie.id}" data-movie='${movieData}' onclick="addToList(event, JSON.parse(this.dataset.movie))">
                     ${buttonText}
@@ -542,9 +546,7 @@ function renderSeasonsAndEpisodes(movie) {
             epInfo.textContent = ep.air_date ? `Air: ${ep.air_date}` : '';
 
             const playLink = document.createElement('a');
-            playLink.href = `${WORKER_URL}/?url=https://vidsrc.to/embed/tv/${movie.id}/${seasonNumber}/${ep.episode_number}`;
-            playLink.target = '_blank';
-            playLink.rel = 'noopener noreferrer';
+            playLink.href = `player.html?id=${movie.id}&type=tv&season=${seasonNumber}&episode=${ep.episode_number}&provider=auto`;
             playLink.style.textDecoration = 'none';
 
             const playBtn = document.createElement('button');

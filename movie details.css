@@ -273,7 +273,7 @@ margin: 3px;
     white-space: wrap;
     overflow: hidden;
     text-align: justify;
-    max-height: 250px;
+    height: 20vh;
 }
 
 .cast h3 {
