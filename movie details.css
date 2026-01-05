@@ -141,6 +141,7 @@ margin: 3px;
 
     .description{
         height: 40vh;
+        margin-bottom: none;
     }
    }
 
