@@ -319,7 +319,7 @@ function displayMovieDetails(movie) {
     
     const isInList = myList.some(m => String(m.id) === String(movie.id));
 
-    const buttonText = isInList ? '✔ Added To List' : 'Add To List';
+    const buttonText = isInList ? '✔Added To List' : 'Add To List';
 
     // Safely support BOTH "gener" and "genres"
     const genresArray = movie.gener || movie.genres || [];
@@ -417,7 +417,7 @@ function displayTvShowDetails(movie) {
     
     const isInList = myList.some(m => String(m.id) === String(movie.id));
 
-    const buttonText = isInList ? '✔ Added To List' : 'Add To List';
+    const buttonText = isInList ? '✔Added To List' : 'Add To List';
 
     // Safely support BOTH "gener" and "genres"
     const genresArray = movie.gener || movie.genres || [];
