@@ -18,6 +18,7 @@ const PLACEHOLDER_POSTER = 'data:image/svg+xml;utf8,' + encodeURIComponent(SVG_S
 
 window.addEventListener("load", () => {
   const loginBox = document.querySelector(".login");
+  if (!loginBox) return;
   loginBox.style.opacity = "0.01";
   loginBox.style.transform = "scale(0.5) rotateX(30deg)";
 
@@ -1133,4 +1134,3 @@ function addSearchMovieAlt(movie, container) {
     posterWrapper.appendChild(title);
     container.appendChild(posterWrapper);
 }
-
