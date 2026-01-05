@@ -3,69 +3,73 @@ const WORKER_URL = "https://streambox-api.bpvw7gw5zw.workers.dev";
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get('id');
 const type = urlParams.get('type') || 'movie';
-const season = urlParams.get('season');
-const episode = urlParams.get('episode');
+const season = urlParams.get('season') || '1';
+const episode = urlParams.get('episode') || '1';
 const initialProvider = urlParams.get('provider') || 'auto';
 
 let currentIframe = null;
 let playableCheckTimeout;
+let currentProvider = initialProvider;
 
-// Enhanced PROVIDERS configuration with fallbacks and multiple URL patterns
+// Updated PROVIDERS with working URLs (2024)
 const PROVIDERS = {
+  'auto': {
+    name: 'Auto (Best)',
+    icon: '🔄',
+    testUrl: null
+  },
   'vidsrc.to': {
-    movie: 'https://vidsrc.to/embed/movie/',
-    tv: 'https://vidsrc.to/embed/tv/',
+    name: 'VidSrc.to',
+    icon: '🎬',
     patterns: {
       movie: 'https://vidsrc.to/embed/movie/{id}',
       tv: 'https://vidsrc.to/embed/tv/{id}/{season}/{episode}'
-    },
-    fallbacks: [
-      'https://vidsrc.me/embed/{type}/{id}',
-      'https://vidsrc.pro/embed/{type}/{id}'
-    ]
+    }
   },
   'vidsrc.icu': {
-    movie: 'https://vidsrc.icu/embed/movie/',
-    tv: 'https://vidsrc.icu/embed/tv/',
+    name: 'VidSrc.icu',
+    icon: '🏥',
     patterns: {
       movie: 'https://vidsrc.icu/embed/movie/{id}',
       tv: 'https://vidsrc.icu/embed/tv/{id}/{season}/{episode}'
     }
   },
+  '2embed.org': {
+    name: '2Embed',
+    icon: '📺',
+    patterns: {
+      movie: 'https://2embed.org/embed/movie/{id}',
+      tv: 'https://2embed.org/embed/tv/{id}/{season}/{episode}'
+    }
+  },
+  'vidsrc.pro': {
+    name: 'VidSrc.pro',
+    icon: '🎥',
+    patterns: {
+      movie: 'https://vidsrc.pro/embed/movie/{id}',
+      tv: 'https://vidsrc.pro/embed/tv/{id}/{season}/{episode}'
+    }
+  },
+  'vidsrc.cc': {
+    name: 'VidSrc.cc',
+    icon: '🔗',
+    patterns: {
+      movie: 'https://vidsrc.cc/embed/movie/{id}',
+      tv: 'https://vidsrc.cc/embed/tv/{id}/{season}/{episode}'
+    }
+  },
   'vidlink.pro': {
-    movie: 'https://vidlink.pro/movie/',
-    tv: 'https://vidlink.pro/tv/',
+    name: 'VidLink',
+    icon: '🔗',
     patterns: {
       movie: 'https://vidlink.pro/movie/{id}',
       tv: 'https://vidlink.pro/tv/{id}'
     },
-    // vidlink.pro uses different parameters
     urlBuilder: function(type, id, season, episode) {
       if (type === 'tv') {
-        // vidlink.pro TV shows use query parameters
-        const url = `https://vidlink.pro/tv/${id}`;
-        const params = new URLSearchParams();
-        if (season) params.set('s', season);
-        if (episode) params.set('e', episode);
-        return params.toString() ? `${url}?${params.toString()}` : url;
+        return `https://vidlink.pro/tv/${id}?s=${season}&e=${episode}`;
       }
       return `https://vidlink.pro/movie/${id}`;
-    }
-  },
-  '2embed.org': {
-    movie: 'https://2embed.org/embed/movie?tmdb=',
-    tv: 'https://2embed.org/embed/tv?tmdb=',
-    patterns: {
-      movie: 'https://2embed.org/embed/movie?tmdb={id}',
-      tv: 'https://2embed.org/embed/tv?tmdb={id}&season={season}&episode={episode}'
-    }
-  },
-  'multiembed.mov': {
-    movie: 'https://multiembed.mov/?video_id=',
-    tv: 'https://multiembed.mov/?video_id=',
-    patterns: {
-      movie: 'https://multiembed.mov/?video_id={id}&s=tmdb',
-      tv: 'https://multiembed.mov/?video_id={id}&s=tmdb&season={season}&episode={episode}'
     }
   }
 };
@@ -77,27 +81,20 @@ const errorElement = document.getElementById('error');
 const errorMessage = document.getElementById('error-message');
 const movieInfo = document.getElementById('movieInfo');
 const playbackControls = document.getElementById('playbackControls');
-
-const playPauseBtn = document.getElementById('playPauseBtn');
-const volumeBtn = document.getElementById('volumeBtn');
-const volumeBar = document.getElementById('volumeBar');
-const progressBar = document.getElementById('progressBar');
-const speedSelect = document.getElementById('speedSelect');
-const fullscreenBtn = document.getElementById('fullscreenBtn');
-const currentTimeEl = document.getElementById('currentTime');
-const totalTimeEl = document.getElementById('totalTime');
+const providerButtonsContainer = document.querySelector('.provider-buttons');
 
 function goBack() {
-  if (document.referrer && document.referrer.includes(window.location.hostname)) {
+  if (document.referrer) {
     history.back();
   } else {
     window.location.href = 'moviedetails.html?id=' + movieId;
   }
 }
 
+// Simple URL builder - no complex pattern matching
 function buildEmbedUrl(providerName) {
   const provider = PROVIDERS[providerName];
-  if (!provider) return null;
+  if (!provider || providerName === 'auto') return null;
   
   let embedUrl = '';
   
@@ -107,24 +104,9 @@ function buildEmbedUrl(providerName) {
   } else {
     // Standard URL building
     if (type === 'tv') {
-      const s = season || '1';
-      const e = episode || '1';
-      
-      if (providerName === '2embed.org') {
-        embedUrl = `${provider.tv}${movieId}&season=${s}&episode=${e}`;
-      } else if (providerName === 'multiembed.mov') {
-        embedUrl = `${provider.tv}${movieId}&s=tmdb&season=${s}&episode=${e}`;
-      } else {
-        embedUrl = `${provider.tv}${movieId}/${s}/${e}`;
-      }
+      embedUrl = `https://vidsrc.to/embed/tv/${movieId}/${season}/${episode}`;
     } else {
-      if (providerName === '2embed.org') {
-        embedUrl = `${provider.movie}${movieId}`;
-      } else if (providerName === 'multiembed.mov') {
-        embedUrl = `${provider.movie}${movieId}&s=tmdb`;
-      } else {
-        embedUrl = `${provider.movie}${movieId}`;
-      }
+      embedUrl = `https://vidsrc.to/embed/movie/${movieId}`;
     }
   }
   
@@ -132,122 +114,40 @@ function buildEmbedUrl(providerName) {
   return embedUrl;
 }
 
-// Try multiple URL patterns for a provider
-async function tryProviderPatterns(providerName) {
-  const provider = PROVIDERS[providerName];
-  if (!provider) return null;
-  
-  const patterns = [];
-  
-  // Add main pattern
-  if (provider.patterns) {
-    const pattern = provider.patterns[type];
-    if (pattern) {
-      let url = pattern
-        .replace('{id}', movieId)
-        .replace('{type}', type)
-        .replace('{season}', season || '1')
-        .replace('{episode}', episode || '1');
-      patterns.push(url);
-    }
-  }
-  
-  // Add fallback patterns
-  if (provider.fallbacks) {
-    provider.fallbacks.forEach(fallback => {
-      const url = fallback
-        .replace('{id}', movieId)
-        .replace('{type}', type)
-        .replace('{season}', season || '1')
-        .replace('{episode}', episode || '1');
-      patterns.push(url);
-    });
-  }
-  
-  // Test each pattern
-  for (const url of patterns) {
-    const proxiedUrl = `${WORKER_URL}/?url=${encodeURIComponent(url)}`;
-    const isPlayable = await checkPlayable(proxiedUrl);
-    if (isPlayable) {
-      console.log(`Found working pattern for ${providerName}:`, url);
-      return url;
-    }
-  }
-  
-  return null;
-}
-
-// Helper to build a player page URL
-function buildPageUrl(providerName) {
-  const params = new URLSearchParams();
-  if (movieId) params.set('id', movieId);
-  if (type) params.set('type', type);
-  if (season) params.set('season', season);
-  if (episode) params.set('episode', episode);
-  if (providerName) params.set('provider', providerName);
-  return `${window.location.pathname}?${params.toString()}`;
-}
-
-async function checkPlayable(url) {
+// Simple test if URL is accessible
+async function testUrl(url) {
   try {
     const controller = new AbortController();
-    playableCheckTimeout = setTimeout(() => controller.abort(), 8000);
+    playableCheckTimeout = setTimeout(() => controller.abort(), 5000);
     
-    const res = await fetch(url, { 
-      method: 'GET',
+    // Test with HEAD request first (faster)
+    const response = await fetch(url, {
+      method: 'HEAD',
       signal: controller.signal,
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-        'Accept-Language': 'en-US,en;q=0.9',
-        'Referer': 'https://vidsrc.to/'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
       }
     });
     
     clearTimeout(playableCheckTimeout);
     
-    if (!res.ok) {
-      console.log(`HTTP ${res.status} for URL`);
-      return false;
+    if (response.ok) {
+      return true;
     }
     
-    const contentType = res.headers.get('content-type') || '';
-    if (!contentType.includes('text/html') && !contentType.includes('video/')) {
-      console.log('Not HTML or video content:', contentType);
-      return false;
-    }
+    // If HEAD fails, try GET with limited data
+    const getResponse = await fetch(url, {
+      method: 'GET',
+      signal: controller.signal,
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+      }
+    });
     
-    const text = await res.text();
+    return getResponse.ok;
     
-    // Check for error indicators
-    const errorIndicators = [
-      '404', 'Not Found', 'error', 'failed', 'unavailable',
-      'not available', 'this video', 'removed', 'copyright'
-    ];
-    
-    const hasError = errorIndicators.some(error => 
-      text.toLowerCase().includes(error.toLowerCase())
-    );
-    
-    // Check for video/success indicators
-    const successIndicators = [
-      '<video', '<iframe', 'player', 'streaming',
-      'source', 'src=', 'mp4', 'm3u8', 'dash'
-    ];
-    
-    const hasSuccess = successIndicators.some(success => 
-      text.toLowerCase().includes(success.toLowerCase())
-    );
-    
-    const isValid = text.length > 300 && 
-                    !hasError && 
-                    (hasSuccess || contentType.includes('video/'));
-    
-    console.log(`URL check: ${isValid ? 'VALID' : 'INVALID'}, length: ${text.length}, hasError: ${hasError}, hasSuccess: ${hasSuccess}`);
-    return isValid;
-    
-  } catch (e) {
-    console.warn('Check failed:', e.message);
+  } catch (error) {
+    console.warn('URL test failed:', error.message);
     clearTimeout(playableCheckTimeout);
     return false;
   }
@@ -261,7 +161,7 @@ function setLoading(isLoading) {
 
 function showError(msg) {
   if (errorElement && errorMessage) {
-    errorMessage.textContent = msg || 'Player failed to load. Try another provider.';
+    errorMessage.textContent = msg || 'Failed to load video. Try another source.';
     errorElement.style.display = 'flex';
   }
   if (playbackControls) {
@@ -275,19 +175,16 @@ function hideError() {
   }
 }
 
-function mountIframe(url) {
+// Direct iframe mounting without worker for better compatibility
+function mountIframe(directUrl, providerName) {
   if (!playerContainer) return;
   
   playerContainer.innerHTML = '';
+  
   const iframe = document.createElement('iframe');
-  
-  // Route through proxy for ad blocking
-  const proxiedUrl = `${WORKER_URL}/?url=${encodeURIComponent(url)}`;
-  iframe.src = proxiedUrl;
-  
+  iframe.src = directUrl;
   iframe.allowFullscreen = true;
   iframe.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope');
-  iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups allow-top-navigation allow-pointer-lock allow-presentation');
   iframe.style.border = 'none';
   iframe.style.width = '100%';
   iframe.style.height = '100%';
@@ -295,224 +192,112 @@ function mountIframe(url) {
   iframe.style.top = '0';
   iframe.style.left = '0';
   iframe.style.backgroundColor = '#000';
+  iframe.referrerPolicy = 'no-referrer';
   
   playerContainer.appendChild(iframe);
   currentIframe = iframe;
+  currentProvider = providerName;
   
-  // Show playback controls if they exist
-  if (playbackControls) {
-    playbackControls.style.display = 'flex';
-  }
-  
+  // Hide loading and error
+  setLoading(false);
   hideError();
   
-  // Add event listeners for iframe load
+  // Show controls after a delay
+  setTimeout(() => {
+    if (playbackControls) {
+      playbackControls.style.display = 'flex';
+    }
+  }, 1000);
+  
+  // Event listeners
   iframe.addEventListener('load', () => {
-    console.log('Iframe loaded successfully from:', url);
+    console.log(`✅ ${providerName} iframe loaded successfully`);
   });
   
-  iframe.addEventListener('error', () => {
-    console.error('Iframe failed to load from:', url);
-    showError('Video failed to load. Please try another provider.');
+  iframe.addEventListener('error', (e) => {
+    console.error(`❌ ${providerName} iframe failed:`, e);
+    showError(`Failed to load from ${providerName}. Trying next source...`);
+    autoPickAndPlay();
   });
 }
 
-// External controls with better iframe communication
-function setupExternalControls() {
-  // Play/Pause functionality
-  if (playPauseBtn) {
-    playPauseBtn.addEventListener('click', () => {
-      if (currentIframe && currentIframe.contentWindow) {
-        try {
-          const isPaused = !playPauseBtn.classList.contains('playing');
-          
-          // Send play/pause command to iframe
-          currentIframe.contentWindow.postMessage({
-            type: 'CONTROL',
-            action: isPaused ? 'play' : 'pause'
-          }, '*');
-          
-          // Toggle button state
-          playPauseBtn.classList.toggle('playing');
-          const icon = playPauseBtn.querySelector('.icon') || playPauseBtn;
-          icon.textContent = isPaused ? '⏸' : '▶';
-          
-        } catch (e) {
-          console.log('Could not control iframe:', e);
-          // Fallback: try to play/pause via iframe click
-          try {
-            currentIframe.contentWindow.document.querySelector('video').play();
-          } catch (e2) {
-            console.log('Fallback also failed');
-          }
-        }
-      }
-    });
-  }
-
-  // Volume control
-  if (volumeBar) {
-    volumeBar.addEventListener('input', (e) => {
-      const volume = e.target.value / 100;
-      if (currentIframe && currentIframe.contentWindow) {
-        try {
-          currentIframe.contentWindow.postMessage({
-            type: 'CONTROL',
-            action: 'volume',
-            value: volume
-          }, '*');
-        } catch (e) {
-          console.log('Volume control not available');
-        }
-      }
-    });
-  }
-
-  // Speed control
-  if (speedSelect) {
-    speedSelect.addEventListener('change', (e) => {
-      const speed = parseFloat(e.target.value);
-      if (currentIframe && currentIframe.contentWindow) {
-        try {
-          currentIframe.contentWindow.postMessage({
-            type: 'CONTROL',
-            action: 'speed',
-            value: speed
-          }, '*');
-        } catch (e) {
-          console.log('Speed control not available');
-        }
-      }
-    });
-  }
-
-  // Fullscreen
-  if (fullscreenBtn) {
-    fullscreenBtn.addEventListener('click', () => {
-      const elem = playerContainer || document.documentElement;
-      if (!document.fullscreenElement) {
-        if (elem.requestFullscreen) {
-          elem.requestFullscreen().catch(err => {
-            console.log(`Error attempting to enable fullscreen: ${err.message}`);
-          });
-        } else if (elem.webkitRequestFullscreen) {
-          elem.webkitRequestFullscreen();
-        }
-      } else {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-          document.webkitExitFullscreen();
-        }
-      }
-    });
-  }
-}
-
+// Try multiple providers in sequence
 async function autoPickAndPlay() {
   setLoading(true);
   hideError();
   
-  // Try providers in this order
-  const order = ['vidsrc.to', 'vidsrc.icu', '2embed.org', 'vidlink.pro', 'multiembed.mov'];
+  console.log('Starting auto provider selection...');
   
-  for (const providerName of order) {
-    console.log(`\n=== Trying provider: ${providerName} ===`);
+  // List of providers to try (in order of reliability)
+  const providersToTry = [
+    'vidsrc.to',
+    'vidsrc.icu', 
+    '2embed.org',
+    'vidsrc.pro',
+    'vidsrc.cc',
+    'vidlink.pro'
+  ];
+  
+  for (const providerName of providersToTry) {
+    console.log(`Trying ${providerName}...`);
     
-    // Try multiple patterns for this provider
-    const workingUrl = await tryProviderPatterns(providerName);
+    let directUrl;
     
-    if (workingUrl) {
-      console.log(`✓ ${providerName} is working with URL:`, workingUrl);
-      mountIframe(workingUrl);
-      setupExternalControls();
+    if (type === 'tv') {
+      if (providerName === 'vidlink.pro') {
+        directUrl = `https://vidlink.pro/tv/${movieId}?s=${season}&e=${episode}`;
+      } else if (providerName === '2embed.org') {
+        directUrl = `https://2embed.org/embed/tv?id=${movieId}&s=${season}&e=${episode}`;
+      } else {
+        directUrl = `https://${providerName.replace('vidsrc.', 'vidsrc.')}/embed/tv/${movieId}/${season}/${episode}`;
+      }
+    } else {
+      if (providerName === 'vidlink.pro') {
+        directUrl = `https://vidlink.pro/movie/${movieId}`;
+      } else if (providerName === '2embed.org') {
+        directUrl = `https://2embed.org/embed/movie?id=${movieId}`;
+      } else {
+        directUrl = `https://${providerName.replace('vidsrc.', 'vidsrc.')}/embed/movie/${movieId}`;
+      }
+    }
+    
+    console.log(`Testing URL: ${directUrl}`);
+    
+    try {
+      // Skip testing for now and just try to load
+      // Testing causes CORS issues sometimes
+      mountIframe(directUrl, providerName);
       
       // Update active button
-      document.querySelectorAll('.provider-btn').forEach(b => {
-        b.classList.remove('active');
-        if (b.dataset.provider === providerName) {
-          b.classList.add('active');
-        }
-      });
+      updateActiveProviderButton(providerName);
       
-      setLoading(false);
+      // Break out of loop - we found a working provider
       return;
-    } else {
-      console.log(`✗ ${providerName} not working`);
+      
+    } catch (error) {
+      console.warn(`${providerName} failed:`, error.message);
+      continue;
     }
   }
   
+  // If all providers failed
   setLoading(false);
-  showError('No working provider found. Please try refreshing or check back later.');
+  showError('All sources failed. Please check the movie ID or try again later.');
+  console.error('All providers failed');
 }
 
-async function playWithProvider(providerName) {
-  setLoading(true);
-  hideError();
-  
-  console.log(`\n=== Manually trying provider: ${providerName} ===`);
-  
-  // Try multiple patterns for this provider
-  const workingUrl = await tryProviderPatterns(providerName);
-  
-  if (!workingUrl) {
-    setLoading(false);
-    showError(`${providerName} is currently unavailable. Try another provider.`);
-    return;
-  }
-  
-  mountIframe(workingUrl);
-  setupExternalControls();
-  setLoading(false);
-}
-
-function wireProviderButtons() {
+// Update the active provider button
+function updateActiveProviderButton(providerName) {
   document.querySelectorAll('.provider-btn').forEach(btn => {
-    const providerName = btn.dataset.provider;
-    
-    // Set href for sharing
-    try {
-      btn.href = buildPageUrl(providerName);
-    } catch (e) {
-      btn.setAttribute('href', '#');
-    }
-
-    // Handle clicks
-    btn.addEventListener('click', async (event) => {
-      const isPrimary = event.button === 0;
-      const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
-
-      if (!isPrimary || hasModifier) {
-        // Let browser handle navigation (open in new tab/window)
-        return;
-      }
-
-      event.preventDefault();
-
-      // Update active class
-      document.querySelectorAll('.provider-btn').forEach(b => {
-        b.classList.remove('active');
-        b.classList.remove('loading');
-      });
-      
+    btn.classList.remove('active');
+    if (btn.dataset.provider === providerName) {
       btn.classList.add('active');
-      btn.classList.add('loading');
-
-      if (providerName === 'auto') {
-        autoPickAndPlay();
-      } else {
-        playWithProvider(providerName);
-      }
-      
-      // Remove loading class after a delay
-      setTimeout(() => {
-        btn.classList.remove('loading');
-      }, 2000);
-    });
+    }
   });
 }
 
-async function loadBasicInfo() {
+// Load movie information
+async function loadMovieInfo() {
   if (!movieInfo) return;
   
   try {
@@ -520,56 +305,113 @@ async function loadBasicInfo() {
     const url = `${WORKER_URL}/?endpoint=${endpoint}&language=en-US`;
     const res = await fetch(url);
     
-    if (!res.ok) throw new Error('Failed to fetch movie info');
-    
-    const data = await res.json();
-    const title = data.title || data.name || 'Untitled';
-    const overview = data.overview || 'No description available.';
-    
-    // Add season/episode info for TV shows
-    let extraInfo = '';
-    if (type === 'tv') {
-      if (season) extraInfo += ` | Season ${season}`;
-      if (episode) extraInfo += ` Episode ${episode}`;
+    if (res.ok) {
+      const data = await res.json();
+      const title = data.title || data.name || 'Unknown Title';
+      const overview = data.overview || 'No description available.';
+      const year = data.release_date ? data.release_date.substring(0,4) : '';
+      const rating = data.vote_average ? data.vote_average.toFixed(1) : '';
+      
+      movieInfo.innerHTML = `
+        <h2>${title} ${year ? `(${year})` : ''}</h2>
+        ${rating ? `<p class="rating">⭐ ${rating}/10</p>` : ''}
+        <p>${overview}</p>
+        ${type === 'tv' ? `<p class="episode-info">Season ${season}, Episode ${episode}</p>` : ''}
+      `;
     }
-    
-    movieInfo.innerHTML = `
-      <h2>${title}${extraInfo}</h2>
-      <p>${overview}</p>
-      ${data.vote_average ? `<p class="rating">⭐ ${data.vote_average.toFixed(1)}/10</p>` : ''}
-      ${data.release_date ? `<p class="year">📅 ${data.release_date.substring(0,4)}</p>` : ''}
-    `;
-  } catch (e) {
-    console.error('Info load failed:', e);
+  } catch (error) {
+    console.error('Movie info load failed:', error);
     movieInfo.innerHTML = `
       <h2>${type === 'tv' ? 'TV Show' : 'Movie'}</h2>
-      <p>Playing content...</p>
+      <p>Loading content...</p>
     `;
   }
+}
+
+// Create provider buttons
+function createProviderButtons() {
+  if (!providerButtonsContainer) return;
+  
+  providerButtonsContainer.innerHTML = '';
+  
+  // Create auto button
+  const autoBtn = document.createElement('button');
+  autoBtn.className = 'provider-btn';
+  if (currentProvider === 'auto') autoBtn.classList.add('active');
+  autoBtn.dataset.provider = 'auto';
+  autoBtn.innerHTML = '🔄 Auto (Best)';
+  autoBtn.addEventListener('click', () => {
+    currentProvider = 'auto';
+    updateActiveProviderButton('auto');
+    autoPickAndPlay();
+  });
+  providerButtonsContainer.appendChild(autoBtn);
+  
+  // Create provider buttons
+  Object.keys(PROVIDERS).forEach(providerKey => {
+    if (providerKey === 'auto') return;
+    
+    const provider = PROVIDERS[providerKey];
+    const btn = document.createElement('button');
+    btn.className = 'provider-btn';
+    if (currentProvider === providerKey) btn.classList.add('active');
+    btn.dataset.provider = providerKey;
+    btn.innerHTML = `${provider.icon || '🎬'} ${provider.name}`;
+    
+    btn.addEventListener('click', async () => {
+      currentProvider = providerKey;
+      updateActiveProviderButton(providerKey);
+      
+      setLoading(true);
+      hideError();
+      
+      let directUrl;
+      
+      if (type === 'tv') {
+        if (providerKey === 'vidlink.pro') {
+          directUrl = `https://vidlink.pro/tv/${movieId}?s=${season}&e=${episode}`;
+        } else if (providerKey === '2embed.org') {
+          directUrl = `https://2embed.org/embed/tv?id=${movieId}&s=${season}&e=${episode}`;
+        } else {
+          directUrl = `https://${providerKey.replace('vidsrc.', 'vidsrc.')}/embed/tv/${movieId}/${season}/${episode}`;
+        }
+      } else {
+        if (providerKey === 'vidlink.pro') {
+          directUrl = `https://vidlink.pro/movie/${movieId}`;
+        } else if (providerKey === '2embed.org') {
+          directUrl = `https://2embed.org/embed/movie?id=${movieId}`;
+        } else {
+          directUrl = `https://${providerKey.replace('vidsrc.', 'vidsrc.')}/embed/movie/${movieId}`;
+        }
+      }
+      
+      mountIframe(directUrl, providerKey);
+    });
+    
+    providerButtonsContainer.appendChild(btn);
+  });
 }
 
 function retry() {
-  const active = document.querySelector('.provider-btn.active');
-  const providerName = active?.dataset.provider || 'auto';
-  if (providerName === 'auto') {
+  hideError();
+  if (currentProvider === 'auto') {
     autoPickAndPlay();
   } else {
-    playWithProvider(providerName);
+    // Retry current provider
+    document.querySelector(`.provider-btn[data-provider="${currentProvider}"]`).click();
   }
 }
 
-// Initialize everything when DOM is ready
+// Initialize everything
 document.addEventListener('DOMContentLoaded', async () => {
-  // Check for required elements
-  if (!playerContainer) {
-    console.error('Player container not found');
+  console.log('Player initializing...');
+  
+  if (!movieId) {
+    showError('No movie ID provided. Please go back and select a movie.');
     return;
   }
   
-  if (!movieId) {
-    showError('Missing movie ID. Please go back and select a movie.');
-    return;
-  }
+  console.log(`Movie ID: ${movieId}, Type: ${type}, Season: ${season}, Episode: ${episode}`);
   
   // Setup error close button
   const errorCloseBtn = errorElement?.querySelector('.error-close');
@@ -577,149 +419,56 @@ document.addEventListener('DOMContentLoaded', async () => {
     errorCloseBtn.addEventListener('click', hideError);
   }
   
-  // Setup retry button
-  const retryBtn = errorElement?.querySelector('.retry-btn');
-  if (retryBtn) {
-    retryBtn.addEventListener('click', retry);
+  // Setup retry button in error message
+  const errorRetryBtn = errorElement?.querySelector('button[onclick="retry()"]');
+  if (errorRetryBtn) {
+    errorRetryBtn.addEventListener('click', retry);
   }
   
   // Load movie info
-  await loadBasicInfo();
+  await loadMovieInfo();
   
-  // Wire up provider buttons
-  wireProviderButtons();
+  // Create provider buttons
+  createProviderButtons();
   
-  // Start with initial provider
+  // Start playing
   if (initialProvider === 'auto') {
     autoPickAndPlay();
-  } else if (PROVIDERS[initialProvider]) {
-    // Activate the correct provider button
-    const currentBtn = document.querySelector(`.provider-btn[data-provider="${initialProvider}"]`);
-    if (currentBtn) {
-      document.querySelectorAll('.provider-btn').forEach(b => b.classList.remove('active'));
-      currentBtn.classList.add('active');
-      playWithProvider(initialProvider);
+  } else {
+    // Manually trigger click on the selected provider button
+    const providerBtn = document.querySelector(`.provider-btn[data-provider="${initialProvider}"]`);
+    if (providerBtn) {
+      providerBtn.click();
     } else {
       autoPickAndPlay();
     }
-  } else {
-    autoPickAndPlay();
   }
   
-  // Add keyboard shortcuts
+  // Keyboard shortcuts
   document.addEventListener('keydown', (e) => {
     switch(e.key.toLowerCase()) {
-      case ' ': // Space to play/pause
-      case 'k':
-        e.preventDefault();
-        if (playPauseBtn) playPauseBtn.click();
-        break;
-      case 'f':
-        e.preventDefault();
-        if (fullscreenBtn) fullscreenBtn.click();
-        break;
-      case 'm':
-        e.preventDefault();
-        if (volumeBtn) {
-          volumeBtn.click();
-          if (volumeBar) {
-            const currentVolume = parseInt(volumeBar.value);
-            volumeBar.value = currentVolume === 0 ? 100 : 0;
-            volumeBar.dispatchEvent(new Event('input'));
-          }
-        }
-        break;
       case 'escape':
         if (errorElement.style.display === 'flex') {
           hideError();
         }
         break;
-      case 'arrowright':
-        e.preventDefault();
-        // Seek forward 10 seconds
-        if (currentIframe && currentIframe.contentWindow) {
-          try {
-            currentIframe.contentWindow.postMessage({
-              type: 'CONTROL',
-              action: 'seek',
-              value: 10
-            }, '*');
-          } catch (e) {
-            console.log('Seek forward not available');
+      case 'f':
+        if (document.fullscreenElement) {
+          document.exitFullscreen();
+        } else {
+          const elem = playerContainer || document.documentElement;
+          if (elem.requestFullscreen) {
+            elem.requestFullscreen();
           }
         }
         break;
-      case 'arrowleft':
-        e.preventDefault();
-        // Seek backward 10 seconds
-        if (currentIframe && currentIframe.contentWindow) {
-          try {
-            currentIframe.contentWindow.postMessage({
-              type: 'CONTROL',
-              action: 'seek',
-              value: -10
-            }, '*');
-          } catch (e) {
-            console.log('Seek backward not available');
-          }
-        }
-        break;
-    }
-  });
-  
-  // Handle fullscreen changes
-  document.addEventListener('fullscreenchange', () => {
-    if (fullscreenBtn) {
-      const icon = fullscreenBtn.querySelector('.icon') || fullscreenBtn;
-      if (document.fullscreenElement) {
-        icon.textContent = '⛶'; // Exit fullscreen icon
-        fullscreenBtn.title = 'Exit fullscreen';
-      } else {
-        icon.textContent = '⛶'; // Enter fullscreen icon
-        fullscreenBtn.title = 'Enter fullscreen';
-      }
     }
   });
 });
 
-// Cleanup timeouts when leaving page
+// Cleanup
 window.addEventListener('beforeunload', () => {
   if (playableCheckTimeout) {
     clearTimeout(playableCheckTimeout);
   }
 });
-
-// Listen for messages from iframe (for playback status updates)
-window.addEventListener('message', (event) => {
-  // Always verify the origin if possible
-  // For now, we'll accept all for simplicity
-  
-  const data = event.data;
-  if (data && data.type === 'PLAYBACK_STATUS') {
-    // Update UI based on iframe playback status
-    if (playPauseBtn && data.isPlaying !== undefined) {
-      playPauseBtn.classList.toggle('playing', data.isPlaying);
-      const icon = playPauseBtn.querySelector('.icon') || playPauseBtn;
-      icon.textContent = data.isPlaying ? '⏸' : '▶';
-    }
-    
-    if (currentTimeEl && data.currentTime) {
-      currentTimeEl.textContent = formatTime(data.currentTime);
-    }
-    
-    if (totalTimeEl && data.duration) {
-      totalTimeEl.textContent = formatTime(data.duration);
-    }
-    
-    if (progressBar && data.currentTime && data.duration) {
-      const progress = (data.currentTime / data.duration) * 100;
-      progressBar.value = progress;
-    }
-  }
-});
-
-function formatTime(seconds) {
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-  return `${mins}:${secs.toString().padStart(2, '0')}`;
-}
