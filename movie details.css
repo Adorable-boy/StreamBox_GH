@@ -121,6 +121,7 @@ margin: 3px;
     -webkit-background-clip: text;
     z-index: 3;
     margin-left: 10px;
+    bottom: 1;
    }
 
    .dets{
@@ -139,20 +140,23 @@ margin: 3px;
         height: 70vh;
     }
 
-    .description{
-        height: 40vh;
-        margin-bottom: none;
-    }
    }
 
 
 
  
 
-@media screen and (orientation: landscape) and (min-width: 820px) and (max-width: 900px){
+@media screen and (orientation: landscape) and (min-width: 310px) and (max-width: 900px){
    .dets{
-       height: 130vh;
+       height: 150vh;
    }
+
+
+    .description{
+        height: 40vh;
+        margin-bottom: none;
+    }
+
 }
 
 
@@ -235,6 +239,7 @@ margin: 3px;
     display: flex;
     gap: 1rem;
     margin-bottom: 10px;
+    align-items: center;
 }
 
 .movie-meta span {
