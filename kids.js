@@ -54,7 +54,7 @@ return res.filter(Boolean)
 
 
     kidsfunc().then(dataArray => {
-        const topPickIds = ["kids1", "kids2", "kids3", "kids4", "kids5", "kids6", "kids7", "kids8", "kids9", "kids10", "kids11","kids12", "kids13", "kids14", "kids15", "kids16", "kids17", "kids18", "TopPicks19", "kids20", "kids21", "kids22", "kids23", "kids24", "kids25", "kids26", "kids27", "kids28"];
+        const topPickIds = ["kids1", "kids2", "kids3", "kids4", "kids5", "kids6", "kids7", "kids8", "kids9", "kids10", "kids11","kids12", "kids13", "kids14", "kids15", "kids16", "kids17", "kids18", "kids19", "kids20", "kids21", "kids22", "kids23", "kids24", "kids25", "kids26", "kids27", "kids28"];
 
         let allKidsMovies = [];
 
