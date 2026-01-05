@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         
     
-    fetch("https://api.themoviedb.org/3/movie/upcoming?api_key=e729d3999faacd83f8c79de0b5c7bc0e&language=en-US&page=2")
+    fetch("https://streamboxweb-api.bpvw7gw5zw.workers.dev/?endpoint=movie/upcoming&language=en-US&page=2")
         .then(response => {
             if (!response.ok) throw new Error('Network response was not ok');
             return response.json();

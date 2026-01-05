@@ -1,4 +1,4 @@
-const WORKER_URL = "https://streambox-api.bpvw7gw5zw.workers.dev";
+const WORKER_URL = "https://streamboxweb-api.bpvw7gw5zw.workers.dev";
 
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get('id');
@@ -18,6 +18,7 @@ const PROVIDERS = {
     icon: '🔄',
     testUrl: null
   },
+
   'vidsrc.to': {
     name: 'VidSrc.to',
     icon: '🎬',
@@ -26,6 +27,7 @@ const PROVIDERS = {
       tv: 'https://vidsrc.to/embed/tv/{id}/{season}/{episode}'
     }
   },
+
   'vidsrc.icu': {
     name: 'VidSrc.icu',
     icon: '🏥',
@@ -34,30 +36,7 @@ const PROVIDERS = {
       tv: 'https://vidsrc.icu/embed/tv/{id}/{season}/{episode}'
     }
   },
-  '2embed.org': {
-    name: '2Embed',
-    icon: '📺',
-    patterns: {
-      movie: 'https://2embed.org/embed/movie/{id}',
-      tv: 'https://2embed.org/embed/tv/{id}/{season}/{episode}'
-    }
-  },
-  'vidsrc.pro': {
-    name: 'VidSrc.pro',
-    icon: '🎥',
-    patterns: {
-      movie: 'https://vidsrc.pro/embed/movie/{id}',
-      tv: 'https://vidsrc.pro/embed/tv/{id}/{season}/{episode}'
-    }
-  },
-  'vidsrc.cc': {
-    name: 'VidSrc.cc',
-    icon: '🔗',
-    patterns: {
-      movie: 'https://vidsrc.cc/embed/movie/{id}',
-      tv: 'https://vidsrc.cc/embed/tv/{id}/{season}/{episode}'
-    }
-  },
+ 
   'vidlink.pro': {
     name: 'VidLink',
     icon: '🔗',
@@ -232,9 +211,6 @@ async function autoPickAndPlay() {
   const providersToTry = [
     'vidsrc.to',
     'vidsrc.icu', 
-    '2embed.org',
-    'vidsrc.pro',
-    'vidsrc.cc',
     'vidlink.pro'
   ];
   
@@ -246,16 +222,12 @@ async function autoPickAndPlay() {
     if (type === 'tv') {
       if (providerName === 'vidlink.pro') {
         directUrl = `https://vidlink.pro/tv/${movieId}?s=${season}&e=${episode}`;
-      } else if (providerName === '2embed.org') {
-        directUrl = `https://2embed.org/embed/tv?id=${movieId}&s=${season}&e=${episode}`;
       } else {
         directUrl = `https://${providerName.replace('vidsrc.', 'vidsrc.')}/embed/tv/${movieId}/${season}/${episode}`;
       }
     } else {
       if (providerName === 'vidlink.pro') {
         directUrl = `https://vidlink.pro/movie/${movieId}`;
-      } else if (providerName === '2embed.org') {
-        directUrl = `https://2embed.org/embed/movie?id=${movieId}`;
       } else {
         directUrl = `https://${providerName.replace('vidsrc.', 'vidsrc.')}/embed/movie/${movieId}`;
       }
@@ -307,17 +279,6 @@ async function loadMovieInfo() {
     
     if (res.ok) {
       const data = await res.json();
-      const title = data.title || data.name || 'Unknown Title';
-      const overview = data.overview || 'No description available.';
-      const year = data.release_date ? data.release_date.substring(0,4) : '';
-      const rating = data.vote_average ? data.vote_average.toFixed(1) : '';
-      
-      movieInfo.innerHTML = `
-        <h2>${title} ${year ? `(${year})` : ''}</h2>
-        ${rating ? `<p class="rating">⭐ ${rating}/10</p>` : ''}
-        <p>${overview}</p>
-        ${type === 'tv' ? `<p class="episode-info">Season ${season}, Episode ${episode}</p>` : ''}
-      `;
     }
   } catch (error) {
     console.error('Movie info load failed:', error);
@@ -370,16 +331,12 @@ function createProviderButtons() {
       if (type === 'tv') {
         if (providerKey === 'vidlink.pro') {
           directUrl = `https://vidlink.pro/tv/${movieId}?s=${season}&e=${episode}`;
-        } else if (providerKey === '2embed.org') {
-          directUrl = `https://2embed.org/embed/tv?id=${movieId}&s=${season}&e=${episode}`;
         } else {
           directUrl = `https://${providerKey.replace('vidsrc.', 'vidsrc.')}/embed/tv/${movieId}/${season}/${episode}`;
         }
       } else {
         if (providerKey === 'vidlink.pro') {
           directUrl = `https://vidlink.pro/movie/${movieId}`;
-        } else if (providerKey === '2embed.org') {
-          directUrl = `https://2embed.org/embed/movie?id=${movieId}`;
         } else {
           directUrl = `https://${providerKey.replace('vidsrc.', 'vidsrc.')}/embed/movie/${movieId}`;
         }

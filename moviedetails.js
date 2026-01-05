@@ -9,7 +9,8 @@ const SVG_STRING = `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="
   <text x="50%" y="50%" font-size="20" fill="#888" text-anchor="middle" dominant-baseline="middle">no image</text>
 </svg>`;
 const PLACEHOLDER_POSTER = 'data:image/svg+xml;utf8,' + encodeURIComponent(SVG_STRING);
-const WORKER_URL = "https://streambox-api.bpvw7gw5zw.workers.dev";
+
+const WORKER_URL = "https://streamboxweb-api.bpvw7gw5zw.workers.dev";
 
 // --------------------------------------------------
 // PAGE LOAD
@@ -53,7 +54,7 @@ function loadMovieDetails() {
 // --------------------------------------------------
 function loadFromTMDB(id, source, container) {
     if (source === "tvshows") {
-        const urlTv = `${WORKER_URL}/?endpoint=tv/${id}&language=en-US&append_to_response=credits,videos&transform=true`;
+        const urlTv = `${WORKER_URL}/?endpoint=tv/${id}&language=en-US&append_to_response=credits,videos`;
         fetch(urlTv)
             .then(r => r.json())
             .then(m => {
@@ -67,7 +68,7 @@ function loadFromTMDB(id, source, container) {
                 loadFromLocalSources(id, source, container);
             });
     } else {
-        const url = `${WORKER_URL}/?endpoint=movie/${id}&language=en-US&append_to_response=credits,videos&transform=true`;
+        const url = `${WORKER_URL}/?endpoint=movie/${id}&language=en-US&append_to_response=credits,videos`;
         fetch(url)
             .then(r => r.json())
             .then(m => {
@@ -206,7 +207,7 @@ async function loadFromMoviesJson(id, container) {
         const fetchPromises = [];
         for (let i = 0; i <= 500; i++) {
             fetchPromises.push(
-                fetch(`${WORKER_URL}/?endpoint=movie/popular&language=en-US&page=${i}&transform=true`)
+                fetch(`${WORKER_URL}/?endpoint=movie/popular&language=en-US&page=${i}`)
                     .then(r => r.json())
             );
         }
@@ -240,7 +241,7 @@ async function loadFromTvShowsJson(id, container) {
         const fetchPromises = [];
         for (let i = 0; i <= 500; i++) {
             fetchPromises.push(
-                fetch(`${WORKER_URL}/?endpoint=tv/popular&language=en-US&page=${i}&transform=true`)
+                fetch(`${WORKER_URL}/?endpoint=tv/popular&language=en-US&page=${i}`)
                     .then(r => r.json())
             );
         }
@@ -277,7 +278,7 @@ function displayMovieDetails(movie) {
     const container = document.getElementById('moviedetails');
     const myList = JSON.parse(localStorage.getItem('myList')) || [];
     const isInList = myList.some(m => String(m.id) === String(movie.id));
-    const buttonText = isInList ? '✔ Added To List' : 'Add To List';
+    const buttonText = isInList ? '✔Added To List' : 'Add To List';
     const genresArray = movie.gener || movie.genres || [];
     const movieData = JSON.stringify(movie).replace(/'/g, '&#39;');
 
@@ -330,7 +331,7 @@ function displayTvShowDetails(movie) {
     const container = document.getElementById('moviedetails');
     const myList = JSON.parse(localStorage.getItem('myList')) || [];
     const isInList = myList.some(m => String(m.id) === String(movie.id));
-    const buttonText = isInList ? '✔ Added To List' : 'Add To List';
+    const buttonText = isInList ? '✔Added To List' : 'Add To List';
     const genresArray = movie.gener || movie.genres || [];
     const movieData = JSON.stringify(movie).replace(/'/g, '&#39;');
 
@@ -591,7 +592,7 @@ function renderSeasonsAndEpisodes(movie) {
 function updateAllButtonsForMovie(id, inList) {
     document.querySelectorAll(`[data-movie-id="${id}"]`)
         .forEach(btn => {
-            btn.textContent = inList ? '✔ Added To List' : 'Add To List';
+            btn.textContent = inList ? '✔Added To List' : 'Add To List';
         });
 }
 
@@ -624,3 +625,8 @@ document.addEventListener('click', e => {
     localStorage.setItem('continueWatching', JSON.stringify(list));
     window.location.href = play.href;
 });
+
+
+
+
+

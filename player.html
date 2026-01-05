@@ -27,43 +27,7 @@
     
     <div class="movie-info" id="movieInfo"></div>
     
-    <!-- Custom Playback Controls -->
-    <div class="playback-controls" id="playbackControls" style="display:none;">
-      <div class="control-group">
-        <button class="control-btn" id="playPauseBtn" title="Play/Pause">
-          <span class="icon">▶</span>
-        </button>
-        
-        <div class="progress-container">
-          <input type="range" id="progressBar" class="progress-bar" min="0" max="100" value="0" title="Seek">
-          <div class="time-display">
-            <span id="currentTime">0:00</span> / <span id="duration">0:00</span>
-          </div>
-        </div>
-      </div>
-      
-      <div class="control-group">
-        <div class="volume-control">
-          <button class="control-btn" id="volumeBtn" title="Mute/Unmute">
-            <span class="icon">🔊</span>
-          </button>
-          <input type="range" id="volumeBar" class="volume-bar" min="0" max="100" value="80" title="Volume">
-        </div>
-        
-        <div class="playback-speed">
-          <select id="speedSelect" title="Playback Speed">
-            <option value="0.5">0.5x</option>
-            <option value="0.75">0.75x</option>
-            <option value="1" selected>1x</option>
-            <option value="1.25">1.25x</option>
-            <option value="1.5">1.5x</option>
-            <option value="2">2x</option>
-          </select>
-        </div>
-        
-        <button class="control-btn" id="fullscreenBtn" title="Fullscreen">
-          <span class="icon">⛶</span>
-        </button>
+  
       </div>
     </div>
     
@@ -72,8 +36,9 @@
         <h4>Available on:</h4>
         <div class="provider-buttons">
           <button class="provider-btn" data-provider="auto">Auto</button>
-          <button class="provider-btn" data-provider="vidsrc.to">VidSrc.to</button>
           <button class="provider-btn" data-provider="vidsrc.icu">VidSrc.icu</button>
+          <button class="provider-btn" data-provider="vidsrc.to">VidSrc.to</button>
+          <button class="provider-btn" data-provider="vidlink.pro">Vidlink.pro</button>
         </div>
       </div>
     </div>

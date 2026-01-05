@@ -61,7 +61,7 @@ async function loadTopPicks() {
         // Reduced from 500 to 33 to match the number of TopPicks containers (TopPicks to TopPicks33)
         // This significantly improves load time and reduces API spam.
         for (let i = 1; i <= 33; i++) {
-            const url = `https://streambox-api.bpvw7gw5zw.workers.dev/?endpoint=movie/popular&language=en-US&page=${i}`;
+            const url = `https://streamboxweb-api.bpvw7gw5zw.workers.dev/?endpoint=movie/popular&language=en-US&page=${i}`;
             fetchPromises.push(fetchWithCache(url, `popular_page_${i}`));
         }
         const responses = await Promise.all(fetchPromises);
@@ -111,16 +111,6 @@ async function loadTopPicks() {
             }
         });
 
-     // Explore section
-        const exploreContainer = document.getElementById("explore");
-        if (exploreContainer && allTopPicksMovies.length > 0) {
-            const shuffledForExplore = [...allTopPicksMovies].sort(() => Math.random() - 0.5);
-            shuffledForExplore.slice(0, 20).forEach(movie => {
-                if (movie.poster) addMovie(movie, exploreContainer);
-                if (!movie.poster) addMovieAlt(movie, exploreContainer);
-            });
-        }
-
 
 
         // Add to allMovies for search
@@ -155,7 +145,7 @@ async function loadTopPicks() {
             
             for (let page = i; page <= endPage; page++) {
                 fetchPromises.push(
-                    fetch(`https://streambox-api.bpvw7gw5zw.workers.dev/?endpoint=movie/popular&language=en-US&page=${page}`)
+                    fetch(`https://streamboxweb-api.bpvw7gw5zw.workers.dev/?endpoint=movie/popular&language=en-US&page=${page}`)
                     .then(r => r.json())
                     .catch(e => null)
                 );
@@ -214,7 +204,7 @@ async function loadTopPicks() {
             
             for (let page = i; page <= endPage; page++) {
                 fetchPromises.push(
-                    fetch(`https://streambox-api.bpvw7gw5zw.workers.dev/?endpoint=discover/tv&language=en-US&page=${page}`)
+                    fetch(`https://streamboxweb-api.bpvw7gw5zw.workers.dev/?endpoint=tv/popular&language=en-US&page=${page}`)
                     .then(r => r.json())
                     .catch(e => null)
                 );
@@ -345,14 +335,18 @@ function addMovieAlt(movie, container) {
 
 
 
+// FROM:
+//fetch(`https://streambox-api.bpvw7gw5zw.workers.dev/?endpoint=movie/popular&language=en-US&page=${i}`)
 
+// TO (use direct TMDB with your API key):
+//fetch(`https://api.themoviedb.org/3/movie/popular?api_key=e729d3999faacd83f8c79de0b5c7bc0e&language=en-US&page=${i}`)
 
 
 
 
 //MajorPoster
 if (document.getElementById("majorposter")) {
-    fetch(`https://streambox-api.bpvw7gw5zw.workers.dev/?endpoint=movie/popular&language=en-US&page=1`)
+    fetch(`https://streamboxweb-api.bpvw7gw5zw.workers.dev/?endpoint=movie/popular&language=en-US&page=1`)
     .then(response => response.json())
     .then(data => {
 
@@ -632,7 +626,7 @@ function updateAllButtonsForMovie(movieId, isInList) {
     // Find all buttons with this movie ID across the entire page
     const allButtons = document.querySelectorAll(`[data-movie-id="${movieId}"]`);
     allButtons.forEach(button => {
-        button.textContent = isInList ? "✔︎ Added To List" : "Add To List";
+        button.textContent = isInList ? "✔︎Added To List" : "Add To List";
     });
 }
 
@@ -1160,3 +1154,42 @@ function addSearchMovieAlt(movie, container) {
     posterWrapper.appendChild(title);
     container.appendChild(posterWrapper);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* // Explore section
+        const explore = document.getElementById("explore");
+        if (explore) {
+           for(let i = 1; i <= 20; i++) {
+            const res = await fetch(`${WORKER_URL}/?endpoint=movie/popular&language=en-US&page=${i}`);
+            const data = await res.json();
+        }
+
+        data.results.forEach(movie => {
+            addMovie(movie, explore);
+
+        });
+                if (movie.poster) addMovie(movie, explore);
+                if (!movie.poster) addMovieAlt(movie, explore);
+        }*/
+
+

@@ -6,7 +6,7 @@ let kids=[]
 
 for (let i = 1; i <= 32; i++) {
     
-  kids.push( fetch(`https://streambox-api.bpvw7gw5zw.workers.dev/?endpoint=discover/movie&with_genres=16&language=en-US&page=${i}`)
+  kids.push( fetch(`https://streamboxweb-api.bpvw7gw5zw.workers.dev/?endpoint=discover/movie&with_genres=16&language=en-US&page=${i}`)
     .then(r => r.json())
   );
 
@@ -119,7 +119,7 @@ return res.filter(Boolean)
             
             for (let page = i; page <= endPage; page++) {
                 fetchPromises.push(
-                    fetch(`https://streambox-api.bpvw7gw5zw.workers.dev/?endpoint=discover/movie&with_genres=16&language=en-US&page=${page}`)
+                    fetch(`https://streamboxweb-api.bpvw7gw5zw.workers.dev/?endpoint=discover/movie&with_genres=16&language=en-US&page=${page}`)
                     .then(r => r.json())
                     .catch(e => null)
                 );
