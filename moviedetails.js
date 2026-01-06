@@ -1,4 +1,13 @@
 
+
+
+
+
+
+
+
+
+
 // --------------------------------------------------
 // GLOBAL STATE
 // --------------------------------------------------
@@ -83,6 +92,7 @@ function loadFromTMDB(id, source, container) {
             });
     }
 }
+
 
 function mapTMDBTvShow(m) {
     return {
@@ -362,7 +372,7 @@ function displayTvShowDetails(movie) {
                     <button class="play">Play 1</button>
                 </a>
 
-                 <a href="https://vidlink.pro/tv/${movie.id}/1/1" class="playLink">
+                 <a href="https://vidsrc.icu/embed/tv/${movie.id}" class="playLink">
                     <button class="play">Play 2</button>
                 </a>
                 <button class="play" data-movie-id="${movie.id}" data-movie='${movieData}' onclick="addToList(event, JSON.parse(this.dataset.movie))">
