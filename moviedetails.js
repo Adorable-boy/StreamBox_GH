@@ -102,7 +102,7 @@ function mapTMDBTvShow(m) {
             ? m.credits.cast.slice(0, 12).map(c => c.name).filter(Boolean)
             : (Array.isArray(m.cast) ? m.cast : []),
         alt: "",
-        show: `${WORKER_URL}/?url=https://vidsrc.to/embed/tv/${m.id}/`,
+        show: `https://vidsrc.icu/embed/tv/${m.id}`,
         source: 'tvshows',
         totalEpisodes: m.number_of_episodes || 0,
         totalSeasons: m.number_of_seasons || 1
@@ -127,7 +127,7 @@ function mapTMDBMovie(m) {
             ? m.credits.cast.slice(0, 12).map(c => c.name).filter(Boolean)
             : (Array.isArray(m.cast) ? m.cast : []),
         alt: "",
-        show: `${WORKER_URL}/?url=https://vidsrc.to/embed/movie/${m.id}/`,
+        show: `https://vidsrc.icu/embed/movie/${m.id}`,
         source: 'toppicks'
     };
 }
@@ -148,7 +148,7 @@ function mapTMDBDetails(m) {
         runtime: m.runtime || null,
         gener: [],
         alt: "",
-        show: `${WORKER_URL}/?url=https://vidsrc.to/embed/movie/${m.id}/`,
+        show: `https://vidsrc.icu/embed/movie/${m.id}`,
     };
 }
 
@@ -298,7 +298,7 @@ function displayMovieDetails(movie) {
             ${movie.description ? `<p class="description">${movie.description}</p>` : '...'}
             ${movie.cast && movie.cast.length ? `<div class="cast"><h3>Cast</h3><p>${movie.cast.join(' . ')}</p></div>` : ''}
             <div class="actions">
-                <a href="player.html?id=${movie.id}&type=movie&provider=auto" class="playLink">
+                <a href="${movie.show}"  class="playLink">
                     <button class="play">▶Play</button>
                 </a>
                 <button class="play" data-movie-id="${movie.id}" data-movie='${movieData}' onclick="addToList(event, JSON.parse(this.dataset.movie))">
@@ -358,8 +358,12 @@ function displayTvShowDetails(movie) {
             
             
             <div class="actions">
-                <a href="player.html?id=${movie.id}&type=tv&provider=auto" class="playLink">
-                    <button class="play">▶Play</button>
+                <a href="${movie.show}" class="playLink">
+                    <button class="play">Play 1</button>
+                </a>
+
+                 <a href="https://vidlink.pro/tv/${movie.id}/1/1" class="playLink">
+                    <button class="play">Play 2</button>
                 </a>
                 <button class="play" data-movie-id="${movie.id}" data-movie='${movieData}' onclick="addToList(event, JSON.parse(this.dataset.movie))">
                     ${buttonText}

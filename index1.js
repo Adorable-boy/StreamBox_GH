@@ -122,6 +122,7 @@ async function loadTopPicks() {
             }
         }
 
+
         // Start background fetch for remaining movies (pages 34-500)
         loadRemainingMovies();
         loadRemainingTvShows();
@@ -334,12 +335,6 @@ function addMovieAlt(movie, container) {
 
 
 
-
-// FROM:
-//fetch(`https://streambox-api.bpvw7gw5zw.workers.dev/?endpoint=movie/popular&language=en-US&page=${i}`)
-
-// TO (use direct TMDB with your API key):
-//fetch(`https://api.themoviedb.org/3/movie/popular?api_key=e729d3999faacd83f8c79de0b5c7bc0e&language=en-US&page=${i}`)
 
 
 
@@ -1172,24 +1167,5 @@ function addSearchMovieAlt(movie, container) {
 
 
 
-
-
-
-
-    /* // Explore section
-        const explore = document.getElementById("explore");
-        if (explore) {
-           for(let i = 1; i <= 20; i++) {
-            const res = await fetch(`${WORKER_URL}/?endpoint=movie/popular&language=en-US&page=${i}`);
-            const data = await res.json();
-        }
-
-        data.results.forEach(movie => {
-            addMovie(movie, explore);
-
-        });
-                if (movie.poster) addMovie(movie, explore);
-                if (!movie.poster) addMovieAlt(movie, explore);
-        }*/
 
 

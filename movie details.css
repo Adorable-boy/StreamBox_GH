@@ -137,8 +137,14 @@ margin: 3px;
 
    @media screen and (max-width: 414px){
     .dets{
-        height: 70vh;
+        height: 90vh;
     }
+
+    .cast h3 {
+    margin-bottom: 0.5rem;
+    color: white;
+    height: 3px;
+}
 
    }
 
@@ -153,11 +159,45 @@ margin: 3px;
 
 
     .description{
-        height: 40vh;
+        height: 20vh;
         margin-bottom: none;
     }
 
+    .cast h3 {
+    margin-bottom: 0.5rem;
+    color: white;
+    height: 3px;
 }
+
+}
+
+
+
+
+@media screen  and (min-width: 310px) and (max-width: 900px){
+   .dets{
+       height: 150vh;
+   }
+
+
+    .description{
+        height: 20vh;
+        margin-bottom: none;
+    }
+
+    .cast h3 {
+    margin-bottom: 0.5rem;
+    color: white;
+    height: 3px;
+}
+
+}
+
+
+
+
+
+
 
 
 
@@ -279,7 +319,15 @@ margin: 3px;
 .cast h3 {
     margin-bottom: 0.5rem;
     color: white;
+    height: 1px;
 }
+
+
+.cast{
+    gap: 1rem; 
+}
+
+
 
 
 .play{
