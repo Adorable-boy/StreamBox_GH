@@ -387,7 +387,7 @@ if (document.getElementById("majorposter")) {
                 return 0; // Small screens: show 0 poster
             } else if (screenWidth <= 760) {
                 return 1; // Medium screens: show 1 posters
-            } else if (screenWidth <= 1024) {
+            } else if (screenWidth <= 1020) {
                 return 2; // Large screens: show 2 posters
             } else if (screenWidth >= 2560) {
                 return 5; // Extra large screens: show 5 posters

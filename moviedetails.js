@@ -311,11 +311,39 @@ function displayMovieDetails(movie) {
                 <a href="${movie.show}"  class="playLink">
                     <button class="play">▶Play</button>
                 </a>
-                <button class="play" data-movie-id="${movie.id}" data-movie='${movieData}' onclick="addToList(event, JSON.parse(this.dataset.movie))">
+
+
+                 <a href="https://vidlink.pro/movie/${movie.id}" class="playLink">
+                    <button class="play">Play 2</button>
+                </a>
+
+
+                <a href="#downloadPopup">
+                  <button class="play">Download movie</button>
+               </a>
+                         <div id="downloadPopup" class="popup">
+                                <div class="popup-content">
+                           <a href="#" class="close">&times;</a>
+
+                          <h3>Download Movie</h3>
+   <p>You need Video DownloadHelper to download this movie. After installing the extension pin it and click play to navigate to the movie then move to Video DownloadHelper extension you will see the media file then click download</p>
+
+    <a href="https://chromewebstore.google.com/detail/video-downloadhelper/lmjnegcaeklhafolokijcfjliaokphfk"
+      target="_blank"
+      class="popup-btn">
+      Install Extension
+    </a>
+  </div>
+</div>
+               <button class="play" data-movie-id="${movie.id}" data-movie='${movieData}' onclick="addToList(event, JSON.parse(this.dataset.movie))">
                     ${buttonText}
                 </button>
             </div>
         </div>
+    </div>
+    
+    <div class="dete">
+        Notice:  It is advisable to download movies for offline viewing.
     </div>`;
 }
 
@@ -372,9 +400,30 @@ function displayTvShowDetails(movie) {
                     <button class="play">Play 1</button>
                 </a>
 
-                 <a href="https://vidsrc.icu/embed/tv/${movie.id}" class="playLink">
+          
+                 <a href="https://vidlink.pro/tv/${movie.id}/1/1" class="playLink">
                     <button class="play">Play 2</button>
                 </a>
+
+
+                <a href="#downloadPopup">
+                  <button class="play">Download movie</button>
+               </a>
+               <div id="downloadPopup" class="popup">
+  <div class="popup-content">
+    <a href="#" class="close">&times;</a>
+
+    <h3>Download Movie</h3>
+    <p>You need Video DownloadHelper to download this movie. After installing the extension pin it and click play then move to Video DownloadHelper extension you will see the media file then click download</p>
+
+    <a href="https://chromewebstore.google.com/detail/video-downloadhelper/lmjnegcaeklhafolokijcfjliaokphfk"
+      target="_blank"
+      class="popup-btn">
+      Install Extension
+    </a>
+  </div>
+</div>
+
                 <button class="play" data-movie-id="${movie.id}" data-movie='${movieData}' onclick="addToList(event, JSON.parse(this.dataset.movie))">
                     ${buttonText}
                 </button>
@@ -384,7 +433,7 @@ function displayTvShowDetails(movie) {
     </div>
 
     <div class="dete">
-        Notice: Click play to watch, or select specific episode below. Some seasons may not be available.
+        Notice: Click play to watch, or select specific episode below. Some seasons may not be available. It is advisable to download episodes for offline viewing.
     </div>`;
 
     renderSeasonsAndEpisodes(movie);
