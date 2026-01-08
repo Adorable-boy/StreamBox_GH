@@ -212,6 +212,7 @@ margin: 3px;
     z-index: 1;
     flex: 1;
     overflow: hidden;
+    pointer-events: none;
    }
 
    .dets::after{
