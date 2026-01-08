@@ -510,15 +510,14 @@ margin: 3px;
     }
 }
 
+
+
 /* For taller screens in landscape */
 @media screen and (orientation: landscape) and (max-height: 500px) {
     .dets {
         height: 150vh !important;
     }
     
-    .movie-info {
-        padding-top: 10% !important;
-    }
     
     .description {
         max-height: 20vh;
@@ -531,13 +530,7 @@ margin: 3px;
         height: 120vh !important;
     }
     
-    .movie-info {
-        padding-top: 20% !important;
-    }
-    
-    .movie-info h1 {
-        font-size: 35px !important;
-    }
+   
     
     .description {
         font-size: 1.2rem !important;
@@ -546,11 +539,11 @@ margin: 3px;
 }
 
 /* Fix for iOS Safari in landscape */
-@supports (-webkit-touch-callout: none) {
+/*@supports (-webkit-touch-callout: none) {
     @media screen and (orientation: landscape) {
         .dets {
             height: -webkit-fill-available !important;
             min-height: -webkit-fill-available;
         }
     }
-}
+}*/
