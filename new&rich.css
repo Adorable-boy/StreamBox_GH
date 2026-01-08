@@ -356,6 +356,10 @@ align-items: center;
         font-size: 1.5rem;
         margin-bottom: 20px;
     }
+
+    body{
+       padding-bottom: 220px;
+    }
 }
 
 @media (max-width: 480px) {
