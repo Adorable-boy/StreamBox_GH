@@ -390,11 +390,11 @@ if (document.getElementById("majorposter")) {
         // Function to determine number of posters based on screen width
         function getNumberOfPosters() {
             const screenWidth = window.innerWidth;
-            if (screenWidth <= 320) {
+            if (screenWidth <= 350) {
                 return 0; // Small screens: show 0 poster
             } else if (screenWidth <= 760) {
                 return 1; // Medium screens: show 1 posters
-            } else if (screenWidth <= 1020) {
+            } else if (screenWidth <= 1120) {
                 return 2; // Large screens: show 2 posters
             } else if (screenWidth >= 2560) {
                 return 5; // Extra large screens: show 5 posters
