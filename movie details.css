@@ -374,7 +374,7 @@ margin: 3px;
 
     .actions{
         display: inline;
-        justify-content: space-between;
+        justify-content: space-evenly;
     }
    }
 
