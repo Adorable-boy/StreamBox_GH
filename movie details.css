@@ -112,7 +112,7 @@ margin: 3px;
    .dets{
     position: relative;
     width: 100%;
-    height: 110vh;
+    height: 100vh;
     display: flex;
     overflow: hidden;
     justify-content: space-between;
