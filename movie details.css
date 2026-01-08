@@ -493,10 +493,7 @@ margin: 3px;
         height: 100vh !important;
         min-height: 100vh;
     }
-    
-    .movie-info {
-        padding-top: 15% !important;
-    }
+  
     
     .description {
         height: auto !important;
@@ -505,7 +502,7 @@ margin: 3px;
     }
     
     .actions {
-        bottom: 20px !important;
+        bottom: 40px !important;
         position: absolute !important;
     }
 }
@@ -515,7 +512,7 @@ margin: 3px;
 /* For taller screens in landscape */
 @media screen and (orientation: landscape) and (max-height: 500px) {
     .dets {
-        height: 150vh !important;
+        height: 150vh ;
     }
     
     
@@ -527,7 +524,7 @@ margin: 3px;
 /* For wider landscape screens (tablets, etc) */
 @media screen and (orientation: landscape) and (min-width: 768px) {
     .dets {
-        height: 120vh !important;
+        height: 120vh ;
     }
     
    
