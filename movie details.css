@@ -138,7 +138,7 @@ margin: 3px;
 
 @media screen  and (min-width: 300px) and (max-width: 2024px){
    .dets{
-       height: 150vh;
+       height: 115vh;
    }
 
 
@@ -160,7 +160,7 @@ margin: 3px;
 
 @media screen  and (min-width: 310px) and (max-width: 900px){
    .dets{
-       height: 100vh;
+       height: 110vh;
    }
 
 
@@ -363,7 +363,7 @@ margin: 3px;
 
   @media screen and (max-width: 500px){
     .dets{
-        height: 90vh;
+        height: 80vh;
     }
 
     .actions{
