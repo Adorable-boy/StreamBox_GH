@@ -119,6 +119,9 @@ margin: 3px;
     border-radius: 10px;
    }
 
+
+
+   
    @media screen and (max-width: 414px){
     .dets{
         height: 110vh;
@@ -153,9 +156,11 @@ margin: 3px;
     margin-bottom: 0.5rem;
     color: white;
     height: 3px;
-}
+       }
 
 }
+
+
 
 
 
@@ -366,7 +371,7 @@ margin: 3px;
 
 
 
-  @media screen and (max-width: 500px){
+  @media screen and (max-width: 550px){
     .dets{
         height: 100vh;
     }
@@ -495,7 +500,7 @@ margin: 3px;
 @media screen and (orientation: landscape) {
     .dets {
         height: auto !important;
-        min-height: 110vh  !important;
+        min-height: 100vh  !important;
         max-height: 150vh  !important;
     }
   
@@ -514,6 +519,20 @@ margin: 3px;
 /* For taller screens in landscape */
 @media screen and (orientation: landscape) and (max-height: 500px) {
     .dets {
+        height: 120vh ;
+    }
+    
+    
+    .description {
+        max-height: 20vh;
+    }
+}
+
+
+
+
+@media screen and (orientation: landscape) and (max-width: 500px) {
+    .dets {
         height: 150vh ;
     }
     
@@ -522,6 +541,8 @@ margin: 3px;
         max-height: 20vh;
     }
 }
+
+
 
 /* For wider landscape screens (tablets, etc) */
 @media screen and (orientation: landscape) and (min-width: 768px) {
