@@ -334,6 +334,7 @@ align-items: center;
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
     }
+
 }
 
 @media (max-width: 768px) {
@@ -378,7 +379,13 @@ align-items: center;
         font-size: 0.9rem;
     }
 
-     body{
-       padding-bottom: 400px;
+}
+
+
+
+@media screen  and  (max-width: 2024px) {
+    #newandrich {
+        padding-bottom: 180px;
     }
+    
 }
