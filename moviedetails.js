@@ -112,7 +112,7 @@ function mapTMDBTvShow(m) {
             ? m.credits.cast.slice(0, 12).map(c => c.name).filter(Boolean)
             : (Array.isArray(m.cast) ? m.cast : []),
         alt: "",
-        show: `https://vidsrc.icu/embed/tv/${m.id}`,
+        show: `${WORKER_URL}/embed?url=https://vidsrc.icu/embed/tv/${m.id}`,
         source: 'tvshows',
         totalEpisodes: m.number_of_episodes || 0,
         totalSeasons: m.number_of_seasons || 1
@@ -137,7 +137,7 @@ function mapTMDBMovie(m) {
             ? m.credits.cast.slice(0, 12).map(c => c.name).filter(Boolean)
             : (Array.isArray(m.cast) ? m.cast : []),
         alt: "",
-        show: `https://vidsrc.icu/embed/movie/${m.id}`,
+        show: `${WORKER_URL}/embed?url=https://vidsrc.icu/embed/movie/${m.id}`,
         source: 'toppicks'
     };
 }
@@ -158,7 +158,7 @@ function mapTMDBDetails(m) {
         runtime: m.runtime || null,
         gener: [],
         alt: "",
-        show: `https://vidsrc.icu/embed/movie/${m.id}`,
+        show: `${WORKER_URL}/embed?url=https://vidsrc.icu/embed/movie/${m.id}`
     };
 }
 
@@ -313,7 +313,7 @@ function displayMovieDetails(movie) {
                 </a>
 
 
-                 <a href="https://vidlink.pro/movie/${movie.id}" class="playLink">
+                 <a href="${WORKER_URL}/embed?url=https://vidlink.pro/movie/${movie.id}" class="playLink">
                     <button class="play">Play 2</button>
                 </a>
 
@@ -401,7 +401,7 @@ function displayTvShowDetails(movie) {
                 </a>
 
           
-                 <a href="https://vidlink.pro/tv/${movie.id}/1/1" class="playLink">
+                 <a href="${WORKER_URL}/embed?url=https://vidlink.pro/tv/${movie.id}/1/1" class="playLink">
                     <button class="play">Play 2</button>
                 </a>
 
