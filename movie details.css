@@ -490,9 +490,8 @@ margin: 3px;
 /* For Landscape Mode (Phone Tilted) */
 @media screen and (orientation: landscape) {
     .dets {
-        height: 100vh !important;
+        height: 140vh !important;
         min-height: 100vh;
-        bottom: 40px;
     }
   
     
