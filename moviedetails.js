@@ -343,7 +343,7 @@ function displayMovieDetails(movie) {
     </div>
     
     <div class="dete">
-        Notice:  It is advisable to download movies for offline viewing.
+        Notice:  It is advisable to download movies for offline viewing because there are misleading ads and if you have an ad blocker like adguard it is recommended to use it.
     </div>`;
 }
 
@@ -433,7 +433,7 @@ function displayTvShowDetails(movie) {
     </div>
 
     <div class="dete">
-        Notice: Click play to watch, or select specific episode below. Some seasons may not be available. It is advisable to download episodes for offline viewing.
+        Notice: Click play to watch, or select specific episode below. Some seasons may not be available. It is advisable to download episodes for offline viewing because there are misleading ads and if you have an ad blocker like adguard it is recommended to use it.
     </div>`;
 
     renderSeasonsAndEpisodes(movie);
