@@ -121,7 +121,7 @@ margin: 3px;
 
 
 
-   
+
    @media screen and (max-width: 414px){
     .dets{
         height: 110vh;
@@ -531,7 +531,7 @@ margin: 3px;
 
 
 
-@media screen and (orientation: landscape) and (max-width: 500px) {
+@media screen and (orientation: landscape) and (max-width: 900px) {
     .dets {
         height: 150vh ;
     }
