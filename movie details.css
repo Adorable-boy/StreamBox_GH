@@ -370,6 +370,11 @@ margin: 3px;
     .dets{
         height: 80vh;
     }
+
+    .actions{
+        flex-direction: column;
+        gap: 10px;
+    }
    }
 
 
