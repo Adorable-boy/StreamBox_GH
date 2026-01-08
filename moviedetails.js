@@ -570,7 +570,7 @@ function renderSeasonsAndEpisodes(movie) {
             card.style.border = '1px solid #eee';
             card.style.borderRadius = '6px';
             card.style.overflow = 'hidden';
-            card.style.background = '#92eae6ff';
+            card.style.background = '#67e6dbff';
             card.style.display = 'flex';
             card.style.flexDirection = 'column';
 
