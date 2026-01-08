@@ -481,3 +481,76 @@ margin: 3px;
   from { transform: translate(-50%, -50%) scale(0.8); }
   to { transform: translate(-50%, -50%) scale(1); }
 }
+
+
+
+
+
+
+/* For Landscape Mode (Phone Tilted) */
+@media screen and (orientation: landscape) {
+    .dets {
+        height: 100vh !important;
+        min-height: 100vh;
+    }
+    
+    .movie-info {
+        padding-top: 15% !important;
+    }
+    
+    .description {
+        height: auto !important;
+        max-height: 30vh;
+        overflow-y: auto;
+    }
+    
+    .actions {
+        bottom: 20px !important;
+        position: absolute !important;
+    }
+}
+
+/* For taller screens in landscape */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+    .dets {
+        height: 150vh !important;
+    }
+    
+    .movie-info {
+        padding-top: 10% !important;
+    }
+    
+    .description {
+        max-height: 20vh;
+    }
+}
+
+/* For wider landscape screens (tablets, etc) */
+@media screen and (orientation: landscape) and (min-width: 768px) {
+    .dets {
+        height: 120vh !important;
+    }
+    
+    .movie-info {
+        padding-top: 20% !important;
+    }
+    
+    .movie-info h1 {
+        font-size: 35px !important;
+    }
+    
+    .description {
+        font-size: 1.2rem !important;
+        max-height: 25vh;
+    }
+}
+
+/* Fix for iOS Safari in landscape */
+@supports (-webkit-touch-callout: none) {
+    @media screen and (orientation: landscape) {
+        .dets {
+            height: -webkit-fill-available !important;
+            min-height: -webkit-fill-available;
+        }
+    }
+}
