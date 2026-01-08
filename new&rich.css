@@ -357,9 +357,7 @@ align-items: center;
         margin-bottom: 20px;
     }
 
-    body{
-       padding-bottom: 400px;
-    }
+   
 }
 
 @media (max-width: 480px) {
@@ -378,5 +376,9 @@ align-items: center;
     .add-to-list-btn {
         padding: 10px;
         font-size: 0.9rem;
+    }
+
+     body{
+       padding-bottom: 400px;
     }
 }
