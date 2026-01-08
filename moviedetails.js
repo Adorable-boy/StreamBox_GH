@@ -314,7 +314,7 @@ function displayMovieDetails(movie) {
 
 
                  <a href="${WORKER_URL}/embed?url=https://vidlink.pro/movie/${movie.id}" class="playLink">
-                    <button class="play">Play 2</button>
+                    <button class="play">Play</button>
                 </a>
 
 
@@ -397,12 +397,12 @@ function displayTvShowDetails(movie) {
             
             <div class="actions">
                 <a href="${movie.show}" class="playLink">
-                    <button class="play">Play 1</button>
+                    <button class="play">Play</button>
                 </a>
 
           
                  <a href="${WORKER_URL}/embed?url=https://vidlink.pro/tv/${movie.id}/1/1" class="playLink">
-                    <button class="play">Play 2</button>
+                    <button class="play">Play</button>
                 </a>
 
 
@@ -438,9 +438,6 @@ function displayTvShowDetails(movie) {
 
     renderSeasonsAndEpisodes(movie);
 }
-
-
-
 
 
 
@@ -504,6 +501,11 @@ function renderSeasonsAndEpisodes(movie) {
         return;
     }
 
+    // Sort seasons by number to ensure season 1 is first
+    seasonsList.sort((a, b) => a.season_number - b.season_number);
+
+    const seasonCache = {};
+
     seasonsList.forEach(s => {
         const btn = document.createElement('button');
         btn.className = 'season-btn';
@@ -512,22 +514,34 @@ function renderSeasonsAndEpisodes(movie) {
         btn.style.padding = '8px 10px';
         btn.style.borderRadius = '6px';
         btn.style.border = '1px solid #ccc';
-        btn.style.background = '#f41414ff';
+        btn.style.background = 'grey'; // Default color
         btn.style.cursor = 'pointer';
 
         btn.addEventListener('click', () => {
-            document.querySelectorAll('#season-controls .season-btn').forEach(b => b.style.background = '#80d9e8ff');
+            document.querySelectorAll('#season-controls .season-btn').forEach(b => b.style.background = 'grey');
             btn.style.background = '#eee';
             loadAndRenderSeason(s.season_number, movie.id, episodesContainer);
         });
         controls.appendChild(btn);
+
+        // AUTO-SELECT SEASON 1 when creating it
+        if (s.season_number === 1) {
+            setTimeout(() => {
+                btn.style.background = '#eee';
+                loadAndRenderSeason(1, movie.id, episodesContainer);
+            }, 100);
+        }
     });
 
     container.appendChild(root);
-    const firstButton = controls.querySelector('.season-btn');
-    if (firstButton) firstButton.click();
 
-    const seasonCache = {};
+    // Fallback: if season 1 button exists but wasn't auto-clicked
+    setTimeout(() => {
+        const firstButton = controls.querySelector('.season-btn');
+        if (firstButton && firstButton.style.background !== '#eee') {
+            firstButton.click();
+        }
+    }, 200);
 
     function loadAndRenderSeason(seasonNumber, tvId, targetEl) {
         if (seasonCache[seasonNumber]) {
@@ -553,6 +567,7 @@ function renderSeasonsAndEpisodes(movie) {
     }
 
     function renderEpisodes(episodes, seasonNumber, targetEl) {
+        // ... (your existing renderEpisodes function remains the same)
         targetEl.innerHTML = '';
         if (!episodes || episodes.length === 0) {
             targetEl.innerHTML = `<p style="padding:12px;color:#666">No episodes found for season ${seasonNumber}.</p>`;
@@ -570,7 +585,7 @@ function renderSeasonsAndEpisodes(movie) {
             card.style.border = '1px solid #eee';
             card.style.borderRadius = '6px';
             card.style.overflow = 'hidden';
-            card.style.background = '#67e6dbff';
+            card.style.background = '#eeeeeeaf';
             card.style.display = 'flex';
             card.style.flexDirection = 'column';
 
@@ -636,11 +651,6 @@ function renderSeasonsAndEpisodes(movie) {
         targetEl.appendChild(grid);
     }
 }
-
-
-
-
-
 
 
 
