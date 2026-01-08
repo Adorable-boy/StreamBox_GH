@@ -112,7 +112,7 @@ margin: 3px;
    .dets{
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: 110vh;
     display: flex;
     overflow: hidden;
     justify-content: space-between;
@@ -121,7 +121,7 @@ margin: 3px;
 
    @media screen and (max-width: 414px){
     .dets{
-        height: 90vh;
+        height: 110vh;
     }
 
     .cast h3 {
@@ -368,7 +368,7 @@ margin: 3px;
 
   @media screen and (max-width: 500px){
     .dets{
-        height: 80vh;
+        height: 100vh;
     }
 
     .actions{
@@ -495,7 +495,7 @@ margin: 3px;
 @media screen and (orientation: landscape) {
     .dets {
         height: auto !important;
-        min-height: 100vh  !important;
+        min-height: 110vh  !important;
         max-height: 150vh  !important;
     }
   
