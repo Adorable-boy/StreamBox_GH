@@ -499,7 +499,6 @@ margin: 3px;
 /* For Landscape Mode (Phone Tilted) */
 @media screen and (orientation: landscape) {
     .dets {
-        height: auto !important;
         min-height: 100vh  !important;
         max-height: 150vh  !important;
     }
@@ -529,18 +528,6 @@ margin: 3px;
 }
 
 
-
-
-@media screen and (orientation: landscape) and (max-width: 1020px) {
-    .dets {
-        height: 150vh ;
-    }
-    
-    
-    .description {
-        max-height: 20vh;
-    }
-}
 
 
 
