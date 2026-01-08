@@ -502,7 +502,7 @@ margin: 3px;
     }
     
     .actions {
-        bottom: 40px !important;
+        top: 40px !important;
         position: absolute !important;
     }
 }
