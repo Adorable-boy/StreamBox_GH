@@ -490,7 +490,7 @@ margin: 3px;
 /* For Landscape Mode (Phone Tilted) */
 @media screen and (orientation: landscape) {
     .dets {
-        height: 140vh !important;
+        height: 150vh !important;
         min-height: 100vh;
     }
   
@@ -501,10 +501,7 @@ margin: 3px;
         overflow-y: auto;
     }
     
-    .actions {
-        top: 40px !important;
-        position: absolute !important;
-    }
+    
 }
 
 
