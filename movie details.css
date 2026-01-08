@@ -499,6 +499,7 @@ margin: 3px;
 /* For Landscape Mode (Phone Tilted) */
 @media screen and (orientation: landscape) {
     .dets {
+        height: auto !important;
         min-height: 100vh  !important;
         max-height: 150vh  !important;
     }
@@ -546,11 +547,11 @@ margin: 3px;
 }
 
 /* Fix for iOS Safari in landscape */
-/*@supports (-webkit-touch-callout: none) {
+@supports (-webkit-touch-callout: none) {
     @media screen and (orientation: landscape) {
         .dets {
             height: -webkit-fill-available !important;
             min-height: -webkit-fill-available;
         }
     }
-}*/
+}
