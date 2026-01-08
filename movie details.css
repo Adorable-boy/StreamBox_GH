@@ -529,13 +529,11 @@ margin: 3px;
 }
 
 
-
-
-
-/* For wider landscape screens (tablets, etc) */
-@media screen and (orientation: landscape) and (min-width: 768px) {
+@media screen and (orientation: landscape) and (min-width: 1px) and (max-width: 529px) {
     .dets {
-        height: 110vh ;
+        height: auto !important;
+        min-height: 200vh !important;
+        max-height: 600vh !important;
     }
     
    
@@ -545,6 +543,86 @@ margin: 3px;
         max-height: 25vh;
     }
 }
+
+
+
+
+
+@media screen and (orientation: landscape) and (min-width: 530px) and (max-width: 1439px) {
+    .dets {
+        height: auto !important;
+        min-height: 200vh  !important;
+        max-height: 250vh  !important;
+    }
+    
+   
+    
+    .description {
+        font-size: 1.2rem !important;
+        max-height: 25vh;
+    }
+}
+
+
+
+
+
+
+
+@media screen and (orientation: landscape) and (min-width: 768px) and (max-width: 1439px) {
+    .dets {
+        height: auto !important;
+        min-height: 160vh  !important;
+        max-height: 250vh  !important;
+    }
+    
+   
+    
+    .description {
+        font-size: 1.2rem !important;
+        max-height: 25vh;
+    }
+}
+
+
+
+
+
+@media screen and (orientation: landscape) and (min-width: 1440px) and (max-width: 2168px) {
+    .dets {
+        height: auto !important;
+        min-height: 230vh  !important;
+        max-height: 300vh  !important;
+    }
+    
+   
+    
+    .description {
+        font-size: 1.2rem !important;
+        max-height: 25vh;
+    }
+}
+
+
+
+
+@media screen and (orientation: landscape) and (min-width: 2169px) and (max-width: 2568px) {
+    .dets {
+        height: auto !important;
+        min-height: 350vh  !important;
+        max-height: 550vh  !important;
+    }
+    
+   
+    
+    .description {
+        font-size: 1.2rem !important;
+        max-height: 25vh;
+    }
+}
+
+
+
 
 /* Fix for iOS Safari in landscape */
 @supports (-webkit-touch-callout: none) {
