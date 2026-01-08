@@ -36,7 +36,9 @@ margin: 3px;
         margin-bottom: 20px;
         padding: 6px 6px;
         text-align: center;
-        color: #444;
+        color: #5b5151;
+        border-top: #444444 1.5px solid;
+        border-radius: 20px;
      }
 
      
@@ -59,6 +61,7 @@ margin: 3px;
     text-align: center;
     position: relative;
     z-index: 2;
+    border: #444444e5 1.5px solid;
    }
 
 
@@ -85,25 +88,7 @@ margin: 3px;
    }
 
 
-   .seasons-episodes{
-    display: none;
-    margin-bottom: 50px;
-    display: none;
-    position: absolute;
-    background-color: #222;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(165, 195, 225, 0.455);
-    z-index: 1;
-    border-radius: 20px;
-   }
-
-   .play1:focus-within .seasons-episodes{
-    display: block;
-    max-height: 300px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    z-index: 11;
-   }
+  
 
 
    .play1{
@@ -132,7 +117,6 @@ margin: 3px;
     overflow: hidden;
     justify-content: space-between;
     border-radius: 10px;
-    
    }
 
    @media screen and (max-width: 414px){
@@ -154,7 +138,7 @@ margin: 3px;
 
 @media screen and (orientation: landscape) and (min-width: 310px) and (max-width: 900px){
    .dets{
-       height: 150vh;
+       height: 159vh;
    }
 
 

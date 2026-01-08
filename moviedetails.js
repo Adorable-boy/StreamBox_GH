@@ -326,7 +326,7 @@ function displayMovieDetails(movie) {
                            <a href="#" class="close">&times;</a>
 
                           <h3>Download Movie</h3>
-   <p>You need Video DownloadHelper to download this movie. After installing the extension pin it and click play to navigate to the movie then move to Video DownloadHelper extension you will see the media file then click download</p>
+   <p>You need Video DownloadHelper to download this movie. After installing the extension pin it and click play to navigate to the movie then move to Video DownloadHelper extension you will see the media file then click download, this does not work on ios.</p>
 
     <a href="https://chromewebstore.google.com/detail/video-downloadhelper/lmjnegcaeklhafolokijcfjliaokphfk"
       target="_blank"
@@ -343,7 +343,7 @@ function displayMovieDetails(movie) {
     </div>
     
     <div class="dete">
-        Notice:  It is advisable to download movies for offline viewing because there are misleading ads and if you have an ad blocker like adguard it is recommended to use it.
+        Notice:  It is advisable to download movies for offline viewing because there are misleading ads and if you have an ad blocker like adguard it is recommended to use it.  When using ios it is advisable to go full screen for better experience and the removal of ads.
     </div>`;
 }
 
@@ -414,7 +414,7 @@ function displayTvShowDetails(movie) {
     <a href="#" class="close">&times;</a>
 
     <h3>Download Movie</h3>
-    <p>You need Video DownloadHelper to download this movie. After installing the extension pin it and click play then move to Video DownloadHelper extension you will see the media file then click download</p>
+    <p>You need Video DownloadHelper to download this movie. After installing the extension pin it and click play then move to Video DownloadHelper extension you will see the media file then click download, this does not work on ios.</p>
 
     <a href="https://chromewebstore.google.com/detail/video-downloadhelper/lmjnegcaeklhafolokijcfjliaokphfk"
       target="_blank"
@@ -433,7 +433,7 @@ function displayTvShowDetails(movie) {
     </div>
 
     <div class="dete">
-        Notice: Click play to watch, or select specific episode below. Some seasons may not be available. It is advisable to download episodes for offline viewing because there are misleading ads and if you have an ad blocker like adguard it is recommended to use it.
+        Notice: Click play to watch, or select specific episode below. Some seasons may not be available. It is advisable to download episodes for offline viewing because there are misleading ads and if you have an ad blocker like adguard it is recommended to use it. When using ios it is advisable to go full screen for better experience and the removal of ads.
     </div>`;
 
     renderSeasonsAndEpisodes(movie);
@@ -516,7 +516,7 @@ function renderSeasonsAndEpisodes(movie) {
         btn.style.cursor = 'pointer';
 
         btn.addEventListener('click', () => {
-            document.querySelectorAll('#season-controls .season-btn').forEach(b => b.style.background = '#e4babaff');
+            document.querySelectorAll('#season-controls .season-btn').forEach(b => b.style.background = '#80d9e8ff');
             btn.style.background = '#eee';
             loadAndRenderSeason(s.season_number, movie.id, episodesContainer);
         });
@@ -570,7 +570,7 @@ function renderSeasonsAndEpisodes(movie) {
             card.style.border = '1px solid #eee';
             card.style.borderRadius = '6px';
             card.style.overflow = 'hidden';
-            card.style.background = '#e6c2c2ff';
+            card.style.background = '#92eae6ff';
             card.style.display = 'flex';
             card.style.flexDirection = 'column';
 
