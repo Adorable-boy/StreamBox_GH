@@ -125,9 +125,10 @@ margin: 3px;
     }
 
     .cast h3 {
-    margin-bottom: 0.5rem;
     color: white;
-    height: 3px;
+    height: auto !important;
+    max-height: 20vh;
+    overflow-y: auto;
 }
 
    }
@@ -136,15 +137,16 @@ margin: 3px;
 
  
 
-@media screen  and (min-width: 300px) and (max-width: 2024px){
+@media screen  and (min-width: 300px) and (max-width: 900px){
    .dets{
-       height: 115vh;
+       height: 110vh;
    }
 
 
     .description{
-        height: 20vh;
-        margin-bottom: none;
+        height: auto !important;
+        max-height: 40vh;
+        overflow-y: auto;
     }
 
     .cast h3 {
@@ -170,8 +172,9 @@ margin: 3px;
 
 
     .description{
-        height: 20vh;
-        margin-bottom: none;
+        height: auto !important;
+        max-height: 30vh;
+        overflow-y: auto;
     }
 
     .cast h3 {
@@ -306,9 +309,11 @@ margin: 3px;
     max-width: 600px;
     text-overflow: ellipsis;
     white-space: wrap;
-    overflow: hidden;
+    overflow-y: auto;
     text-align: justify;
-    height: 20vh;
+    height: auto !important;
+    max-height: 35vh;
+   
 }
 
 .cast h3 {
@@ -368,7 +373,6 @@ margin: 3px;
 
     .actions{
         display: inline;
-        padding-bottom: 5px;
     }
    }
 
@@ -490,7 +494,7 @@ margin: 3px;
 /* For Landscape Mode (Phone Tilted) */
 @media screen and (orientation: landscape) {
     .dets {
-        height: 150vh !important;
+        height: 100vh !important;
         min-height: 100vh;
     }
   
@@ -521,7 +525,7 @@ margin: 3px;
 /* For wider landscape screens (tablets, etc) */
 @media screen and (orientation: landscape) and (min-width: 768px) {
     .dets {
-        height: 120vh ;
+        height: 110vh ;
     }
     
    
