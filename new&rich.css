@@ -7,14 +7,13 @@ body {
     overflow-x: hidden;
     width: 100%;
     margin: 0;
-    padding-bottom: 1000px;
+    padding-bottom: 220px;
 
 }
 
 
 main {
-    margin-top: 100px;
-    padding-bottom: 80px; /* Extra spacing before footer */
+    margin-top: 100px; 
 }
 
 
@@ -26,7 +25,6 @@ main {
     left: 0;
     width:100%;
     bottom: 0;
-    margin-top: 20px;
     z-index: 10;
  }
 
@@ -73,7 +71,7 @@ align-items: center;
     padding-right: 15px;
     padding-left: 15px;
     border-radius: 20px;
-    fill: black;
+    fill:  #ada7a7;
     width: 30px;
     height: 30px;
     transition: all 0.4s ease;
@@ -115,7 +113,7 @@ nav h1 {
     font-size: 1.2rem;
     opacity: 0.98;
     padding: 10px 20px ;
-    background: #3f3e3e;
+    background: #605d5d9f;
     border-radius: 20px;
     border: #ffffff24 1px solid;
  }
@@ -135,7 +133,7 @@ transition: all ease 0.4s;
 border: none;
 align-items: center;
 cursor: pointer;
-background-color: #222;
+background: #605d5d9f;
 border-radius: 20px;
 padding: 0px 6px;
 }
@@ -159,272 +157,222 @@ align-items: center;
 
 
 
-/* Section Wrapper */
-.section-wrapper {
-    margin-bottom: 40px;
+
+
+
+
+
+
+
+/* ========== COMING SOON SECTION ========== */
+#newandrich {
+    margin-top: 120px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
-.section-wrapper h1 {
-    margin: 20px 0 20px 20px;
-    font-size: 1.5rem;
+/* Section Title */
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    padding-left: 15px;
+    border-left: 5px solid rgb(255, 0, 60);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-/* Poster Card Container */
-.poster-card {
+/* Grid - 3 posters per row */
+.movie-grid {
     display: grid;
-    position: relative;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
     width: 100%;
-    max-width: 100%;
-    grid-template-columns: repeat(auto-fit,minmax(240px,1fr))  ;
 }
 
-/* Poster Container with Image and Overlay */
-.poster-container {
+/* Movie Poster Container */
+.movie-card {
     position: relative;
     width: 100%;
-    height: 220px;
+    border-radius: 12px;
     overflow: hidden;
-    border-radius: 10px;
-    background-color: #322f2fb6;
-    transition: transform 0.4s ease-in-out;
-}
-.poster-container:hover {
-    transform: translateY(-7px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    background: #222;
 }
 
+.movie-card:hover {
+    transform: translateY(-5px);
+}
 
+/* Landscape Image Container */
+.movie-image-container {
+    width: 100%;
+    height: 250px; /* Fixed height for landscape */
+    position: relative;
+    overflow: hidden;
+}
 
-.poster-image {
+/* Image */
+.movie-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease, filter 0.4s ease;
 }
 
-.poster-image:hover {
-    transform: scale(1.1);
-    filter: brightness(0.7);
-}
-
-/* Info Overlay - appears on hover */
-.poster-info-overlay {
+/* OVERLAY - ALWAYS VISIBLE */
+.movie-overlay {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.7), transparent);
+    background: linear-gradient(to top, 
+        rgba(0, 0, 0, 0.95) 0%, 
+        rgba(0, 0, 0, 0.85) 30%, 
+        rgba(0, 0, 0, 0.7) 50%, 
+        transparent 100%);
+    padding: 20px;
     color: white;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    pointer-events: none;
+    opacity: 1 !important; /* Always visible */
 }
 
-.poster-container:hover .poster-info-overlay {
-    opacity: 1;
-}
-
-
-.poster-title {
-    margin: 0 0 8px 0;
+/* Title */
+.movie-name {
     font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Meta Info - Year and Rating */
+.movie-meta {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.movie-year {
+    border: #867e7ed8 0.01rem solid;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 0.9rem;
     font-weight: bold;
 }
 
-.poster-meta {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 8px;
-    font-size: 0.9rem;
-    color: #ccc;
-}
-
-.poster-meta span {
-    padding: 2px 8px;
-    background: rgba(255, 255, 255, 0.2);
+.movie-rating {
+    border: #867e7ed8 0.01rem solid;
+    padding: 5px 12px;
     border-radius: 4px;
-}
-
-.poster-description {
-    margin-top: 8px ;
-    font-size: 0.85rem;
-    line-height: 1.4;
-    margin-bottom: 2px;
-    overflow: hidden;
-}
-
-.poster-genres {
+    font-size: 0.9rem;
+    font-weight: bold;
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
     gap: 5px;
 }
 
-.genre-tag {
-    font-size: 0.75rem;
-    padding: 3px 8px;
-    border-radius: 12px;
-    color: white;
-    border: #fff 1px solid;
+/* Description */
+.movie-description {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #ddd;
+    margin-bottom: 15px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 2.8em;
 }
 
-/* Button Group */
-.newrich-button-group {
+/* Add to List Button */
+.add-to-list-btn {
+    width: 100%;
+    padding: 5px;
+    background: transparent;
+    border: 1px solid rgb(255, 0, 60);
+    color: white;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.add-to-list-btn:hover {
+    background: rgba(239, 182, 195, 0.452);
+}
+
+.add-to-list-btn.added {
+    background: rgb(255, 0, 60);
+    color: white;
+}
+
+/* Loading Animation */
+.loading {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-top: 15px;
-    width: 100%;
-    padding: 0 5px;
-    box-sizing: border-box;
+    align-items: center;
+    height: 300px;
+    font-size: 1.2rem;
+    color: #aaa;
 }
 
-
-.newrich-play-btn,
-.newrich-add-btn {
-    padding: 10px 20px;
-    font-size: 0.95rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-    flex: 1;
-    max-width: 150px;
-    position: relative;
-}
-
-.newrich-play-btn {
-    border: 3px solid rgb(255, 0, 60);
-    background-color: rgba(255, 255, 255, 0.747);
-}
-
-.newrich-play-btn:hover {
-    transform: scale(1.05);
-}
-
-.newrich-add-btn {
-    background-color: rgb(170, 147, 147);
-    border: 3px solid rgb(255, 0, 60);
-}
-
-.newrich-add-btn:hover {
-    transform: scale(1.05);
-}
-
-
-.column-posters{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    justify-items: center;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-
-.column-posters::-webkit-scrollbar {
-height: 3px;
-}
-
-
-main{
-    margin-top: 100px;
-}
-
-
-h1{
+/* Error Message */
+.error-message {
     text-align: center;
-    text-decoration: none;
-    transition: transform ease-in-out 0.4s;
+    padding: 50px;
+    color: #ff6b6b;
+    font-size: 1.1rem;
 }
 
-h1:hover{
-transform: scale(1.1);
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .movie-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
 }
 
-.new-discription{
-    position: absolute;
-    z-index: 1;
-}
-
-/* Responsive Grid Layout */
 @media (max-width: 768px) {
-    .column-posters {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 15px;
-        padding: 15px;
+    #newandrich {
+        margin-top: 100px;
     }
     
-    .poster-container {
-        height: 180px;
+    .movie-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        max-width: 500px;
+        margin: 0 auto;
     }
     
-    nav {
-        flex-wrap: wrap;
-        gap: 10px;
+    .movie-image-container {
+        height: 220px;
     }
     
-    nav h1 {
-        font-size: 0.9rem;
-        padding: 8px 15px;
+    .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
     }
 }
 
 @media (max-width: 480px) {
-    .column-posters {
-        grid-template-columns: 1fr;
-        gap: 20px;
+    .movie-grid {
+        gap: 15px;
+    }
+    
+    .movie-overlay {
+        padding: 15px;
+    }
+    
+    .movie-name {
+        font-size: 1.1rem;
+    }
+    
+    .add-to-list-btn {
         padding: 10px;
-    }
-    
-    .poster-card {
-        max-width: 100%;
-    }
-    
-    .poster-container {
-        height: 200px;
-    }
-    
-    nav {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    nav h1 {
-        font-size: 0.8rem;
-        padding: 6px 12px;
-        margin: 2px 0;
-    }
-    
-    .newrich-button-group {
-        width: 100%;
-        padding: 0 10px;
-        gap: 8px;
-    }
-    
-    .newrich-play-btn,
-    .newrich-add-btn {
-        padding: 8px 15px;
-        font-size: 0.85rem;
-        max-width: none;
+        font-size: 0.9rem;
     }
 }
-
-@media (min-width: 769px) and (max-width: 1024px) {
-    .column-posters {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        
-    }
-}
-
-@media (min-width: 1025px) {
-    .column-posters {
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    }
-}
-

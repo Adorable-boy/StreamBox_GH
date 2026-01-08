@@ -185,7 +185,7 @@ function loadFromLocalSources(id, source, container) {
 
 
 function loadFromNewRich(id, container) {
-    fetch(`${WORKER_URL}/?endpoint=movie/upcoming&language=en-US&page=2`)
+    fetch(`${WORKER_URL}/?endpoint=movie/upcoming&language=en-US&page=1`)
         .then(res => res.json())
         .then(data => {
             const movies = [
@@ -698,6 +698,101 @@ document.addEventListener('click', e => {
     localStorage.setItem('continueWatching', JSON.stringify(list));
     window.location.href = play.href;
 });
+
+
+
+
+
+// --------------------------------------------------
+// EXPLORE SECTION FOR MOVIE DETAILS PAGE
+// --------------------------------------------------
+function loadExploreForMovieDetails() {
+    const exploreContainer = document.getElementById('explore');
+    if (!exploreContainer) return;
+
+    // Fetch popular movies for explore section
+    fetch(`${WORKER_URL}/?endpoint=movie/popular&language=en-US&page=${Math.floor(Math.random() * 500) + 1}`)
+        .then(r => r.json())
+        .then(data => {
+            if (data && data.results) {
+                // Map TMDB movies to our format
+                const exploreMovies = data.results.map(m => ({
+                    id: m.id,
+                    name: m.title || m.original_title || m.name,
+                    title: m.name || m.original_title || m.title,
+                    poster: m.poster_path ? `https://image.tmdb.org/t/p/w500${m.poster_path}` : PLACEHOLDER_POSTER,
+                    description: m.overview,
+                    year: m.release_date ? m.release_date.substring(0, 4) : "",
+                    rating: m.vote_average,
+                    alt: m.title || m.name,
+                    source: 'toppicks'
+                }));
+
+                // Clear container
+                exploreContainer.innerHTML = '';
+
+                // Take first 20 movies
+                const moviesToShow = exploreMovies.slice(0, 20);
+
+                // Add each movie
+                moviesToShow.forEach(movie => {
+                    const posterWrapper = document.createElement("div");
+                    posterWrapper.className = "poster-wrapper";
+                    posterWrapper.style.display = "flex";
+                    posterWrapper.style.flexDirection = "column";
+
+                    const link = document.createElement("a");
+                    link.href = `moviedetails.html?id=${movie.id}&source=toppicks`;
+
+                    const img = document.createElement("img");
+                    img.src = movie.poster || PLACEHOLDER_POSTER;
+                    img.alt = movie.name || "Movie";
+                    img.style.width = "150px";
+                    img.style.height = "225px";
+                    img.style.objectFit = "cover";
+                    img.style.borderRadius = "8px";
+
+                    const title = document.createElement("p");
+                    title.textContent = movie.name || movie.title || "Untitled";
+                    title.className = "movie-title";
+                    title.style.marginTop = "8px";
+                    title.style.fontSize = "0.9rem";
+                    title.style.textAlign = "center";
+                    title.style.maxWidth = "150px";
+                    title.style.overflow = "hidden";
+                    title.style.textOverflow = "ellipsis";
+                    title.style.whiteSpace = "nowrap";
+
+                    link.appendChild(img);
+                    posterWrapper.appendChild(link);
+                    posterWrapper.appendChild(title);
+                    exploreContainer.appendChild(posterWrapper);
+                });
+            }
+        })
+        .catch(error => {
+            console.error("Error loading explore section:", error);
+            exploreContainer.innerHTML = '<p style="text-align:center; color:#888; padding:20px;">Could not load explore content</p>';
+        });
+}
+
+// Call this when movie details page loads
+document.addEventListener('DOMContentLoaded', () => {
+    // Load movie details first
+    loadMovieDetails();
+    
+    // Then load explore section
+    setTimeout(() => {
+        loadExploreForMovieDetails();
+    }, 50); // Small delay to ensure main content loads first
+});
+
+
+
+
+
+
+
 
 
 

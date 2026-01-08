@@ -123,6 +123,8 @@ async function loadTopPicks() {
         }
 
 
+
+
         // Start background fetch for remaining movies (pages 34-500)
         loadRemainingMovies();
         loadRemainingTvShows();
@@ -130,6 +132,11 @@ async function loadTopPicks() {
     });
 
 
+
+
+
+
+  
 
 
 
