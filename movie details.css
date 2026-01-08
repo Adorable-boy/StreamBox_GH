@@ -373,6 +373,7 @@ margin: 3px;
 
     .actions{
         display: inline;
+        gap: 5px;
     }
    }
 
