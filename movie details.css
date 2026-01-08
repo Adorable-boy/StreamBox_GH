@@ -492,6 +492,7 @@ margin: 3px;
     .dets {
         height: 100vh !important;
         min-height: 100vh;
+        bottom: 40px;
     }
   
     
