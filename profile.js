@@ -1,5 +1,9 @@
 // Wait for DOM to be ready
 document.addEventListener('DOMContentLoaded',function(){
+
+
+    const IMAGE_URL = 'https://image.tmdb.org/t/p/w780';
+
        const listElement = document.getElementById("myList");
 
        if(!listElement){
@@ -21,7 +25,7 @@ document.addEventListener('DOMContentLoaded',function(){
        }
 
        myList.forEach(movie =>{
-        if(movie.poster){
+        if(movie.poster || 'https://image.tmdb.org/t/p/w500' + movie.poster_path || IMAGE_URL + movie.backdrop_path){
             displayMovieWithPoster(movie, listElement);
         } else {
             displayMovieWithoutPoster(movie, listElement);
@@ -40,7 +44,7 @@ link.href = `moviedetails.html?id=${movie.id}&source=profile`;
 
 
 const img = document.createElement("img");
-img.src = movie.poster;
+img.src = movie.poster || 'https://image.tmdb.org/t/p/w500' + movie.poster_path || IMAGE_URL + movie.backdrop_path;
 img.alt = movie.alt || movie.title || "Movie poster";
 
 const removeButton = document.createElement("button");

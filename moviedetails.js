@@ -452,41 +452,11 @@ function displayTvShowDetails(movie) {
         Notice: Click play to watch, or select specific episode below. Some seasons may not be available.
     </div>`;
 
-    // Add popup functionality
-    addPopupFunctionality();
     
     // Render seasons and episodes
     renderSeasonsAndEpisodes(movie);
 }
 
-function addPopupFunctionality() {
-    const downloadLinks = document.querySelectorAll('.download-link');
-    const popup = document.getElementById('downloadPopup');
-    const closeBtn = document.querySelector('.close-popup');
-    
-    if (downloadLinks.length && popup) {
-        downloadLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                popup.style.display = 'flex';
-            });
-        });
-        
-        if (closeBtn) {
-            closeBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                popup.style.display = 'none';
-            });
-        }
-        
-        // Close popup when clicking outside
-        popup.addEventListener('click', function(e) {
-            if (e.target === popup) {
-                popup.style.display = 'none';
-            }
-        });
-    }
-}
 
 
 

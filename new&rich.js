@@ -1,6 +1,4 @@
 // Configuration
-const API_KEY = 'e729d3999faacd83f8c79de0b5c7bc0e';
-const TMDB_URL = 'https://api.themoviedb.org/3/movie/upcoming';
 const IMAGE_URL = 'https://image.tmdb.org/t/p/w780'; // Landscape images
 
 // Main container
@@ -18,7 +16,7 @@ async function loadComingSoonMovies() {
     
     try {
         // Fetch data from TMDB
-        const response = await fetch(`${TMDB_URL}?api_key=${API_KEY}&language=en-US&page=${Math.floor(Math.random() * 5) + 1}`);
+        const response = await fetch(`https://streamboxweb-api.bpvw7gw5zw.workers.dev/?endpoint=movie/upcoming&language=en-US&page=${Math.floor(Math.random() * 5) + 1}`);
         const data = await response.json();
         
         // Clear loading
@@ -145,13 +143,13 @@ function createMovieCard(movie) {
 
 // 3. Get my list from localStorage
 function getMyList() {
-    const list = localStorage.getItem('myMovieList');
+    const list = localStorage.getItem('myList');
     return list ? JSON.parse(list) : [];
 }
 
 // 4. Save my list to localStorage
 function saveMyList(list) {
-    localStorage.setItem('myMovieList', JSON.stringify(list));
+    localStorage.setItem('myList', JSON.stringify(list));
 }
 
 // 5. Add or remove movie from list
