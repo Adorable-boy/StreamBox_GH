@@ -444,9 +444,9 @@ margin: 3px;
 /* Base landscape fixes for all devices */
 @media screen and (orientation: landscape) {
     .dets {
-        height: 100vh !important;
-        min-height: 100vh !important;
-        max-height: 100vh !important;
+        height: 150vh !important;
+        min-height: 150vh !important;
+        max-height: 150vh !important;
     }
     
     .movie-info {
@@ -511,8 +511,8 @@ margin: 3px;
 /* Medium landscape screens (tablets) */
 @media screen and (orientation: landscape) and (min-width: 768px) and (min-height: 500px) {
     .dets {
-        height: 120vh !important;
-        min-height: 120vh !important;
+        height: 150vh !important;
+        min-height: 150vh !important;
     }
     
     .movie-info {
