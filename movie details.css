@@ -587,18 +587,6 @@ margin: 3px;
 }
 
 /* iOS Safari specific fixes */
-@supports (-webkit-touch-callout: none) {
-    @media screen and (orientation: landscape) {
-        .dets {
-            height: -webkit-fill-available !important;
-            min-height: -webkit-fill-available !important;
-        }
-        
-        .description {
-            -webkit-overflow-scrolling: touch !important;
-        }
-    }
-}
 
 /* Fix for scrollbars appearing */
 @media screen and (orientation: landscape) {
