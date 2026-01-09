@@ -427,7 +427,7 @@ margin: 3px;
 .dets {
     position: relative;
     width: 100%;
-    height: 150vh; /* Default for portrait mobile */
+    height: 100vh; /* Default for portrait mobile */
     display: flex;
     overflow: hidden;
     justify-content: space-between;
@@ -442,11 +442,11 @@ margin: 3px;
 /* ===== LANDSCAPE MODE RESPONSIVE FIXES ===== */
 
 /* Base landscape fixes for all devices */
-@media screen and (orientation: landscape) {
+@media screen and (orientation: landscape)  and (max-width:900px) {
     .dets {
-        height: 150vh !important;
-        min-height: 150vh !important;
-        max-height: 150vh !important;
+        height: 200vh !important;
+        min-height: 200vh !important;
+        max-height: 200vh !important;
     }
     
     .movie-info {
