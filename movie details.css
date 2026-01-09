@@ -752,14 +752,7 @@ header button {
         justify-content: center;
     }
     
-    .row-posters2 {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    }
-    
-    .row-posters2 img {
-        width: 110px;
-        height: 165px;
-    }
+ 
 }
 
 /* Tablet Portrait (481px - 768px) */
@@ -768,9 +761,7 @@ header button {
         grid-template-columns: repeat(2, 1fr);
     }
     
-    .row-posters2 {
-        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    }
+
 }
 
 /* Tablet Landscape (769px - 1024px) */
