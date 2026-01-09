@@ -327,11 +327,11 @@ function displayMovieDetails(movie) {
                 
                 <div class="actions">
                     <a href="${movie.show}" class="playLink">
-                        <button class="play primary">▶ Play</button>
+                        <button class="play primary">Play</button>
                     </a>
                     
                     <a href="https://vidlink.pro/movie/${movie.id}" class="playLink">
-                        <button class="play secondary">Play 2</button>
+                        <button class="play secondary">Play</button>
                     </a>
 
                      <!-- Download Popup -->
@@ -426,10 +426,9 @@ function displayTvShowDetails(movie) {
                     
                    
                     
-                     <!-- Download Popup -->
     <div id="downloadPopup" class="popup-overlay">
         <div class="popup-content">
-            <a href="#" class="close-popup">&times;</a>
+            <a href="#" class="close-popup" class="playLink">&times;</a>
             <h3>Download Show</h3>
             <p>You need Video DownloadHelper to download this show. After installing the extension pin it and click play to navigate to the show then move to Video DownloadHelper extension you will see the media file then click download, this does not work on ios.</p>
             <a href="https://chromewebstore.google.com/detail/video-downloadhelper/lmjnegcaeklhafolokijcfjliaokphfk"
