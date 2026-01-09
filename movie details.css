@@ -600,21 +600,22 @@ header button {
 
        .row-posters2 {
         display: grid;
-        grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
-        gap: 12px;
+        grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
         padding-bottom: 5px;
         padding-top: 5px ;
-        justify-items: center;
         overflow-x: hidden;
+        gap: 10px;
     }
     
     .row-posters2 img {
-        transition: transform 0.4s;
+        background-color: #222;
+        transition: transform 0.4s ease-out;
         width: 136px;
         height: 200px;
         border-radius: 10px;
         object-fit: cover;
         color: white;
+        border: #ffffff1a 0.2px solid;
     }
 
     .row-posters2 img:hover {
