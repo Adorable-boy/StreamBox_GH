@@ -604,6 +604,8 @@ header button {
         padding-bottom: 5px;
         padding-top: 5px ;
         overflow-x: hidden;
+        align-items: center;
+        align-content: center;
         gap: 10px;
     }
     
