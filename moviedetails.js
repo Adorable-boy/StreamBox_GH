@@ -294,56 +294,52 @@ function displayMovieDetails(movie) {
 
     container.innerHTML = `
     <div class="dets">
-        <h1 id="detail">${movie.name || movie.original_title || movie.title || 'Untitled'}</h1>
-        <img src="${movie.poster}" class="dets-video" onerror="this.src='${PLACEHOLDER_POSTER}'">
-        <div class="movie-info">
+        <div class="movie-header">
+            <h1 id="detail">${movie.name || movie.original_title || movie.title || 'Untitled'}</h1>
             <div class="movie-meta">
                 ${movie.year ? `<span class="year">${movie.year}</span>` : ''}
-                ${movie.rating ? `<span class="rating">🌟${movie.rating} rating</span>` : ''}
                 ${movie.runtime ? `<span class="duration">${movie.runtime} min</span>` : ''}
-            </div>
-            <div class="geners">
-                ${Array.isArray(genresArray) ? genresArray.map(g => `<span class="gener-tag">${g}</span>`).join(', ') : ''}
-            </div>
-            ${movie.description ? `<p class="description">${movie.description}</p>` : '...'}
-            ${movie.cast && movie.cast.length ? `<div class="cast"><h3>Cast</h3><p>${movie.cast.join(' . ')}</p></div>` : ''}
-            <div class="actions">
-                <a href="${movie.show}"  class="playLink">
-                    <button class="play">▶Play</button>
-                </a>
-
-
-                 <a href="${WORKER_URL}/embed?url=https://vidlink.pro/movie/${movie.id}" class="playLink">
-                    <button class="play">Play</button>
-                </a>
-
-
-                <a href="#downloadPopup">
-                  <button class="play">Download movie</button>
-               </a>
-                         <div id="downloadPopup" class="popup">
-                                <div class="popup-content">
-                           <a href="#" class="close">&times;</a>
-
-                          <h3>Download Movie</h3>
-   <p>You need Video DownloadHelper to download this movie. After installing the extension pin it and click play to navigate to the movie then move to Video DownloadHelper extension you will see the media file then click download, this does not work on ios.</p>
-
-    <a href="https://chromewebstore.google.com/detail/video-downloadhelper/lmjnegcaeklhafolokijcfjliaokphfk"
-      target="_blank"
-      class="popup-btn">
-      Install Extension
-    </a>
-  </div>
-</div>
-               <button class="play" data-movie-id="${movie.id}" data-movie='${movieData}' onclick="addToList(event, JSON.parse(this.dataset.movie))">
-                    ${buttonText}
-                </button>
+                ${movie.rating ? `<span class="rating">${movie.rating} rating</span>` : ''}
             </div>
         </div>
-    </div>
-    
-    <div class="dete">
-        Notice:  It is advisable to download movies for offline viewing because there are misleading ads and if you have an ad blocker like adguard it is recommended to use it.  When using ios it is advisable to go full screen for better experience and the removal of ads.
+        
+        <div class="movie-content">
+            <img src="${movie.poster}" class="dets-video" onerror="this.src='${PLACEHOLDER_POSTER}'">
+            
+            <div class="movie-info">
+                <div class="genres-section">
+                    <h3>Genres</h3>
+                    <div class="geners">
+                        ${Array.isArray(genresArray) ? genresArray.map(g => `<span class="gener-tag">${g}</span>`).join(' ') : ''}
+                    </div>
+                </div>
+                
+                <div class="description-section">
+                    <h3>Description</h3>
+                    <p class="description">${movie.description || 'No description available.'}</p>
+                </div>
+                
+                ${movie.cast && movie.cast.length ? `
+                <div class="cast-section">
+                    <h3>Cast</h3>
+                    <p class="cast">${movie.cast.join(' • ')}</p>
+                </div>` : ''}
+                
+                <div class="actions">
+                    <a href="${movie.show}" class="playLink">
+                        <button class="play primary">▶ Play</button>
+                    </a>
+                    
+                    <a href="https://vidlink.pro/movie/${movie.id}" class="playLink">
+                        <button class="play secondary">Play 2</button>
+                    </a>
+                    
+                    <button class="play list-btn" data-movie-id="${movie.id}" data-movie='${movieData}' onclick="addToList(event, JSON.parse(this.dataset.movie))">
+                        ${buttonText}
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>`;
 }
 
@@ -374,72 +370,112 @@ function displayTvShowDetails(movie) {
     const movieData = JSON.stringify(movie).replace(/'/g, '&#39;');
 
     container.innerHTML = `
-   
-   
     <div class="dets">
-        
-    <h1 id="detail">${movie.name || movie.original_title || movie.title || 'Untitled'}</h1>
-        
-    <img src="${movie.poster}" class="dets-video" onerror="this.src='${PLACEHOLDER_POSTER}'">
-        
-    <div class="movie-info">
-            <div class="movie-meta">
+        <div class="show-header">
+            <h1 id="detail">${movie.name || movie.original_title || movie.title || 'Untitled'}</h1>
+            <div class="show-meta">
                 ${movie.year ? `<span class="year">${movie.year}</span>` : ''}
-                ${movie.rating ? `<span class="rating">🌟${movie.rating}</span>` : ''}
-                ${movie.runtime ? `<span class="duration">${movie.runtime} min</span>` : ''}
+                ${movie.rating ? `<span class="rating">⭐${movie.rating}</span>` : ''}
+                <span class="episode-count">${movie.totalEpisodes || 0} Episodes</span>
             </div>
-            <div class="geners">
-                ${Array.isArray(genresArray) ? genresArray.map(g => `<span class="gener-tag">${g}</span>`).join(', ') : ''}
-            </div>
-            ${movie.description ? `<p class="description">${movie.description}</p>` : ''}
-            ${movie.cast && movie.cast.length ? `<div class="cast"><h3>Cast</h3><p>${movie.cast.join(' . ')}</p></div>` : ''}
+        </div>
+        
+        <div class="show-content">
+            <img src="${movie.poster}" class="show-poster" onerror="this.src='${PLACEHOLDER_POSTER}'">
             
-            
-            <div class="actions">
-                <a href="${movie.show}" class="playLink">
-                    <button class="play">Play</button>
-                </a>
-
-          
-                 <a href="${WORKER_URL}/embed?url=https://vidlink.pro/tv/${movie.id}/1/1" class="playLink">
-                    <button class="play">Play</button>
-                </a>
-
-
-                <a href="#downloadPopup">
-                  <button class="play">Download movie</button>
-               </a>
-               <div id="downloadPopup" class="popup">
-  <div class="popup-content">
-    <a href="#" class="close">&times;</a>
-
-    <h3>Download Movie</h3>
-    <p>You need Video DownloadHelper to download this movie. After installing the extension pin it and click play then move to Video DownloadHelper extension you will see the media file then click download, this does not work on ios.</p>
-
-    <a href="https://chromewebstore.google.com/detail/video-downloadhelper/lmjnegcaeklhafolokijcfjliaokphfk"
-      target="_blank"
-      class="popup-btn">
-      Install Extension
-    </a>
-  </div>
-</div>
-
-                <button class="play" data-movie-id="${movie.id}" data-movie='${movieData}' onclick="addToList(event, JSON.parse(this.dataset.movie))">
-                    ${buttonText}
-                </button>
-            
+            <div class="show-info">
+                <div class="genres-section">
+                    <h3>Genres</h3>
+                    <div class="geners">
+                        ${Array.isArray(genresArray) ? genresArray.map(g => `<span class="gener-tag">${g}</span>`).join(' ') : ''}
+                    </div>
                 </div>
+                
+                <div class="description-section">
+                    <h3>Description</h3>
+                    <p class="description">${movie.description || 'No description available.'}</p>
+                </div>
+                
+                ${movie.cast && movie.cast.length ? `
+                <div class="cast-section">
+                    <h3>Cast</h3>
+                    <p class="cast">${movie.cast.join(' • ')}</p>
+                </div>` : ''}
+                
+                <div class="actions">
+                    <a href="${movie.show}" class="playLink">
+                        <button class="play primary">▶ Play</button>
+                    </a>
+                    
+                    <a href="https://vidlink.pro/tv/${movie.id}/1/1" class="playLink">
+                        <button class="play secondary">Play 2</button>
+                    </a>
+                    
+                    <a href="#downloadPopup" class="download-link">
+                        <button class="play download">Download</button>
+                    </a>
+                    
+                    <button class="play list-btn" data-movie-id="${movie.id}" data-movie='${movieData}' onclick="addToList(event, JSON.parse(this.dataset.movie))">
+                        ${buttonText}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download Popup -->
+    <div id="downloadPopup" class="popup-overlay">
+        <div class="popup-content">
+            <a href="#" class="close-popup">&times;</a>
+            <h3>Download Movie</h3>
+            <p>You need Video DownloadHelper to download this movie. After installing the extension pin it and click play to navigate to the movie then move to Video DownloadHelper extension you will see the media file then click download, this does not work on ios.</p>
+            <a href="https://chromewebstore.google.com/detail/video-downloadhelper/lmjnegcaeklhafolokijcfjliaokphfk"
+               target="_blank"
+               class="popup-btn">
+                Install Extension
+            </a>
         </div>
     </div>
 
     <div class="dete">
-        Notice: Click play to watch, or select specific episode below. Some seasons may not be available. It is advisable to download episodes for offline viewing because there are misleading ads and if you have an ad blocker like adguard it is recommended to use it. When using ios it is advisable to go full screen for better experience and the removal of ads.
+        Notice: Click play to watch, or select specific episode below. Some seasons may not be available.
     </div>`;
 
+    // Add popup functionality
+    addPopupFunctionality();
+    
+    // Render seasons and episodes
     renderSeasonsAndEpisodes(movie);
 }
 
-
+function addPopupFunctionality() {
+    const downloadLinks = document.querySelectorAll('.download-link');
+    const popup = document.getElementById('downloadPopup');
+    const closeBtn = document.querySelector('.close-popup');
+    
+    if (downloadLinks.length && popup) {
+        downloadLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                popup.style.display = 'flex';
+            });
+        });
+        
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                popup.style.display = 'none';
+            });
+        }
+        
+        // Close popup when clicking outside
+        popup.addEventListener('click', function(e) {
+            if (e.target === popup) {
+                popup.style.display = 'none';
+            }
+        });
+    }
+}
 
 
 

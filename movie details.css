@@ -1,256 +1,76 @@
-body{
-background: black;
-color: white;
-overflow-x: hidden;
-height: 100vh;
-background-attachment: fixed;
-font-family: Arial, Helvetica, sans-serif;
-scroll-behavior: smooth;
-margin: 3px;
+/* Merged CSS for Movie/TV Show Details Page */
+
+/* ============================================
+   GLOBAL STYLES
+============================================ */
+:root {
+    --primary-color: #e50914;
+    --secondary-color: #333;
+    --accent-color: #4CAF50;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --text-light: #888888;
+    --bg-dark: #000000;
+    --bg-dark-light: #111111;
+    --bg-dark-lighter: #1a1a1a;
+    --bg-light: #2a2a2a;
+    --bg-lighter: #333333;
+    --border-color: #444444;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.5);
+    --shadow-md: 0 4px 8px rgba(0,0,0,0.7);
+    --shadow-lg: 0 8px 16px rgba(0,0,0,0.9);
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 20px;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
 }
 
+body {
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    height: 100vh;
+    background-attachment: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+    scroll-behavior: smooth;
+    margin: 3px;
+}
 
-#detail{
-    z-index: 3;
-    color: azure;
-    margin: 10px 10px 0 10px;
-   }
- 
-
-
-
-
-
-
-
-    .svg-items{
-        color: #fff;
-        border-radius: 20px;
-        background: #3f3e3e;
-        border: #ffffff24 1px solid;
-    }
-
-
-
-     .dete {
-        margin-bottom: 20px;
-        padding: 6px 6px;
-        text-align: center;
-        color: #5b5151;
-        border-top: #444444 1.5px solid;
-        border-radius: 20px;
-     }
-
-     
-     .clear{
-        margin-top: 50px;
-     }
-
- 
-   header{
+/* ============================================
+   HEADER & NAVIGATION
+============================================ */
+header {
     display: flex;
     justify-content: space-between;
-    background-color:  rgba(58, 65, 68, 0.795);
-    border-radius: 15px;
-    color:aliceblue;
+    background-color: rgba(58, 65, 68, 0.795);
+    border-radius: var(--radius-xl);
+    color: aliceblue;
     margin-top: 10px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-right: 20px;
-    padding-left: 20px;
+    padding: 20px;
     text-align: center;
     position: relative;
     z-index: 2;
-    border: #444444e5 1.5px solid;
-   }
+    border: 1.5px solid #444444e5;
+}
 
-
-
-   header button{
-    border-radius: 20px;
+header button {
+    border-radius: var(--radius-xl);
     font-size: medium;
     border: none;
-    border-radius: 20px;
+    border-radius: var(--radius-xl);
     align-content: center;
-    border: #ffffff24 1px solid;
+    border: 1px solid #ffffff24;
     padding: auto;
     color: #fff;
     background-color: #3f3e3e;
-   }
-
-   .actions{
-    position: absolute;
-    z-index: 10;
-    text-decoration: none;
-    display: inline-flex;
-    max-width: 100%;
-   }
-
-
-  
-
-
-   .play1{
-    padding: 14px 20px ;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform ease-in 0.2s;
-    background: linear-gradient(to right, tomato, pink, rgb(0, 255, 208), violet, rgb(0, 162, 255));
-    color:transparent;
-    background-clip: text;
-    border: 4px solid rgb(255, 0, 60);
-    border-radius: 9px;
-    -webkit-background-clip: text;
-    z-index: 3;
-    margin-left: 10px;
-    bottom: 1;
-   }
-
-   
- 
-
-
-
-    .description{
-        height: auto !important;
-        max-height: 40vh;
-        overflow-y: auto;
-    }
-
-    .cast h3 {
-    margin-bottom: 0.5rem;
-    color: white;
-    height: 3px;
-    }
-
-
-
-
-
- 
-
-
-
-
-       .row-posters2 {
-        display: grid;
-        grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
-        gap: 12px;
-        padding-bottom: 5px;
-        padding-top: 5px ;
-        justify-items: center;
-        overflow-x: hidden;
-    }
-    
-    .row-posters2 img {
-        transition: transform 0.4s;
-        width: 136px;
-        height: 200px;
-        border-radius: 10px;
-        object-fit: cover;
-        color: white;
-    }
-
-    .row-posters2 img:hover {
-        transform: scale(1.05);
-        cursor: pointer;
-    }
-
-
-
-
-
-.movie-info h1 {
-    font-size: 25px;
-    margin-bottom: 10px;
 }
 
-.movie-meta {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 10px;
-    align-items: center;
-}
-
-.movie-meta span {
-    padding: 3px 8px;
-    background: var(--accent-color);
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: bold;
-}
-
-.genres {
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.genre-tag {
-    padding: 0.3rem 0.8rem;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    display: flex;
-}
-
-.description {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-    max-width: 600px;
-    text-overflow: ellipsis;
-    white-space: wrap;
-    overflow-y: auto;
-    text-align: justify;
-    height: auto !important;
-    max-height: 35vh;
-   
-}
-
-.cast h3 {
-    margin-bottom: 0.5rem;
-    color: white;
-    height: 1px;
-}
-
-
-.cast{
-    gap: 1rem; 
-}
-
-
-
-
-.play{
-    padding: 14px 20px ;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform ease-in 0.2s;
-    background: linear-gradient(to right, tomato, pink, rgb(0, 255, 208), violet, rgb(0, 162, 255));
-    color:transparent;
-    background-clip: text;
-    border: 4px solid rgb(255, 0, 60);
-    border-radius: 9px;
-    -webkit-background-clip: text;
-    z-index: 3;
-}
-
-
-
-.play:hover, .play1:hover {
-    transform: scale(1.05);
-}
-
-
-
-
-#toggleChange svg{
+#toggleChange svg {
     height: 30px;
     width: 30px;
     fill: #fff;
@@ -259,281 +79,719 @@ margin: 3px;
     align-items: center;
     cursor: pointer;
     background-color: #222;
-    border-radius: 20px;
+    border-radius: var(--radius-xl);
     padding: 0px 6px;
 }
 
 #toggleChange svg:hover {
-  transform: scale(1.1);
+    transform: scale(1.1);
 }
 
+/* ============================================
+   MOVIE/TV SHOW DETAILS CONTAINER
+============================================ */
+.dets {
+    max-width: min(1200px, 95vw);
+    margin: 0 auto;
+    padding: clamp(1rem, 3vw, 2rem);
+    background: var(--bg-dark-light);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    position: relative;
+}
 
+/* ============================================
+   SHOW HEADER - RESPONSIVE
+============================================ */
+.movie-header, .show-header {
+    margin-bottom: clamp(1.5rem, 4vw, 2rem);
+    padding-bottom: clamp(1rem, 3vw, 1.5rem);
+    border-bottom: 2px solid var(--border-color);
+}
 
+#detail {
+    z-index: 3;
+    margin: 0 0 clamp(0.5rem, 2vw, 1rem) 0;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    color: var(--text-primary);
+    font-weight: 700;
+    line-height: 1.2;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
 
-.svg-items{
+.movie-meta, .show-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(0.5rem, 2vw, 1rem);
+    font-size: clamp(0.875rem, 2vw, 1.1rem);
+    color: var(--text-secondary);
+    align-items: center;
+}
+
+.movie-meta span, .show-meta span {
+    padding: clamp(0.375rem, 1vw, 0.5rem) clamp(0.75rem, 2vw, 1rem);
+    background: var(--bg-light);
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.movie-meta .year, .show-meta .year {
+    background: var(--primary-color);
+    color: white;
+}
+
+.movie-meta .rating, .show-meta .rating {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.movie-meta .duration, .show-meta .episode-count {
+    background: var(--accent-color);
+    color: white;
+}
+
+/* ============================================
+   SHOW CONTENT - RESPONSIVE FLEX LAYOUT
+============================================ */
+.movie-content, .show-content {
+    display: flex;
+    flex-direction: row;
+    gap: clamp(1rem, 4vw, 2rem);
+    margin-bottom: clamp(1.5rem, 4vw, 2rem);
+}
+
+@media (max-width: 768px) {
+    .movie-content, .show-content {
+        flex-direction: column;
+    }
+}
+
+.dets-video, .show-poster {
+    width: min(100%, 300px);
+    height: auto;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    align-self: flex-start;
+    border: 1px solid var(--border-color);
+}
+
+@media (max-width: 768px) {
+    .dets-video, .show-poster {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+}
+
+.movie-info, .show-info {
+    flex: 1;
+    min-width: min(300px, 100%);
+}
+
+/* ============================================
+   SECTIONS - RESPONSIVE
+============================================ */
+.genres-section, .description-section, .cast-section {
+    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+}
+
+.genres-section h3, .description-section h3, .cast-section h3 {
+    margin: 0 0 clamp(0.5rem, 1.5vw, 0.75rem) 0;
+    color: var(--text-primary);
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    font-weight: 600;
+}
+
+.geners, .genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(0.375rem, 1.5vw, 0.625rem);
+}
+
+.gener-tag, .genre-tag {
+    background: var(--primary-color);
+    color: white;
+    padding: clamp(0.375rem, 1vw, 0.5rem) clamp(0.75rem, 2vw, 1rem);
+    border-radius: 20px;
+    font-size: clamp(0.8125rem, 2vw, 0.9375rem);
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.description {
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin: 0;
+    font-size: clamp(0.9375rem, 2vw, 1rem);
+}
+
+.cast {
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+    font-size: clamp(0.875rem, 2vw, 0.9375rem);
+}
+
+.cast h3 {
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+/* ============================================
+   ACTIONS BUTTONS - RESPONSIVE GRID
+============================================ */
+.actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(120px, 100%), 1fr));
+    gap: clamp(0.5rem, 2vw, 1rem);
+    margin-top: clamp(1.5rem, 4vw, 2rem);
+    position: relative;
+    z-index: 10;
+    text-decoration: none;
+    max-width: 100%;
+}
+
+@media (min-width: 480px) {
+    .actions {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+}
+
+@media (min-width: 768px) {
+    .actions {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.actions button {
+    width: 100%;
+    padding: clamp(0.75rem, 2vw, 1rem);
+    border: none;
+    border-radius: 9px;
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 44px;
+    background: linear-gradient(to right, tomato, pink, rgb(0, 255, 208), violet, rgb(0, 162, 255));
+    color: transparent;
+    background-clip: text;
+    border: 4px solid rgb(255, 0, 60);
+    -webkit-background-clip: text;
+}
+
+.actions button.play.primary {
+    background: linear-gradient(to right, tomato, pink);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+.actions button.play.secondary {
+    background: linear-gradient(to right, rgb(0, 255, 208), violet);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+.actions button.play.download {
+    background: linear-gradient(to right, violet, rgb(0, 162, 255));
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+.actions button.play.list-btn {
+    background: linear-gradient(to right, pink, rgb(0, 255, 208));
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    border: 4px solid var(--border-color);
+}
+
+/* Hover and Active States */
+.actions button:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
+.actions button:active {
+    transform: translateY(0);
+}
+
+.playLink {
+    text-decoration: none;
+    width: 100%;
+}
+
+/* ============================================
+   POPUP STYLES
+============================================ */
+.popup-overlay, .popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(1rem, 3vw, 2rem);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+}
+
+.popup:target {
+    opacity: 1;
+    visibility: visible;
+    display: flex;
+}
+
+.popup-content {
+    background: var(--bg-dark-light);
+    padding: clamp(1rem, 4vw, 2rem);
+    border-radius: var(--radius-md);
+    max-width: min(500px, 90vw);
+    width: 100%;
+    position: relative;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+    animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+    from { transform: translate(-50%, -50%) scale(0.8); }
+    to { transform: translate(-50%, -50%) scale(1); }
+}
+
+.close-popup, .close {
+    position: absolute;
+    top: clamp(0.75rem, 2vw, 1rem);
+    right: clamp(0.75rem, 2vw, 1rem);
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: bold;
+    line-height: 1;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-popup:hover, .close:hover {
+    color: var(--text-primary);
+}
+
+.popup-content h3 {
+    margin: 0 0 clamp(1rem, 3vw, 1.5rem) 0;
+    color: var(--text-primary);
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+}
+
+.popup-content p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+    font-size: clamp(0.9375rem, 2vw, 1rem);
+}
+
+.popup-btn {
+    display: inline-block;
+    background: var(--primary-color);
+    color: white;
+    padding: clamp(0.75rem, 2vw, 1rem) clamp(1rem, 3vw, 1.5rem);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    transition: background 0.3s ease;
+    text-align: center;
+    min-height: 44px;
+    line-height: 1.4;
+}
+
+.popup-btn:hover {
+    background: #b20710;
+    color: white;
+}
+
+/* ============================================
+   NOTICE BOX
+============================================ */
+.dete {
+    background: #2d2d00;
+    border: 1px solid #666600;
+    padding: clamp(0.75rem, 2vw, 1rem);
+    border-radius: var(--radius-sm);
+    margin: clamp(1rem, 3vw, 1.5rem) 0;
+    color: #ffcc00;
+    font-size: clamp(0.8125rem, 2vw, 0.9375rem);
+    line-height: 1.5;
+    text-align: center;
+    border-top: 1.5px solid var(--border-color);
+    border-radius: var(--radius-xl);
+}
+
+/* ============================================
+   SEASON & EPISODES SECTION
+============================================ */
+#seasons-root {
+    margin-top: clamp(1.5rem, 4vw, 2.5rem);
+    padding-top: clamp(1rem, 3vw, 1.5rem);
+    border-top: 2px solid var(--border-color);
+}
+
+#seasons-root h3 {
+    font-size: clamp(1.25rem, 3vw, 1.4rem);
+    color: var(--text-primary);
+    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+}
+
+#season-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(0.375rem, 1.5vw, 0.5rem);
+    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+}
+
+.season-btn {
+    padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(0.75rem, 2vw, 1rem);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--bg-light);
+    color: var(--text-primary);
+    cursor: pointer;
+    font-weight: 500;
+    font-size: clamp(0.8125rem, 2vw, 0.9375rem);
+    transition: all 0.3s ease;
+    min-height: 40px;
+    white-space: nowrap;
+}
+
+.season-btn:hover {
+    background: #444444;
+    border-color: #666666;
+}
+
+.season-btn.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* ============================================
+   EPISODE GRID - RESPONSIVE
+============================================ */
+#episodes-container {
+    margin-top: clamp(1rem, 3vw, 1.5rem);
+}
+
+.episode-card {
+    background: var(--bg-dark-lighter);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.episode-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Episode Grid Container */
+.episode-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
+    gap: clamp(0.75rem, 2vw, 1rem);
+    margin-top: clamp(0.75rem, 2vw, 1rem);
+}
+
+@media (max-width: 480px) {
+    .episode-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .episode-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+/* Episode Card Content */
+.episode-thumb {
+    width: 100%;
+    height: clamp(100px, 25vw, 140px);
+    object-fit: cover;
+}
+
+.episode-info {
+    padding: clamp(0.5rem, 1.5vw, 0.75rem);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.episode-title {
+    margin: 0 0 clamp(0.375rem, 1vw, 0.5rem) 0;
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    line-height: 1.3;
+    color: var(--text-primary);
+}
+
+.episode-overview {
+    margin: 0 0 clamp(0.5rem, 1.5vw, 0.75rem) 0;
+    font-size: clamp(0.75rem, 1.8vw, 0.875rem);
+    color: var(--text-secondary);
+    line-height: 1.4;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.episode-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: clamp(0.25rem, 1vw, 0.5rem);
+    margin-top: auto;
+}
+
+.episode-date {
+    font-size: clamp(0.6875rem, 1.6vw, 0.75rem);
+    color: var(--text-light);
+}
+
+.episode-play-btn {
+    padding: clamp(0.375rem, 1vw, 0.5rem) clamp(0.625rem, 1.5vw, 0.75rem);
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: clamp(0.75rem, 1.8vw, 0.875rem);
+    cursor: pointer;
+    transition: background 0.3s ease;
+    white-space: nowrap;
+}
+
+.episode-play-btn:hover {
+    background: #444444;
+}
+
+/* ============================================
+   IMAGE GRIDS & POSTERS
+============================================ */
+.row-posters2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    padding: 5px;
+    justify-items: center;
+    overflow-x: hidden;
+}
+
+.row-posters2 img {
+    transition: transform 0.4s;
+    width: 136px;
+    height: 200px;
+    border-radius: 10px;
+    object-fit: cover;
+    color: white;
+    border: 1px solid var(--border-color);
+}
+
+.row-posters2 img:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.svg-items {
+    color: #fff;
+    border-radius: var(--radius-xl);
+    background: #3f3e3e;
+    border: 1px solid #ffffff24;
     display: flex;
     flex-direction: column;
     text-align: center;
     align-items: center;
 }
 
-.movie-title{
-    margin: 0 0 8px 0;
-    font-size: 0.8rem;
-    font-weight: bold;
-    max-width: 136px;
+/* ============================================
+   UTILITY CLASSES
+============================================ */
+.clear {
+    margin-top: 50px;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.text-truncate {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
+/* ============================================
+   ACCESSIBILITY & SPECIAL MODES
+============================================ */
 
-
-
-/* Popup Styles */
-/* Overlay */
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
-  opacity: 0;
-  visibility: hidden;
-  transition: 0.3s;
-  z-index: 1000;
-}
-
-/* Show popup */
-.popup:target {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Popup box */
-.popup-content {
-  background: #111;
-  color: #fff;
-  width: 90%;
-  max-width: 400px;
-  padding: 20px;
-  border-radius: 10px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  animation: scaleIn 0.3s ease;
-}
-
-/* Close button */
-.close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  color: #fff;
-  font-size: 24px;
-  text-decoration: none;
-}
-
-/* Popup action button */
-.popup-btn {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 10px 20px;
-  background: red;
-  color: #fff;
-  border-radius: 5px;
-  text-decoration: none;
-}
-
-
-
-
-@keyframes scaleIn {
-  from { transform: translate(-50%, -50%) scale(0.8); }
-  to { transform: translate(-50%, -50%) scale(1); }
-}
-
-
-
-
-
-/* ... your existing CSS code ... */
-
-/* MOBILE PORTRAIT (Default) */
-
-.movie-info {
-    margin-left: 10px;
-    padding-top: 30%;
-    position: absolute;
-    flex: 1;
-    z-index: 6;
-    color: azure;
-}
-
-
-
-
-
-
-
-/* FIX FOR ALL DEVICES - RESPONSIVE VIDEO CONTAINER */
-.dets-video {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
-    flex: 1;
-    overflow: hidden;
-}
-
-.dets::after {
-    position: absolute;
-    top: 0;
-    content: "";
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 2;
-    pointer-events: none;
-    background: linear-gradient(to top, rgba(0,0,0,1) 10%, rgba(0, 0, 0, 0.389) 50%, rgba(0, 0, 0, 0.133) 100%);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-/* Base style */
-.dets {
-    position: relative;
-    width: 100%;
-    height: 100vh; /* Default for portrait mobile */
-    display: flex;
-    overflow: hidden;
-    justify-content: space-between;
-    border-radius: 10px;
-}
-
-
-
-
-
-
-/* ===== LANDSCAPE MODE RESPONSIVE FIXES ===== */
-
-/* Base landscape fixes for all devices */
-
-
-
-@media screen and  (max-width: 900px){
-    .dets{
-        height: 150vh;
+/* Print Styles */
+@media print {
+    .actions,
+    .popup-overlay,
+    .popup,
+    .season-btn,
+    .episode-play-btn {
+        display: none !important;
     }
-
-
-    .actions{
-         display: inline;
-    }
-}
-
-
-
-
-
-
-
-
-
-@media screen and (orientation: landscape) and (min-width: 900px){
-    .dets{
-        height: 100vh;
-    }
-}
-
-
-
-@media (orientation: landscape) and (max-width: 896px) {
-  .dets{
-        height: 150vh;
-    }
-}
-
-
-
-
-/* Large landscape screens (desktops, laptops) */
-@media screen and (orientation: landscape) and (min-width: 2560px) {
+    
     .dets {
-        height: 200vh !important;
-        min-height: 300vh !important;
+        box-shadow: none;
+        max-width: 100%;
+        background: white;
+        color: black;
     }
     
-    .movie-info {
-        padding-top: 20% !important;
-        width: 40% !important;
-        max-width: 600px !important;
+    .dets-video, .show-poster {
+        filter: grayscale(100%);
+    }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    :root {
+        --primary-color: #ff0000;
+        --secondary-color: #000000;
+        --accent-color: #00ff00;
+        --text-primary: #ffffff;
+        --text-secondary: #cccccc;
+        --border-color: #ffffff;
     }
     
-    .movie-info h1 {
-        font-size: 40px !important;
+    .show-poster, .dets-video {
+        border: 2px solid #ffffff;
     }
     
-    .description {
-        font-size: 1.2rem !important;
-        line-height: 1.6 !important;
-        max-height: 30vh !important;
+    .actions button {
+        border: 4px solid #ffffff;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .actions button,
+    .season-btn,
+    .episode-card,
+    .episode-play-btn,
+    .row-posters2 img,
+    #toggleChange svg {
+        transition: none;
+    }
+    
+    .actions button:hover,
+    .season-btn:hover,
+    .episode-card:hover,
+    .row-posters2 img:hover,
+    #toggleChange svg:hover {
+        transform: none;
+    }
+    
+    .popup-content {
+        animation: none;
+    }
+    
+    @keyframes scaleIn {
+        from, to { transform: translate(-50%, -50%) scale(1); }
+    }
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+============================================ */
+
+/* Mobile Portrait (320px - 480px) */
+@media (max-width: 480px) {
+    header {
+        gap: 10px;
+        padding: 15px;
     }
     
     .actions {
-        gap: 20px !important;
+        grid-template-columns: 1fr;
+    }
+    
+    .movie-meta, .show-meta {
+        justify-content: center;
+    }
+    
+    .row-posters2 {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+    
+    .row-posters2 img {
+        width: 110px;
+        height: 165px;
     }
 }
 
-
-
-/* Very wide screens (ultrawide monitors) */
-@media screen and (orientation: landscape) and (min-width: 1920px) {
-    .movie-info {
-        width: 30% !important;
-        padding-top: 15% !important;
+/* Tablet Portrait (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+    .actions {
+        grid-template-columns: repeat(2, 1fr);
     }
     
-    .movie-info h1 {
-        font-size: 45px !important;
-    }
-    
-    .description {
-        font-size: 1.3rem !important;
-        max-height: 35vh !important;
+    .row-posters2 {
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     }
 }
 
-/* iOS Safari specific fixes */
+/* Tablet Landscape (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .actions {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
 
-/* Fix for scrollbars appearing */
+/* Desktop (1025px and up) */
+@media (min-width: 1025px) {
+    .dets {
+        padding: 2rem;
+    }
+    
+    .actions {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
 
-
-/* Remove any conflicting media queries from your original CSS */
-/* Delete or comment out these from your original file: */
-/*
-@media screen and (orientation: landscape) and (min-width: 310px) and (max-width: 900px)
-@media screen and (min-width: 310px) and (max-width: 900px)
-@media screen and (max-width: 500px)
-@media screen and (max-width: 414px)
-*/
-
-
-
-
-
-
+/* Ultra-wide screens (1440px and up) */
+@media (min-width: 1440px) {
+    .dets {
+        max-width: 1400px;
+    }
+}
