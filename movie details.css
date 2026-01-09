@@ -83,7 +83,7 @@ margin: 3px;
     z-index: 10;
     text-decoration: none;
     min-width: 70%;
-    display: flex;
+    display: inline;
     gap: 15px;
    }
 
@@ -109,41 +109,9 @@ margin: 3px;
     bottom: 1;
    }
 
-   .dets{
-    position: relative;
-    width: 100%;
-    height: 110vh;
-    display: flex;
-    overflow: hidden;
-    justify-content: space-between;
-    border-radius: 10px;
-   }
-
-
-
-
-   @media screen and (max-width: 414px){
-    .dets{
-        height: 110vh;
-    }
-
-    .cast h3 {
-    color: white;
-    height: auto !important;
-    max-height: 20vh;
-    overflow-y: auto;
-}
-
-   }
-
-
-
+   
  
 
-@media screen  and (min-width: 300px) and (max-width: 900px){
-   .dets{
-       height: 110vh;
-   }
 
 
     .description{
@@ -156,78 +124,13 @@ margin: 3px;
     margin-bottom: 0.5rem;
     color: white;
     height: 3px;
-       }
-
-}
-
-
-
-
-
-
-@media screen  and (min-width: 310px) and (max-width: 900px){
-   .dets{
-       height: 110vh;
-   }
-
-
-    .actions{
-        display: inline;
     }
 
 
-    .description{
-        height: auto !important;
-        max-height: 30vh;
-        overflow-y: auto;
-    }
-
-    .cast h3 {
-    margin-bottom: 0.5rem;
-    color: white;
-    height: 3px;
-}
-
-}
 
 
 
-
-
-
-
-
-
-
-  
-
-   .dets-video{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
-    flex: 1;
-    overflow: hidden;
-    pointer-events: none;
-   }
-
-
-
-
-
-
-   .dets::after{
-    position: absolute;
-    top: 0;
-    content: "";
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 2;
-    pointer-events: none;
-    background: linear-gradient(to top,rgba(0,0,0,1)10%,rgba(0, 0, 0, 0.421)50%,rgba(0, 0, 0, 0.148)100% );
-   }
+ 
 
 
 
@@ -259,19 +162,6 @@ margin: 3px;
 
 
 
-
-
-
-
-
-.movie-info {
-    margin-left: 10px;
-    padding-top:30% ;
-    position: absolute;
-    flex: 1;
-    z-index: 6;
-    color: azure;
-}
 
 .movie-info h1 {
     font-size: 25px;
@@ -357,30 +247,6 @@ margin: 3px;
 .play:hover, .play1:hover {
     transform: scale(1.05);
 }
-
-/* Responsive Design */
-@media (max-width: 768px) {
- 
-    
-    .genres, .movie-meta {
-        justify-content: center;
-    }
-    
-    
-}
-
-
-
-  @media screen and (max-width: 550px){
-    .dets{
-        height: 100vh;
-    }
-
-    .actions{
-        display: inline;
-    }
-   }
-
 
 
 
@@ -495,15 +361,72 @@ margin: 3px;
 
 
 
+/* ... your existing CSS code ... */
 
-/* For Landscape Mode (Phone Tilted) */
+/* MOBILE PORTRAIT (Default) */
+.dets {
+    position: relative;
+    width: 100%;
+    height: 110vh;
+    display: flex;
+    overflow: hidden;
+    justify-content: space-between;
+    border-radius: 10px;
+}
+
+.movie-info {
+    margin-left: 10px;
+    padding-top: 30%;
+    position: absolute;
+    flex: 1;
+    z-index: 6;
+    color: azure;
+}
+
+/* SMALL MOBILE PHONES */
+@media screen and (max-width: 414px) {
+    .dets {
+        height: 90vh;
+    }
+}
+
+/* VERY SMALL SCREENS */
+@media screen and (max-width: 500px) {
+    .dets {
+        height: 80vh;
+    }
+}
+
+/* TABLETS AND LARGER MOBILES */
+@media screen and (min-width: 768px) {
+    .dets {
+        height: 120vh;
+    }
+    
+    .movie-info {
+        padding-top: 25%;
+    }
+    
+    .movie-info h1 {
+        font-size: 35px;
+    }
+    
+    .description {
+        font-size: 1.2rem;
+        max-height: 25vh;
+    }
+}
+
+/* LANDSCAPE MODE - ALL DEVICES */
 @media screen and (orientation: landscape) {
     .dets {
-        height: auto !important;
-        min-height: 100vh  !important;
-        max-height: 150vh  !important;
+        height: 100vh !important;
+        min-height: 100vh;
     }
-  
+    
+    .movie-info {
+        padding-top: 15% !important;
+    }
     
     .description {
         height: auto !important;
@@ -511,17 +434,21 @@ margin: 3px;
         overflow-y: auto;
     }
     
-    
+    .actions {
+        bottom: 1;
+        position: absolute;
+    }
 }
 
-
-
-/* For taller screens in landscape */
+/* SHORT LANDSCAPE SCREENS */
 @media screen and (orientation: landscape) and (max-height: 500px) {
     .dets {
-        height: 120vh ;
+        height: 150vh !important;
     }
     
+    .movie-info {
+        padding-top: 10% !important;
+    }
     
     .description {
         max-height: 20vh;
@@ -529,14 +456,38 @@ margin: 3px;
 }
 
 
-@media screen and (orientation: landscape) and (min-width: 1px) and (max-width: 529px) {
+
+
+/* SHORT LANDSCAPE SCREENS */
+@media screen and (orientation: landscape) and (min-height: 501px) {
     .dets {
-        height: auto !important;
-        min-height: 200vh !important;
-        max-height: 600vh !important;
+        height: 150vh !important;
     }
     
-   
+    .movie-info {
+        padding-top: 10% !important;
+    }
+    
+    .description {
+        max-height: 20vh;
+    }
+}
+
+
+
+/* LANDSCAPE TABLETS & LAPTOPS */
+@media screen and (orientation: landscape) and (min-width: 768px) {
+    .dets {
+        height: 110vh !important;
+    }
+    
+    .movie-info {
+        padding-top: 20% !important;
+    }
+    
+    .movie-info h1 {
+        font-size: 35px !important;
+    }
     
     .description {
         font-size: 1.2rem !important;
@@ -544,87 +495,37 @@ margin: 3px;
     }
 }
 
-
-
-
-
-@media screen and (orientation: landscape) and (min-width: 530px) and (max-width: 1439px) {
+/* LARGE SCREENS (DESKTOPS) */
+@media screen and (min-width: 1024px) {
     .dets {
-        height: auto !important;
-        min-height: 200vh  !important;
-        max-height: 250vh  !important;
+        height: 100vh;
+        max-height: 800px;
     }
     
-   
+    .movie-info {
+        padding-top: 20%;
+        width: 60%;
+    }
     
     .description {
-        font-size: 1.2rem !important;
-        max-height: 25vh;
+        max-height: 20vh;
     }
 }
 
-
-
-
-
-
-
-@media screen and (orientation: landscape) and (min-width: 768px) and (max-width: 1439px) {
+/* VERY LARGE SCREENS */
+@media screen and (min-width: 1440px) {
     .dets {
-        height: auto !important;
-        min-height: 160vh  !important;
-        max-height: 250vh  !important;
+        height: 100vh;
+        max-height: 900px;
     }
     
-   
-    
-    .description {
-        font-size: 1.2rem !important;
-        max-height: 25vh;
+    .movie-info {
+        padding-top: 15%;
+        width: 50%;
     }
 }
 
-
-
-
-
-@media screen and (orientation: landscape) and (min-width: 1440px) and (max-width: 2168px) {
-    .dets {
-        height: auto !important;
-        min-height: 230vh  !important;
-        max-height: 300vh  !important;
-    }
-    
-   
-    
-    .description {
-        font-size: 1.2rem !important;
-        max-height: 25vh;
-    }
-}
-
-
-
-
-@media screen and (orientation: landscape) and (min-width: 2169px) and (max-width: 2568px) {
-    .dets {
-        height: auto !important;
-        min-height: 350vh  !important;
-        max-height: 550vh  !important;
-    }
-    
-   
-    
-    .description {
-        font-size: 1.2rem !important;
-        max-height: 25vh;
-    }
-}
-
-
-
-
-/* Fix for iOS Safari in landscape */
+/* iOS SAFARI FIXES */
 @supports (-webkit-touch-callout: none) {
     @media screen and (orientation: landscape) {
         .dets {
@@ -632,4 +533,96 @@ margin: 3px;
             min-height: -webkit-fill-available;
         }
     }
+    
+    .dets {
+        /* Prevent iOS elastic scrolling issues */
+        overflow: hidden;
+    }
 }
+
+/* FIX FOR ALL DEVICES - RESPONSIVE VIDEO CONTAINER */
+.dets-video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    flex: 1;
+    overflow: hidden;
+}
+
+.dets::after {
+    position: absolute;
+    top: 0;
+    content: "";
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(to top, rgba(0,0,0,1) 10%, rgba(0, 0, 0, 0.389) 50%, rgba(0, 0, 0, 0.133) 100%);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Base style */
+.dets {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Default for portrait mobile */
+    display: flex;
+    overflow: hidden;
+    justify-content: space-between;
+    border-radius: 10px;
+}
+
+/* LANDSCAPE - ALL DEVICES */
+@media screen and (orientation: landscape) {
+    .dets {
+        height: 100vh !important;
+        min-height: 100vh;
+    }
+    
+    .movie-info {
+        padding-top: 15% !important;
+    }
+}
+
+/* SMALL SCREENS */
+@media screen and (max-width: 500px) {
+    .dets {
+        height: 85vh;
+    }
+}
+
+/* TABLETS & LARGER */
+@media screen and (min-width: 768px) {
+    .dets {
+        height: 120vh;
+    }
+}
+
+/* LARGE SCREENS */
+@media screen and (min-width: 1024px) {
+    .dets {
+        height: 100vh;
+        max-height: 800px;
+    }
+}
+
+
+
+
+
+
+
+
