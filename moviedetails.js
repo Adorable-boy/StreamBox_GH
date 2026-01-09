@@ -333,7 +333,20 @@ function displayMovieDetails(movie) {
                     <a href="https://vidlink.pro/movie/${movie.id}" class="playLink">
                         <button class="play secondary">Play 2</button>
                     </a>
-                    
+
+                     <!-- Download Popup -->
+    <div id="downloadPopup" class="popup-overlay">
+        <div class="popup-content">
+            <a href="#" class="close-popup">&times;</a>
+            <h3>Download Movie</h3>
+            <p>You need Video DownloadHelper to download this movie. After installing the extension pin it and click play to navigate to the movie then move to Video DownloadHelper extension you will see the media file then click download, this does not work on ios.</p>
+            <a href="https://chromewebstore.google.com/detail/video-downloadhelper/lmjnegcaeklhafolokijcfjliaokphfk"
+               target="_blank"
+               class="popup-btn">
+                Install Extension
+            </a>
+        </div>
+    </div>
                     <button class="play list-btn" data-movie-id="${movie.id}" data-movie='${movieData}' onclick="addToList(event, JSON.parse(this.dataset.movie))">
                         ${buttonText}
                     </button>
@@ -404,17 +417,28 @@ function displayTvShowDetails(movie) {
                 
                 <div class="actions">
                     <a href="${movie.show}" class="playLink">
-                        <button class="play primary">▶ Play</button>
+                        <button class="play primary">Play</button>
                     </a>
                     
                     <a href="https://vidlink.pro/tv/${movie.id}/1/1" class="playLink">
-                        <button class="play secondary">Play 2</button>
+                        <button class="play secondary">Play</button>
                     </a>
                     
-                    <a href="#downloadPopup" class="download-link">
-                        <button class="play download">Download</button>
-                    </a>
+                   
                     
+                     <!-- Download Popup -->
+    <div id="downloadPopup" class="popup-overlay">
+        <div class="popup-content">
+            <a href="#" class="close-popup">&times;</a>
+            <h3>Download Show</h3>
+            <p>You need Video DownloadHelper to download this show. After installing the extension pin it and click play to navigate to the show then move to Video DownloadHelper extension you will see the media file then click download, this does not work on ios.</p>
+            <a href="https://chromewebstore.google.com/detail/video-downloadhelper/lmjnegcaeklhafolokijcfjliaokphfk"
+               target="_blank"
+               class="popup-btn">
+                Install Extension
+            </a>
+        </div>
+    </div>
                     <button class="play list-btn" data-movie-id="${movie.id}" data-movie='${movieData}' onclick="addToList(event, JSON.parse(this.dataset.movie))">
                         ${buttonText}
                     </button>
@@ -423,19 +447,7 @@ function displayTvShowDetails(movie) {
         </div>
     </div>
 
-    <!-- Download Popup -->
-    <div id="downloadPopup" class="popup-overlay">
-        <div class="popup-content">
-            <a href="#" class="close-popup">&times;</a>
-            <h3>Download Movie</h3>
-            <p>You need Video DownloadHelper to download this movie. After installing the extension pin it and click play to navigate to the movie then move to Video DownloadHelper extension you will see the media file then click download, this does not work on ios.</p>
-            <a href="https://chromewebstore.google.com/detail/video-downloadhelper/lmjnegcaeklhafolokijcfjliaokphfk"
-               target="_blank"
-               class="popup-btn">
-                Install Extension
-            </a>
-        </div>
-    </div>
+   
 
     <div class="dete">
         Notice: Click play to watch, or select specific episode below. Some seasons may not be available.
