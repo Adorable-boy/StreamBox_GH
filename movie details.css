@@ -432,64 +432,12 @@ margin: 3px;
 /* ===== LANDSCAPE MODE RESPONSIVE FIXES ===== */
 
 /* Base landscape fixes for all devices */
-@media screen and (orientation: landscape) {
-    .dets {
-        height: 150vh !important;
-        min-height: 150vh !important;
-        max-height: 150vh !important;
-    }
-    
-    .movie-info {
-        padding-top: 10% !important;
-        width: 60% !important;
-    }
-    
-    .description {
-        height: auto !important;
-        max-height: 20vh !important;
-        overflow-y: auto !important;
-        margin-bottom: 10px !important;
-    }
-    
-    .actions {
-        position: relative !important;
-        bottom: auto !important;
-        margin-top: 15px !important;
-        gap: 10px !important;
-        flex-wrap: wrap !important;
-    }
-    
-    .cast {
-        margin-top: 10px !important;
-    }
-    
-    .cast p {
-        max-height: 10vh !important;
-        overflow-y: auto !important;
-    }
-}
+
 
 
 @media screen and  (max-width: 900px){
     .dets{
-        height: 200vh;
-    }
-
-
-    .actions{
-         display: inline-flex;
-    }
-}
-
-
-
-
-
-
-
-@media screen and  (max-width: 400px){
-    .dets{
-        height: 200vh;
+        height: 150vh;
     }
 
 
@@ -502,11 +450,24 @@ margin: 3px;
 
 
 
+
+
+
+
 @media screen and (orientation: landscape) and (min-width: 900px){
     .dets{
-        height: 300vh;
+        height: 100vh;
     }
 }
+
+
+
+@media (orientation: landscape) and (max-width: 896px) {
+  .dets{
+        height: 150vh;
+    }
+}
+
 
 
 
@@ -560,16 +521,7 @@ margin: 3px;
 /* iOS Safari specific fixes */
 
 /* Fix for scrollbars appearing */
-@media screen and (orientation: landscape) {
-    .dets-video {
-        object-fit: cover !important;
-        background-color: #000 !important;
-    }
-    
-    .dets::after {
-        background: linear-gradient(to top, rgba(0,0,0,1) 5%, rgba(0,0,0,0.7) 20%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.1) 70%, transparent 100%) !important;
-    }
-}
+
 
 /* Remove any conflicting media queries from your original CSS */
 /* Delete or comment out these from your original file: */
