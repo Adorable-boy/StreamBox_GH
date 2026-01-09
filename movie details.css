@@ -427,7 +427,7 @@ margin: 3px;
 .dets {
     position: relative;
     width: 100%;
-    height: 100vh; /* Default for portrait mobile */
+    height: 150vh; /* Default for portrait mobile */
     display: flex;
     overflow: hidden;
     justify-content: space-between;
