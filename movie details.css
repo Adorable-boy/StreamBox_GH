@@ -597,29 +597,30 @@ header button {
 /* ============================================
    IMAGE GRIDS & POSTERS
 ============================================ */
-.row-posters2 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 12px;
-    padding: 5px;
-    justify-items: center;
-    overflow-x: hidden;
-}
 
-.row-posters2 img {
-    transition: transform 0.4s;
-    width: 136px;
-    height: 200px;
-    border-radius: 10px;
-    object-fit: cover;
-    color: white;
-    border: 1px solid var(--border-color);
-}
+       .row-posters2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
+        gap: 12px;
+        padding-bottom: 5px;
+        padding-top: 5px ;
+        justify-items: center;
+        overflow-x: hidden;
+    }
+    
+    .row-posters2 img {
+        transition: transform 0.4s;
+        width: 136px;
+        height: 200px;
+        border-radius: 10px;
+        object-fit: cover;
+        color: white;
+    }
 
-.row-posters2 img:hover {
-    transform: scale(1.05);
-    cursor: pointer;
-}
+    .row-posters2 img:hover {
+        transform: scale(1.05);
+        cursor: pointer;
+    }
 
 .svg-items {
     color: #fff;
