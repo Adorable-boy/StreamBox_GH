@@ -94,7 +94,8 @@ header button {
     max-width: min(1200px, 95vw);
     margin: 0 auto;
     padding: clamp(1rem, 3vw, 2rem);
-    background: var(--bg-dark-light);
+    background: #444444ae;
+    backdrop-filter: blur(20px);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--border-color);
@@ -226,7 +227,7 @@ header button {
 
 .description {
     line-height: 1.6;
-    color: var(--text-secondary);
+    color: rgb(255, 255, 255);
     margin: 0;
     font-size: clamp(0.9375rem, 2vw, 1rem);
 }

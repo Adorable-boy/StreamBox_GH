@@ -15,23 +15,6 @@ const SVG_STRING = `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="
 </svg>`;
 const PLACEHOLDER_POSTER = 'data:image/svg+xml;utf8,' + encodeURIComponent(SVG_STRING);
 
-// Simple localStorage cache for JSON responses
-function fetchWithCache(url, key) {
-  try {
-    const cached = localStorage.getItem(key);
-    if (cached) {
-      return Promise.resolve(JSON.parse(cached));
-    }
-  } catch (_) {}
-  return fetch(url)
-    .then(r => r.json())
-    .then(data => {
-      try {
-        localStorage.setItem(key, JSON.stringify(data));
-      } catch (_) {}
-      return data;
-    });
-}
 
 
 window.addEventListener("load", () => {
@@ -502,7 +485,7 @@ if (document.getElementById("majorposter")) {
 
         const isInList = myList.some(item => item.id === major.id);
 
-        addButton.textContent = isInList ? "✔︎ Added To List" : "Add To List";
+        addButton.textContent = isInList ? "✔︎ Added To List" : "+ Add To List";
 
         addButton.setAttribute("data-movie-id", major.id);
 
@@ -605,7 +588,7 @@ function addMajorAlt(major, container) {
         // Check if movie is already in list and set initial button state
         let myList = JSON.parse(localStorage.getItem("myList")) || [];
         const isInList = myList.some(item => item.id === major.id);
-        addButton.textContent = isInList ? "✔︎ Added To List" : "Add To List";
+        addButton.textContent = isInList ? "✔︎ Added To List" : "+ Add To List";
         addButton.setAttribute("data-movie-id", major.id);
         addButton.onclick = function(event) {
             addToList(event, major);
@@ -628,7 +611,7 @@ function updateAllButtonsForMovie(movieId, isInList) {
     // Find all buttons with this movie ID across the entire page
     const allButtons = document.querySelectorAll(`[data-movie-id="${movieId}"]`);
     allButtons.forEach(button => {
-        button.textContent = isInList ? "✔︎Added To List" : "Add To List";
+        button.textContent = isInList ? "✔︎Added To List" : "+ Add To List";
     });
 }
 

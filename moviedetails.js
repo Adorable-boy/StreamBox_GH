@@ -142,6 +142,10 @@ function mapTMDBMovie(m) {
     };
 }
 
+
+
+
+
 function mapTMDBDetails(m) {
     const genres = Array.isArray(m.genres) ? m.genres.map(g => g.name).filter(Boolean) : [];
     const cast = m.credits && Array.isArray(m.credits.cast)
@@ -288,7 +292,7 @@ function displayMovieDetails(movie) {
     const container = document.getElementById('moviedetails');
     const myList = JSON.parse(localStorage.getItem('myList')) || [];
     const isInList = myList.some(m => String(m.id) === String(movie.id));
-    const buttonText = isInList ? '✔Added To List' : 'Add To List';
+    const buttonText = isInList ? '✔Added To List' : ' + Add To List';
     const genresArray = movie.gener || movie.genres || [];
     const movieData = JSON.stringify(movie).replace(/'/g, '&#39;');
 
@@ -642,7 +646,7 @@ function renderSeasonsAndEpisodes(movie) {
             epInfo.textContent = ep.air_date ? `Air: ${ep.air_date}` : '';
 
             const playLink = document.createElement('a');
-            playLink.href = `player.html?id=${movie.id}&type=tv&season=${seasonNumber}&episode=${ep.episode_number}&provider=auto`;
+            playLink.href = `${WORKER_URL}/embed?url=https://vidsrc.icu/embed/tv/${id}/${seasonNumber}/${ep.episode_number}`;
             playLink.style.textDecoration = 'none';
 
             const playBtn = document.createElement('button');
@@ -682,7 +686,7 @@ function renderSeasonsAndEpisodes(movie) {
 function updateAllButtonsForMovie(id, inList) {
     document.querySelectorAll(`[data-movie-id="${id}"]`)
         .forEach(btn => {
-            btn.textContent = inList ? '✔Added To List' : 'Add To List';
+            btn.textContent = inList ? '✔ Added To List' : '+ Add To List';
         });
 }
 

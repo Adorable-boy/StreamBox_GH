@@ -237,7 +237,7 @@
     }
     
     .row-posters img{
-        background-color: #222;
+        background-color: #323030;
         transition: transform 0.4s ease-out;
         width: 136px;
         height: 200px;
@@ -247,11 +247,57 @@
         border: #ffffff1a 0.2px solid;
     }
    
+
+
+
+
+
+    @media screen and (min-width:400px){
+
+         .row-posters img{
+        background-color: #323030;
+        transition: transform 0.4s ease-out;
+        width: 136px;
+        height: 200px;
+        border-radius: 10px;
+        object-fit: cover;
+        color: white;
+        border: #ffffff1a 0.2px solid;
+    }
+
+
     .row-posters img:hover{
         transform: scale(1.05);
         cursor: pointer;
     }
+    }
 
+
+
+    @media screen and (max-width:400px){
+         .row-posters {
+        display: flex;
+        gap: 15px;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        padding-left: 5px;
+        padding-right: 5px;
+        overflow-x: auto;
+        position: relative;
+    }
+    
+    .row-posters img{
+        background-color: #323030;
+        width: 136px;
+        height: 200px;
+        border-radius: 10px;
+        object-fit: cover;
+        color: white;
+        border: #ffffff1a 0.2px solid;
+    }
+
+
+    }
 
 
      .row-posters::-webkit-scrollbar {
