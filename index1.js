@@ -15,6 +15,23 @@ const SVG_STRING = `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="
 </svg>`;
 const PLACEHOLDER_POSTER = 'data:image/svg+xml;utf8,' + encodeURIComponent(SVG_STRING);
 
+// Simple localStorage cache for JSON responses
+function fetchWithCache(url, key) {
+  try {
+    const cached = localStorage.getItem(key);
+    if (cached) {
+      return Promise.resolve(JSON.parse(cached));
+    }
+  } catch (_) {}
+  return fetch(url)
+    .then(r => r.json())
+    .then(data => {
+      try {
+        localStorage.setItem(key, JSON.stringify(data));
+      } catch (_) {}
+      return data;
+    });
+}
 
 
 window.addEventListener("load", () => {
