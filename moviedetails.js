@@ -382,7 +382,7 @@ function displayTvShowDetails(movie) {
     const container = document.getElementById('moviedetails');
     const myList = JSON.parse(localStorage.getItem('myList')) || [];
     const isInList = myList.some(m => String(m.id) === String(movie.id));
-    const buttonText = isInList ? '✔Added To List' : 'Add To List';
+    const buttonText = isInList ? '✔Added To List' : '+ Add To List';
     const genresArray = movie.gener || movie.genres || [];
     const movieData = JSON.stringify(movie).replace(/'/g, '&#39;');
 
@@ -570,7 +570,7 @@ function renderSeasonsAndEpisodes(movie) {
             return;
         }
 
-        const url = `${WORKER_URL}/?endpoint=tv/${tvId}/season/${seasonNumber}&language=en-US`;
+        const url = `https://streamboxweb-api.bpvw7gw5zw.workers.dev/?endpoint=tv/${tvId}/season/${seasonNumber}&language=en-US`;
         fetch(url)
             .then(r => {
                 if (!r.ok) throw new Error('HTTP ' + r.status);
@@ -587,7 +587,7 @@ function renderSeasonsAndEpisodes(movie) {
             });
     }
 
-    function renderEpisodes(episodes, seasonNumber, targetEl) {
+    function renderEpisodes(episodes, seasonNumber, targetEl, tvId) {
         // ... (your existing renderEpisodes function remains the same)
         targetEl.innerHTML = '';
         if (!episodes || episodes.length === 0) {
@@ -646,7 +646,7 @@ function renderSeasonsAndEpisodes(movie) {
             epInfo.textContent = ep.air_date ? `Air: ${ep.air_date}` : '';
 
             const playLink = document.createElement('a');
-            playLink.href = `${WORKER_URL}/embed?url=https://vidsrc.icu/embed/tv/${id}/${seasonNumber}/${ep.episode_number}`;
+            playLink.href = `${WORKER_URL}/embed?url=https://vidsrc.icu/embed/tv/${movie.id}/${seasonNumber}/${ep.episode_number}`;
             playLink.style.textDecoration = 'none';
 
             const playBtn = document.createElement('button');
