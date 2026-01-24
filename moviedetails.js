@@ -382,7 +382,7 @@ function displayTvShowDetails(movie) {
     const container = document.getElementById('moviedetails');
     const myList = JSON.parse(localStorage.getItem('myList')) || [];
     const isInList = myList.some(m => String(m.id) === String(movie.id));
-    const buttonText = isInList ? '✔Added To List' : '+ Add To List';
+    const buttonText = isInList ? '✔ Added To List' : '+ Add To List';
     const genresArray = movie.gener || movie.genres || [];
     const movieData = JSON.stringify(movie).replace(/'/g, '&#39;');
 
